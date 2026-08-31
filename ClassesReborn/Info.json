@@ -1,0 +1,12 @@
+﻿{
+  "Id": "ClassesReborn",
+  "DisplayName": "Buildcraft",
+  "Author": "Xhanatos",
+  "Version": "3.44.4",
+  "ManagerVersion": "0.27.11",
+  "Requirements": [],
+  "AssemblyName": "ClassesReborn.dll",
+  "EntryMethod": "ClassesReborn.Main.Load",
+  "HomePage": "https://github.com/Xhanatos/Buildcraft",
+  "Repository": "https://raw.githubusercontent.com/Xhanatos/Buildcraft/main/Repository.json"
+}

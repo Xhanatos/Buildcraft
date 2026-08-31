@@ -1,0 +1,2961 @@
+BUILDCRAFT - CHANGELOG
+======================
+
+Last updated for Buildcraft 3.44.4.
+
+
+CURRENT CUMULATIVE CHANGES
+==========================
+
+MONGREL RACE IDENTITY AND ANIMATION REPAIR (3.44.4)
+-----------------------------------------------------
+
+- Playable Mongrels now use a distinct internal race identity instead of
+  sharing the Human identity. This prevents the per-frame animation-controller
+  exceptions that caused severe slowdown, stalled death animations, and
+  standing corpses.
+- Mongrel visual presets use the same distinct identity, and startup validation
+  now rejects duplicate Human identities before gameplay begins.
+
+FATE'S FAVORED SAVE-LOAD REPAIR (3.44.3)
+-----------------------------------------
+
+- Fate's Favored now waits until a unit's features and stat modifiers have
+  finished loading before checking for luck bonuses, preventing failed stat
+  initialization, 0/0 hit points, and repeated exception-driven slowdown.
+
+MANY-BLOODED HUMAN NAME REPAIR (3.44.2)
+-----------------------------------------
+
+- Added the missing localized name for the Human ancestry offered by the
+  Many-Blooded Mongrel trait.
+
+MONGREL APPEARANCE OPTIONS (3.44.1)
+------------------------------------
+
+- Added eight gender-compatible Mongrel mutation choices to visual character
+  customization: two mismatched-ear variants, five horn variants, and unusual
+  glossy eyes.
+- Mongrel visual options now use independent customization containers, so the
+  mutation choices remain exclusive to Mongrel character creation.
+
+MONGREL RACIAL CONTENT (3.44.0)
+--------------------------------
+
+- Mongrels now receive Underground Survivor (+2 racial Stealth and Trickery)
+  and Sound Mimicry (+1 racial Persuasion and Persuasion as a class skill) in
+  addition to their fixed ability modifiers and Mongrel Resilience.
+- Mongrel Resilience now owns the existing +2 natural armor mechanic directly,
+  allowing alternate heritages to exchange it without hidden bonuses remaining.
+- Added eight stack-compatible Mongrel alternate heritages: Chitin-Plated,
+  Keen-Eared, Hooved Runner, First-Crusade Scion, Adaptive Lineage, Cliffborn,
+  Fanged Offshoot, and Crushing Limbs.
+- Adaptive Lineage provides a martial-or-exotic weapon choice, proficiency with
+  that weapon, and +1 CMB while it is wielded. Crushing Limbs grants a 1d4 slam.
+- Added the Mongrel racial traits Crusader's Descendant, Unsettling Appearance,
+  Twisted Balance, Many-Blooded, and Hardened Mutation.
+- Many-Blooded offers the humanoid player races and counts the selected ancestry
+  for Buildcraft racial traits and feat prerequisites.
+- Added an independent Unity Mod Manager toggle for Mongrel alternate heritages.
+
+MONGREL CHARACTER-CREATION REPAIR (3.43.7)
+-------------------------------------------
+
+- Mongrels no longer receive a selectable +2 ability-score bonus in addition
+  to their fixed racial modifiers.
+- The Mongrel race page now lists Mongrel Resilience, making its existing +2
+  natural armor bonus visible in the Race Traits section.
+
+PLAYABLE MONGREL RACE (3.43.6)
+-------------------------------
+
+- Added Owlcat's native Mongrel race to player character creation behind its
+  own Unity Mod Manager toggle.
+- Preserved the native +2 Strength, +2 Dexterity, -2 Charisma, and +2 natural
+  armor mechanics.
+- Added the complete Human character-doll customization options to the native
+  Human-compatible Mongrel visual presets so both genders have functional
+  heads, hair, facial hair, and appearance choices.
+- Added Mongrel as a choice for Buildcraft's Racial Heritage feat while the
+  playable race is enabled.
+
+SHIELD FIGHTER COMBAT TRAIT (3.43.5)
+-------------------------------------
+
+- Added Shield Fighter to the Combat Traits group. A shield wielded in the
+  off hand counts as a light weapon when determining two-weapon fighting
+  penalties, and shield bash attacks gain +1 damage.
+
+HUMAN BONUS-FEAT REPLACEMENT REPAIR (3.43.4)
+----------------------------------------------
+
+- Human alternate heritages that replace the racial bonus feat no longer leave
+  an unresolved hidden bonus-feat selection in character creation. Eye for
+  Talent characters can proceed after choosing their normal level-1 feat and
+  both companion ability-score benefits.
+
+HULRUN SPAWN REPAIR (3.43.3)
+----------------------------
+
+- Human alternate-heritage UI synchronization is now disabled during automatic
+  NPC preset level-ups. This prevents the Human bonus-feat preview from being
+  recalculated in AutoCommit mode and allows Hulrun and other marketplace NPCs
+  to initialize with their intended levels and hit points.
+
+MARKETPLACE CUTSCENE REPAIR (3.43.2)
+------------------------------------
+
+- Character-trait pages are now excluded explicitly from blueprint-driven NPC
+  level-ups, preventing marketplace actors from receiving unresolved player
+  selections while the opening Hulrun scene is initialized.
+
+HALFLING TRAIT ADJUSTMENT (3.43.1)
+-----------------------------------
+
+- Successful Shirker grants +1 Stealth and +2 on Persuasion checks made to
+  demoralize enemies.
+
+DREAD ARCHER FIGHTER ARCHETYPE (3.43.0)
+----------------------------------------
+
+- Added Dread Archer as an independently toggleable Fighter archetype.
+- Merciless Reputation replaces Bravery and grants +2 on demoralize checks per
+  rank at Fighter levels 2, 6, 10, 14, and 18.
+- Deadly Aim replaces the level-1 bonus combat feat. Painful Shots replaces the
+  level-4 feat and makes a free demoralize attempt on the first ranged weapon
+  hit each round while Deadly Aim is active.
+- Ranged Weapon Training applies to every ranged weapon, counts as Weapon
+  Training, and advances at levels 5, 9, 13, and 17.
+- Merciless replaces the level-8 and level-16 bonus combat feats, dealing 1d6
+  and then 2d6 additional damage against shaken or fear-affected targets.
+- Dreadful Carnage replaces the level-12 bonus combat feat without requiring
+  its normal prerequisites, and its range increases from 30 to 50 feet at
+  level 18.
+- Dread Archers retain light and medium armor proficiency but receive no heavy
+  armor or shield proficiency.
+
+CONTENT VERIFICATION REPAIRS (3.42.3)
+--------------------------------------
+
+- Dirty Fighting's two prerequisite aliases are now explicitly declared as
+  compatible multiple components, matching the runtime prerequisite patch.
+- Archaeologist's Luck now calculates its additional rounds through one
+  combined resource component. Its total remains 8 + twice Charisma at 1st
+  level and increases by 4 rounds at every later Bard level.
+- Volley Fire still participates in every native teamwork-sharing system, but
+  its Cavalier registration now preserves the abilities' other effects without
+  causing invalid duplicate-effect validation warnings.
+- Crimson Marksman's name and description are initialized before its archetype
+  blueprint is validated.
+- Fighter Armor Training and Warrior of the Holy Light's Power of Faith now
+  update their intended fields directly, avoiding false validation warnings
+  from valid native multi-component and custom-range blueprints.
+- Removed a disabled Eldritch Heritage compatibility branch that caused the
+  compiler's only warning.
+- Verified all 139 content settings against their individual Unity Mod Manager
+  controls and group All/None handlers, and checked all 901 localization
+  entries for duplicate or unresolved direct keys.
+
+NPC CHARACTER-CREATION SAFETY (3.42.2)
+---------------------------------------
+
+- Alternate racial heritage pages now follow the base game's optional primary
+  selection behavior, allowing automatic NPC level-up to skip them safely.
+- Character-trait pages are now added only to the active player character-
+  creation controller and no longer enter automatic NPC initialization.
+- This prevents Hulrun's marketplace initialization from failing before the
+  opening dialogue can find its speaker.
+
+SCHOOL UNDERSTANDING PHYSICAL ENHANCEMENT (3.42.1)
+--------------------------------------------------
+
+- Physical Enhancement now uses School Understanding's effective level while
+  Bolster is active instead of checking Wizard class level.
+- An active Strength, Dexterity, or Constitution enhancement is recalculated
+  both when Bolster begins and when it ends, preventing a stale bonus.
+
+WIZARD SUPREME INTELLECT (3.42.0)
+---------------------------------
+
+- Wizards gain Supreme Intellect at level 20: +4 inherent Intelligence and
+  +2 on caster-level checks to overcome spell resistance and on dispel checks
+  with spells cast from the Wizard spellbook.
+- Shadowcasters do not gain Supreme Intellect because they retain their own
+  level-20 capstone.
+- Added an independent Unity Mod Manager toggle under class and archetype
+  changes.
+
+ARCANE BOMBER BOMB FEATS (3.41.0)
+---------------------------------
+
+- Arcane Bomber Wizards can select Precise Bombs from Wizard Bonus Feats
+  starting at level 1 and Fast Bombs starting at level 8.
+- These choices grant the native bomb feats. All four Arcane Bomb abilities
+  are explicitly recognized as bombs and added to Fast Bombs' ability lists,
+  so the feats continue to function on Spellblast-empowered Arcane Bombs when
+  multiclassing with Alchemist or another bomb-using class.
+- Added an independent Unity Mod Manager toggle under class and archetype
+  changes.
+
+WIZARD ARCANE BOND (3.40.0)
+---------------------------
+
+- Arcane Bond — Object can restore a prepared spell twice per day.
+- Added an independent Unity Mod Manager toggle for this change under class
+  and archetype changes.
+
+ARCANIST EXPLOITS (3.39.0)
+--------------------------
+
+- Added Familiar to the Arcanist Exploit selection, using the native
+  Arcanist-compatible familiar choices.
+- Added School Understanding with one choice for every Wizard school. The
+  selected first-level school power uses the exploit's governing ability
+  score and normally scales as Wizard level 1.
+- School Understanding - Bolster spends 1 arcane reservoir point as a swift
+  action and lets the selected power use the character's full effective
+  exploit level for a number of rounds equal to the governing ability
+  modifier, minimum 1.
+- Added Spell Thief as a greater exploit available from effective exploit
+  level 11. It spends 1 reservoir point, requires a melee touch attack and a
+  failed Will save, then moves the target's highest-level eligible beneficial
+  spell to the user for its remaining duration.
+- Exploiter Wizards and Arcane Enforcers use Intelligence for these exploits;
+  ordinary Arcanists use Charisma. Every exploit has an independent Unity Mod
+  Manager toggle.
+
+NEW RACIAL TRAITS (3.38.0)
+--------------------------
+
+- Added Tusked as a Half-Orc racial trait and Adopted option. It increases the
+  damage dice of existing bite and gore attacks by one size category.
+- Added Vile Chemist as a Goblin racial trait and Adopted option. Bomb attacks
+  deal an additional 1d2 acid damage.
+- Tusked and Toothy are compatible: Toothy can grant a bite attack, while
+  Tusked improves its damage die.
+
+GOBLIN RACIAL TRAITS (3.37.0)
+-------------------------------
+
+- Added five Goblin-only racial traits to the Racial Traits group and the
+  Adopted trait selection: Color Thief, Foul Belch, Goblin Foolhardiness,
+  Bouncy, and Underfoot Menace.
+- Color Thief grants +2 trait Stealth while wearing light armor or no armor.
+- Foul Belch is a once-per-day swift action against an adjacent creature. A
+  failed Fortitude save against DC 10 + half character level + Constitution
+  modifier leaves the target sickened for 1d6 rounds.
+- Goblin Foolhardiness grants +1 trait attack with non-reach melee weapons
+  against larger creatures while no ally is adjacent.
+- Bouncy grants +2 racial CMD against trip and +1 racial Reflex.
+- Underfoot Menace grants +2 dodge AC against attacks of opportunity made by
+  larger creatures.
+
+GIFTED ADEPT CHARACTER-CREATION FIX (3.36.1)
+------------------------------------------------
+
+- Gifted Adept now builds its spell choices from the preview character's
+  actual class and archetype spellbooks, including spellbooks that have not
+  yet been attached during character creation.
+- Each spell choice is checked against the character's current class level,
+  so the trait offers level-1 Warpriest spells at character creation without
+  exposing spell levels the character cannot cast.
+- Spell choices are refreshed after Buildcraft finishes its spell-list
+  additions, allowing the trait to recognize the mod's added spells.
+
+WIZARD ARCANE DISCOVERIES (3.36.0)
+-----------------------------------
+
+- Arcane Discovery is available from both the general feat list and the
+  Wizard bonus-feat list and can be selected repeatedly for different
+  discoveries.
+- Knowledge Is Power adds the Wizard's Intelligence modifier to combat
+  maneuver checks and combat maneuver defense.
+- Opposition Research lets a level-9 Wizard choose one of their opposition
+  schools; spells of that school then use their normal number of preparation
+  slots.
+- Creative Destruction grants temporary hit points equal to the number of
+  damage dice rolled by a damaging evocation spell for one hour. Repeated
+  triggers replace the existing pool rather than stacking.
+- Alchemical Affinity grants +1 caster level and +1 saving-throw DC to spells
+  appearing on both the Wizard and Alchemist spell lists.
+- Idealize increases ability-score enhancement bonuses granted by the
+  Wizard's transmutation spells by +2, increasing to +4 at Wizard level 20.
+- The Wizard changes and every individual discovery have separate Unity Mod
+  Manager toggles.
+
+WARPRIEST MAGIC-TRAIT SUPPORT (3.35.12)
+----------------------------------------
+
+- Two-World Magic now recognizes Warpriest as a level-1 spellcasting class
+  and offers its foreign-cantrip selection during character creation.
+
+DISTINCT GOBLIN HERITAGE ICONS (3.35.11)
+-----------------------------------------
+
+- Cave Crawler, City Scavenger, Eat Anything, Hard Head Big Teeth,
+  Over-Sized Ears, and Tree Runner now use six distinct native icons chosen
+  to match their individual themes.
+
+FEMALE GOBLIN CLASS-OUTFIT FIX (3.35.10)
+-----------------------------------------
+
+- Female Goblins now select every class outfit from the male-compatible
+  Goblin clothing table, covering armor, robes, skirts, boots, and attached
+  lower-body equipment.
+- Character gender remains female for gameplay and dialogue.
+
+STARTUP CONFIGURATION REPAIRS (3.35.9)
+---------------------------------------
+
+- Volley Fire now supplies the auxiliary teamwork blueprints required for
+  Cavalier Tactician, Vanguard Tactician, and Raging Tactician integration.
+- Corrected the Warpriest Fervor description blueprint lists so Fervor Quicken
+  Cast is handled as a feature rather than an ability.
+- True Cognatogen validation now preserves and verifies the native True Mutagen
+  non-ability bonuses without assuming a particular natural-armor component.
+
+GROUPED CHARACTER TRAITS (3.35.8)
+----------------------------------
+
+- Character-creation and Additional Traits choices are now organized into
+  Combat, Faith, Magic, Social, and Racial trait categories.
+- Each trait slot uses independent category selectors, allowing two traits from
+  the same category while continuing to prevent duplicate trait choices.
+- None remains directly available in every trait slot.
+
+FEMALE GOBLIN BODY EQUIPMENT FIX (3.35.7)
+-------------------------------------------
+
+- Female Goblins now use the complete male Goblin-compatible visual equipment
+  set, including class outfits and their arms, hands, legs, and feet.
+- The visual substitution applies to every equipment refresh while preserving
+  the character's selected female gender for gameplay and dialogue.
+
+GOBLIN GREEN SKIN AND RED EYES (3.35.6)
+-----------------------------------------
+
+- Added a Goblin-green choice to the functional Body Color palette.
+- Added a red choice to the functional Eye Color palette.
+- Goblin palettes are cloned before adding the new colors, leaving the native
+  Halfling and Kitsune customization palettes unchanged.
+
+GOBLIN COLOR CUSTOMIZATION FIX (3.35.5)
+-----------------------------------------
+
+- Goblin skin colors now use the native player-character primary-ramp mask
+  across the head, ears, neck, torso, arms, hands, legs, and feet.
+- Goblin eye colors now use a separate secondary-ramp mask on the eye renderer.
+- The Looks-page skin and eye selectors now repaint the Goblin model instead of
+  only displaying cosmetic color choices.
+
+FEMALE GOBLIN VISUAL FIX (3.35.4)
+----------------------------------
+
+- Female Goblins now use Owlcat's compatible male Goblin doll internally
+  during both character-creation previews and final unit-view construction.
+- The temporary visual substitution preserves the character's selected female
+  gender while preventing the male-only Goblin head from being bound to the
+  incompatible global female doll rig.
+
+GOBLIN APPEARANCE CUSTOMIZATION FIX (3.35.3)
+---------------------------------------------
+
+- Corrected the female Goblin model by using the Goblin body's matching small
+  skeleton for both gender choices, preventing the head and ears from being
+  stretched vertically.
+- Added functional skin-color and eye-color palettes to the Goblin Looks page.
+- Male and female Goblins continue to use their respective character-creation
+  gender choices while sharing Owlcat's single modular Goblin body and head.
+
+GOBLIN RACE REGISTRATION FIX (3.35.2)
+--------------------------------------
+
+- Goblin once again appears in the selectable race list.
+- Added three complete Goblin visual presets using supported small-race
+  skeletons together with Owlcat's Goblin body and head entities.
+- Goblin race registration now occurs before appearance configuration so a
+  cosmetic setup error cannot hide the race from character creation.
+
+GOBLIN APPEARANCE FIX (3.35.1)
+-------------------------------
+
+- Restored the native Goblin body and head resources in character creation.
+- The Looks page now builds the Goblin model from Goblin-compatible visual
+  entities, enabling its three body presets together with skin, eye, scar,
+  warpaint, tattoo, and outfit-color customization.
+
+PLAYABLE GOBLIN RACE (3.35.0)
+------------------------------
+
+- Added Goblin as a fully selectable player race using Owlcat's native Goblin
+  body, animation set, equipment support, and three appearance presets.
+- Goblins are Small and gain +4 Dexterity, -2 Strength, -2 Charisma, +4
+  Stealth, +2 Perception, and a 30-foot base speed.
+- Added six alternate racial heritages: Cave Crawler, City Scavenger, Eat
+  Anything, Hard Head Big Teeth, Over-Sized Ears, and Tree Runner.
+- Compatible heritage stacking allows Cave Crawler to be combined with one
+  heritage that replaces Stealthy and Keen Senses.
+- Added Goblin to the Racial Heritage feat and added individual Unity Mod
+  Manager toggles for the playable race and its alternate heritages.
+
+MARTIAL MYTHIC ABILITIES (3.34.0)
+-----------------------------------
+
+- Added Ricochet to the Mythic Ability selection. Once per round, a successful
+  thrown-weapon hit makes a free attack at -2 against the nearest other enemy
+  within 15 feet of the original target.
+- Added Bashing Bulwark to the Mythic Ability selection. Shield-bash damage
+  increases by one size category, and the first successful shield bash each
+  round grants +2 untyped stackable AC until the wielder's next turn.
+- Added Shielded Casting to the Mythic Ability selection. Shields contribute
+  no arcane spell failure and count as a free hand for Spell Combat-style
+  spellcasting checks.
+- Each new mythic ability has an individual Unity Mod Manager toggle.
+
+DRUID, BARD, AND ALCHEMIST CAPSTONES (3.33.0)
+------------------------------------------------
+
+- Defender of the True World's Enemy of the Fey, Fey Stalker, and Feybane
+  bonuses now apply against evil outsiders as well as fey.
+- Bards that retain Deadly Performance gain True Artist at level 20. It grants
+  +2 on all skill checks, +2 to Bardic Performance saving throw DCs, and +4
+  Dexterity while a Bardic Performance is active.
+- Every Alchemist gains Awakened Intellect at level 20, increased to a
+  permanent +4 Intelligence. It is no longer a Grand Discovery option.
+- Added True Cognatogen as a Grand Discovery requiring Grand Cognatogen. It
+  mirrors True Mutagen with +8 natural armor and +8 to Intelligence, Wisdom,
+  and Charisma while imposing the Cognatogen penalties on physical scores.
+
+PRIMAL SHIFTING CAPSTONE (3.32.14)
+-----------------------------------
+
+- Added Primal Shifting at Shifter level 20 to every Shifter and Shifter
+  archetype that retains Final Aspect. Archetypes that exchange Final Aspect
+  do not receive it.
+- Assuming or changing a major form is a swift action. While a major form is
+  active, the Shifter gains +10 feet of movement speed and +2 on all saving
+  throws.
+
+WITCHCRAFT CAPSTONE (3.32.13)
+------------------------------
+
+- Added Witchcraft to the base Witch progression at level 20 so every Witch
+  archetype inherits the capstone.
+- Witchcraft adds +2 to the saving throw DCs of the Witch's Hex abilities and
+  spells with the Curse descriptor, and +2 to the Witch's saving throws
+  against Hex and Curse effects.
+- When a creature succeeds at its saving throw against a Hex with a once-per-
+  day target restriction, Witchcraft permits exactly one additional attempt
+  with that Hex against that creature.
+
+CURSING GAZE AND HEX STRIKE (3.32.12)
+---------------------------------------
+
+- Added Cursing Gaze to the Mythic Ability selection. It changes known hexes
+  and major hexes to swift actions while excluding grand hexes.
+- Added Hex Strike as a selectable general feat for Witch, Shaman, Hexcrafter,
+  and Sylvan Trickster hexes.
+- Hex Strike can be prepared by successful unarmed strikes, claws, bites, and
+  other natural-weapon hits. The selected single-target hex must be delivered
+  to the creature hit as a swift action before the end of the round.
+- Added separate Unity Mod Manager settings for Cursing Gaze and Hex Strike.
+
+SHARP NAILS TRAIT (3.32.11)
+----------------------------
+
+- Added Sharp Nails to all four Trait selections.
+- Sharp Nails increases the critical multiplier of claw attacks by 1.
+
+RAKING CLAWS (3.32.10)
+------------------------
+
+- Raking Claws now requires base attack bonus +4 instead of +8.
+- The Wild Shape (Wolf) or Major Form prerequisite has been removed.
+- The feat's existing bleed effect is unchanged.
+
+WITCH LEY LINE GUARDIAN (3.32.9)
+---------------------------------
+
+- Ley Line Guardians retain the standard Witch Hex selection at level 8.
+- The level-8 Conduit Surge improvement and every other archetype exchange
+  remain unchanged.
+
+WITCH KEEN-EYED ADVENTURER (3.32.8)
+-------------------------------------
+
+- Cantrip Mastery is gained at Witch level 10 and replaces the level-10 Hex.
+- The archetype retains its normal level-20 Hex selection.
+- Cantrip Mastery's description reflects its new level and replacement.
+
+WITCH HAGBOUND (3.32.7)
+-------------------------
+
+- Hagbound Witches retain the standard Witch Hex selection at level 1.
+- Hag's Claw Mastery is gained at Witch levels 3, 7, and 11. Each rank adds
+  +1 attack with claws and increases their critical threat range by 1, up to
+  +3 attack and a 17-20 threat range for ordinary claws.
+
+WARPRIEST CHAMPION OF THE FAITH (3.32.6)
+------------------------------------------
+
+- Champion of the Faith's Smite attack bonus and target-specific deflection
+  Armor Class bonus now scale with Wisdom.
+
+SLAYER ARCANE ENFORCER (3.32.5)
+--------------------------------
+
+- Arcane Enforcer's Arcane Reservoir maximum now uses Intelligence instead
+  of Charisma.
+- Arcane Exploit saving throw DCs and all other ability-score-based effects,
+  including damage, temporary hit points, durations, and damage reduction,
+  now use Intelligence for Arcane Enforcers.
+- Arcanists and Exploiter Wizards retain their native scaling.
+- Updated the Arcane Reservoir and Arcane Exploits descriptions.
+
+SORCERER GEOMANCER (3.32.4)
+----------------------------
+
+- Favored Terrain is now granted once at levels 3, 7, 11, 15, and 19, with
+  one choice replacing each lost Sorcerer bloodline bonus feat.
+- The progression retains three new-terrain choices and two Favored Terrain
+  rank-up choices.
+
+WARPRIEST CULT LEADER (3.32.3)
+-------------------------------
+
+- Cult Leader's Enthrall now uses a move action.
+- Updated the feature and ability descriptions with the new action type.
+
+WARPRIEST FERVOR (3.32.2)
+--------------------------
+
+- Fervor now grants daily uses equal to the character's full Warpriest level
+  plus Wisdom modifier.
+- Updated Fervor feature and ability descriptions with the new daily-use
+  formula.
+
+WARPRIEST SHIELDBEARER (3.32.1)
+--------------------------------
+
+- Shieldbearer's Sacred Armor numeric enhancement bonus now also applies as
+  an enhancement bonus on shield-bash attack and damage rolls.
+- The shield-bash bonus follows the currently active Sacred Armor enhancement
+  rank and does not stack with a higher weapon enhancement bonus.
+- Updated the Sacred Armor descriptions and added a Warpriest class toggle to
+  Unity Mod Manager.
+
+MARTIAL DIVINE SPELLS (3.32.0)
+--------------------------------
+
+- Added Weapon of Awe at spell level 2 for Cleric/Oracle, Inquisitor,
+  Paladin, and Warpriest. It grants +2 sacred weapon damage and makes targets
+  shaken for 1 round on a confirmed critical hit.
+- Added Sanctify Armor at Paladin spell level 3 and Inquisitor spell level 4.
+  It grants +1 armor enhancement per four caster levels, up to +5, and DR
+  5/evil while Judgment or Smite is active.
+- Added Forceful Strike at spell level 4 for Cleric/Oracle, Inquisitor,
+  Paladin, and Warpriest. Its swift-action melee attack adds 1d4 force damage
+  per caster level, up to 10d4, and can bull rush on a failed Fortitude save.
+- Added Wrathful Weapon at spell level 4 for Cleric/Oracle and Warpriest, with
+  anarchic, axiomatic, holy, and unholy variants for either hand.
+- Added individual Unity Mod Manager toggles for all four spells.
+
+BUILDCRAFT NAME (3.31.3)
+------------------------
+
+- Renamed the player-facing mod to Buildcraft.
+- Preserved the existing internal mod identity so current settings, updates,
+  and save-game blueprint references remain compatible.
+
+NORMAL SLAYER ARMOR TALENTS (3.31.2)
+--------------------------------------
+
+- Armored Marauder and Armored Swiftness are now available through every
+  normal Slayer Talent tier instead of being restricted to Advanced Slayer
+  Talents.
+- Their Slayer-level-10 prerequisites were removed. Armored Swiftness retains
+  Armored Marauder as its prerequisite.
+- Reaping Stalker remains an Advanced Slayer Talent available from level 10.
+
+HERITAGE ROADMAP ORDER (3.31.1)
+---------------------------------
+
+- Progressively generated heritage pages and their dependent choices now sit
+  directly after the heritage page that opened them.
+- The complete alternate-heritage chain therefore remains before Background
+  Selection in character creation.
+
+PROGRESSIVE ALTERNATE-HERITAGE CHAIN (3.31.0)
+------------------------------------------------
+
+- Character creation initially shows only the race's first heritage page.
+- Selecting an alternate heritage opens the next compatible heritage page;
+  selecting the standard heritage or No Additional Heritage ends the chain.
+- Changing an earlier choice automatically removes every later heritage page
+  and choice that depended on it.
+- Every additional stage now has its own No Additional Heritage feature, so a
+  stop choice can never become unavailable because another stage used it.
+
+TRANSACTIONAL HERITAGE REPLACEMENT (3.30.1)
+-----------------------------------------------
+
+- Switching an alternate racial heritage now validates the replacement before
+  removing the current choice from that roadmap slot.
+- Clicking a heritage that is already selected in another slot, or conflicts
+  with another selected heritage, leaves all existing selections intact.
+
+DYNAMIC ALTERNATE-HERITAGE DEPTH (3.30.0)
+--------------------------------------------
+
+- Alternate racial heritage stacking now computes the largest set of options
+  that replace different racial features for each race.
+- Each race receives the number of ordered heritage stages required by that
+  compatibility depth instead of a universal limit of two heritage choices.
+- Halflings receive three total heritage stages, allowing Hasty, Jinxed, and
+  Low Blow to be selected together while Craven remains incompatible with
+  options that also replace Fearless or Halfling Luck.
+- Additional stages retain stable blueprint identities and remain adjacent to
+  the primary heritage stage in the character-creation roadmap.
+
+JABBING MASTER REBALANCE (3.29.3)
+-----------------------------------
+
+- Jabbing Master now deals +2d6 damage on the second and every later
+  consecutive unarmed hit against one target that round.
+- Jabbing Master now explicitly requires Power Attack, Improved Unarmed Strike,
+  Dodge, Jabbing Style, and base attack bonus +12.
+
+ALTERNATE-HERITAGE SELECTION ROLLBACK (3.29.1)
+------------------------------------------------
+
+- Changing an alternate racial heritage now rolls back the previous heritage
+  when Wrath replaces a selection directly without first deselecting it.
+- Nested choices granted by the previous heritage are rolled back with their
+  parent selection, preventing Eye for Talent ability choices from remaining
+  active after Standard Heritage or No Additional Heritage is selected.
+- Explicit deselection uses the same atomic selection-tree rollback while
+  preserving unrelated later character-creation choices.
+
+ROGUE, SLAYER, AND COMBAT-FEAT EXPANSION (3.29.0)
+--------------------------------------------------
+
+- Added Hamstring Strike, Armor Piercer, and Emboldening Strike to Rogue
+  Talent selections. Hamstring Strike and Armor Piercer are mutually exclusive
+  toggles that exchange sneak-attack dice for their control or armor-reduction
+  effects.
+- Added Armored Marauder, Armored Swiftness, and Reaping Stalker to the
+  advanced Slayer Talent selection.
+- Added Multiattack with a one-natural-attack prerequisite, Improved Natural
+  Attack, and Claw Pounce. Claw Pounce requires two claws and base attack bonus
+  +10 and restricts its charge full attack to claws.
+- Added Close-Quarters Thrower, Jabbing Style, Jabbing Master, and Tandem Trip.
+- Added Volley Fire as a nearby ranged-teamwork bonus with Solo Tactics
+  support, capped at +4.
+- Added Focused Shot as Intelligence-to-damage for bows and crossbows. Its
+  Intelligence modifier replaces other ability-score damage modifiers.
+- Added Tactical Reflexes as an Intelligence-based Combat Reflexes substitute,
+  including flat-footed attacks of opportunity and Combat Reflexes prerequisite
+  compatibility.
+- Added individual Unity Mod Manager toggles for all ten added feats.
+
+ALTERNATE-HERITAGE DESELECTION (3.28.7)
+-----------------------------------------
+
+- Alternate racial heritages are now removed by their stable selection and
+  selected feature when Wrath rebuilds a character-creation roadmap with a
+  different transient selection index.
+- Deselecting an earlier heritage fully removes its pending level-up action and
+  rebuilds the preview, so that heritage can immediately be selected again or
+  replaced by another compatible option.
+
+STATIC ALTERNATE-HERITAGE ROADMAP (3.28.6)
+------------------------------------------
+
+- Replaced dynamic insertion and reordering of stacked heritage selections
+  with a fixed Additional Racial Heritage slot created alongside the race's
+  primary heritage slot when character creation begins.
+- The additional slot offers every compatible heritage plus No Additional
+  Heritage. It is only added for races that have at least two options replacing
+  different racial abilities.
+- Eye for Talent now suppresses completion requirements for the existing Human
+  Bonus Feat slot without removing that slot from the live roadmap. This keeps
+  the roadmap's phase count stable in either heritage order.
+- This corrects the ArgumentOutOfRangeException raised by Wrath's
+  CharGenRoadmapMenuView after selecting Giant Ancestry and Eye for Talent.
+
+STACKED-HERITAGE SOURCE GROUPING (3.28.5)
+-----------------------------------------
+
+- Fixed Eye for Talent followed by Giant Ancestry leaving character creation
+  on a blank page.
+- Nested choices are now associated with a selected heritage through both the
+  game's explicit Parent link and the blueprint that granted the choice. This
+  covers progressions such as Eye for Talent whose nested selections have no
+  Parent link in the level-up state.
+- Compatible follow-up heritages are placed only after all nested choices from
+  the preceding heritage.
+
+STACKED-HERITAGE NESTED SELECTIONS (3.28.4)
+-------------------------------------------
+
+- Fixed character creation becoming blank after selecting a second alternate
+  racial heritage when either heritage contained nested choices.
+- Each heritage now remains grouped with its complete nested-selection subtree
+  before the next compatible heritage selection is presented.
+- Selection state is no longer reordered when it is already in the correct
+  hierarchy, avoiding unnecessary roadmap invalidation.
+
+EYE FOR TALENT (3.28.3)
+-----------------------
+
+- Eye for Talent now lets the player choose two different ability scores for
+  their animal companion or bonded mount. Each chosen score gains a +2 racial
+  bonus.
+- The companion or mount also gains 4 additional hit points.
+- Fixed the ability-score choice names displaying raw localization markup in
+  the selection list.
+
+GREATER ELDRITCH HERITAGE CAPSTONES (3.28.2)
+---------------------------------------------
+
+- Greater Eldritch Heritage now grants the level-20 capstone power of the
+  bloodline selected through Eldritch Heritage when the character reaches
+  character level 20.
+- The capstone is added to the feat's existing 15th-level bloodline power and
+  effective-level improvement. Characters who select the feat at level 20
+  receive the capstone immediately.
+- Added explicit capstone grants for every one of the feat chain's 21 supported
+  native bloodline choices.
+
+ALTERNATE-HERITAGE SELECTION FLOW (3.28.1)
+-------------------------------------------
+
+- Compatible follow-up heritage selections now appear immediately after the
+  race's primary heritage selection and before Background Selection.
+- Follow-up selections are restored whenever another character-creation
+  feature changes, so choosing a background no longer removes an outstanding
+  alternate-heritage choice.
+
+HUMAN ALTERNATE RACIAL HERITAGES (3.28.0)
+------------------------------------------
+
+- Added Focused Study, granting selectable Skill Focus feats at character
+  levels 1, 8, and 16 in place of the human bonus feat.
+- Added Awareness, granting a +1 racial bonus on all saving throws and
+  concentration checks in place of the human bonus feat.
+- Added Military Tradition, granting proficiency with two chosen martial or
+  exotic weapons in place of the human bonus feat.
+- Added Unstoppable Magic, granting a +2 racial bonus on caster-level checks
+  made to overcome spell resistance in place of the human bonus feat.
+- Added Dimdweller, granting +2 racial bonuses on Persuasion, Perception, and
+  Stealth checks in place of Skilled.
+- Added Giant Ancestry, granting +1 CMB and CMD but -2 Stealth in place of
+  Skilled.
+- Added Heart of the Slums, granting +2 Trickery and Stealth and a second roll
+  on saving throws against disease in place of Skilled.
+- Added Practiced Hunter, granting +2 Stealth and Lore (Nature) and making both
+  class skills in place of Skilled.
+- Human alternate heritages may be combined when they replace different racial
+  abilities. Two options replacing the bonus feat, or two replacing Skilled,
+  remain mutually exclusive.
+
+GREATER ELEMENTAL RAGE DAMAGE (3.27.1)
+---------------------------------------
+
+- Greater Elemental Rage now adds 1d6 energy damage, rather than 1d10, for
+  each point of the weapon's critical multiplier beyond x1.
+- The same damage adjustment applies when Greater Ferocious Mount shares the
+  rage power with an animal companion.
+
+COMPATIBLE ALTERNATE-HERITAGE STACKING (3.27.0)
+------------------------------------------------
+
+- Selecting an alternate racial heritage now opens another heritage choice
+  whenever at least one compatible exchange remains available.
+- Additional heritages may be combined only when they replace different
+  racial abilities. Options that exchange an already-replaced ability are
+  blocked automatically.
+- Standard Heritage ends the repeat selection while retaining all racial
+  abilities not exchanged by the selected alternate heritages.
+- Deselecting or changing an earlier heritage removes dependent later choices
+  and their nested selections cleanly.
+- Added a dedicated Unity Mod Manager toggle under Race Changes.
+
+UNLIMITED STONE IN THE BLOOD HEALING (3.26.6)
+------------------------------------------------
+
+- Stone in the Blood now restores 2 hit points after every qualifying instance
+  of acid damage without a daily healing pool.
+
+UNLIMITED JINXED (3.26.5)
+-------------------------
+
+- Jinxed no longer consumes a daily resource and may be used freely as a
+  standard action.
+
+GREATER FEROCIOUS MOUNT SHARING (3.26.4)
+-----------------------------------------
+
+- Greater Ferocious Mount now gives the animal companion every rage power
+  possessed by its master for the duration of the master's rage. The shared
+  list is collected from all supported rage-power selections instead of being
+  limited to a fixed set of Buildcraft powers.
+- Removed rage-power acquisition-level requirements from the player-facing
+  descriptions of custom rage powers; their blueprint prerequisites remain
+  enforced.
+- Corrected Ghost Rager's blueprint prerequisite to effective rage-power
+  level 6, matching its intended requirement.
+
+PLAYER-FACING DESCRIPTION CLEANUP (3.26.3)
+-------------------------------------------
+
+- Removed development comparisons and implementation notes from custom
+  player-facing descriptions, including Superstition, Canny Defense,
+  Intrepid Volunteer, Improved Armored Swiftness, and several alternate
+  racial heritages.
+- Real mechanical restrictions, prerequisites, replacement information, and
+  non-stacking rules remain documented where players need them.
+
+UNLIMITED ABYSSAL AND DRACONIC BLOODLINE CLAWS (3.26.2)
+-------------------------------------------------------
+
+- Abyssal Grow Claws and every Draconic Bloodline Claws tier no longer consume
+  a rounds-per-day resource. Once gained, they can remain active indefinitely
+  and may be dismissed freely.
+- The change applies to the shared bloodline powers used by Sorcerers,
+  Eldritch Scions, Dragon Disciples, and the Buildcraft Eldritch Heritage
+  chain. Bloodrager claws that exist only during bloodrage remain unchanged.
+- Added a separate Unity Mod Manager toggle under Global Changes.
+
+ARMORED HULK IMPROVED ARMORED SWIFTNESS (3.26.1)
+-------------------------------------------------
+
+- Improved Armored Swiftness at level 5 now replaces the level-2 capped
+  Armored Swiftness feature with a true +10-foot movement-speed bonus while
+  wearing medium or heavy armor.
+- The bonus is not capped by the armored hulk's normal unencumbered speed and
+  stacks with other movement-speed bonuses.
+
+ADDED RAGE POWERS (3.26.0)
+--------------------------
+
+- Added Superstition. While raging, it grants a scaling morale bonus on
+  saving throws against hostile magic used by enemies, without interfering
+  with beneficial allied magic.
+- Added Witch Hunter. It requires Superstition and grants scaling weapon
+  damage against creatures that possess spells or spell-like abilities.
+- Added Eater of Magic at effective rage-power level 10. Once per rage, it
+  rerolls a failed saving throw against hostile magic; a successful second
+  result grants temporary hit points equal to the effect's caster level for
+  1 minute.
+- Added Strength Surge at effective rage-power level 8. As a free action, it
+  adds the character's effective rage-power level to the next combat maneuver
+  check or combat maneuver defense check. It has one use per rage at level 8,
+  two at level 12, and three at level 16.
+- Added a condensed two-step Elemental Rage chain. The first power provides
+  permanent 1d6 acid, cold, electricity, or fire damage on weapon and natural
+  attacks throughout rage; Greater Elemental Rage adds scaling d6 damage of
+  that element to confirmed critical hits.
+- Added Ghost Rager at effective rage-power level 6, providing ghost-touch
+  attacks and a scaling morale bonus to touch Armor Class while raging.
+- Added Ferocious Mount, Greater Ferocious Mount, and Spirit Steed. These
+  share rage bonuses and constant rage powers with an adjacent companion or
+  bonded mount, then add magic natural attacks and scaling DR/magic.
+- Added separate Unity Mod Manager toggles for each new power or power chain.
+- Added the constant new rage powers to Inspired Rage sharing and made the
+  selections available through the normal Barbarian, Skald, Primalist, and
+  rage-power-granting Shifter paths.
+
+SORCERER ARCHETYPE BONUS-FEAT REPLACEMENTS (3.25.5)
+----------------------------------------------------
+
+- Geomancer and Overwhelming Mage once again replace every recurring
+  Sorcerer Bloodline Feat Selection. With Buildcraft enabled, both now
+  remove the selections at levels 3, 7, 11, 15, and 19.
+- Corrected their replacement schedules to match the expanded Sorcerer
+  progression, preventing Wrath from incorrectly disabling either archetype
+  because its former level-13 replacement no longer matched a base feature.
+
+OPTIONAL TRAIT PICKS (3.25.4)
+-----------------------------
+
+- Added a None option to every automatic and Additional Traits selection, so
+  players may skip either individual trait pick without disabling the trait
+  system in Unity Mod Manager.
+- Each slot uses an independent no-effect option, allowing all two or four
+  available trait choices to be skipped without duplicate-selection conflicts.
+
+TOYBOX GESTALT COMPATIBILITY (3.25.3)
+-------------------------------------
+
+- Added a class-selector synchronization guard for ToyBox's experimental
+  Multiple Classes On Level-Up option. If ToyBox's radio selection and
+  Wrath's active primary class disagree, the clicked class is now applied on
+  that same click instead of requiring an intermediate third-class choice.
+- ToyBox's multiclass checkbox refresh now restores the primary class shown by
+  the class selector after its temporary preview changes.
+- Guarded ToyBox's BAB, saving-throw, and hit-point gestalt calculations
+  against transient character-generation previews with no valid primary
+  class. Valid completed gestalt selections continue to use ToyBox's chosen
+  progression policies unchanged.
+- Selecting the base class while archetype stacking is active now removes its
+  archetypes directly without temporarily removing and re-adding the class,
+  avoiding invalid gestalt preview states during archetype deselection.
+
+ARCHETYPE DESELECTION CORRECTION (3.25.2)
+-----------------------------------------
+
+- Deselecting an archetype now removes that exact AddArchetype action from the
+  active character-creation or respec preview instead of changing only its
+  visual checkbox.
+- The archetype list immediately recalculates selected and available states
+  after removal, so choices that were locked only because they conflicted with
+  the removed archetype become selectable again.
+- Archetype-stacking interception remains limited to classes the character is
+  taking for the first time; ordinary later level-ups retain native behavior.
+
+ARCHETYPE-STACKING UI PERFORMANCE HOTFIX (3.25.1)
+-------------------------------------------------
+
+- Restricted the shared nested-selection Harmony hooks before evaluating any
+  archetype-stacking state, so unrelated menus never perform provider checks.
+- Cached the ToyBox and standalone-provider reflection metadata once at mod
+  startup while continuing to read ToyBox's live toggle value. This removes
+  the repeated assembly scans that could saturate one CPU core and leave the
+  main menu extremely slow or apparently unresponsive.
+
+TABLETOP-COMPATIBLE ARCHETYPE STACKING (3.25.0)
+------------------------------------------------
+
+- Added an optional archetype-stacking system for newly selected classes.
+  Multiple archetypes of the same class may be chosen when Wrath's native
+  compatibility check confirms that their feature replacements do not
+  conflict. Incompatible archetypes remain mutually exclusive.
+- Updated character creation, respec, class tooltips, character information,
+  progression previews, spellbook previews, martial statistics, and class
+  skills to display and calculate all selected archetypes together.
+- Archetypes must still be chosen when the character first takes the class;
+  adding another archetype to an already-levelled class requires a respec.
+- Added a default-on "Tabletop-compatible archetype stacking" toggle under
+  Global Changes in Unity Mod Manager.
+- Added runtime conflict guards for ToyBox and the standalone Multiple
+  Archetypes mod. If ToyBox's option is enabled or the standalone mod is
+  loaded, Buildcraft suspends only its overlapping archetype-stacking
+  patches and reports the provider in the Unity Mod Manager panel and log.
+- Added the required MIT attribution for the ToyBox and Multiple Archetypes
+  implementations on which the selection and preview work is based.
+
+RACIAL HERITAGE ROADMAP ORDER (3.24.2)
+---------------------------------------
+
+- Classified the separate Human, Kitsune, Aasimar, Tiefling, Oread, and
+  Dhampir alternate-heritage selectors as native racial selections. Their tabs
+  now appear immediately after Race alongside the base-game heritage step,
+  rather than later in character creation after Skills.
+
+ALTERNATE RACIAL HERITAGE CORRECTION (3.24.1)
+----------------------------------------------
+
+- Corrected the twenty-eight options introduced in 3.24.0: they are alternate
+  racial heritages that exchange native racial features, not campaign Traits.
+  They no longer consume either of the two character-creation Trait slots and
+  the shared Trait pool is restored to 74 choices, including 44 racial traits.
+- Keen Kitsune, Pyromaniac, and Dual-Minded reuse Wrath's existing native
+  heritage options instead of creating duplicate selections.
+- Human Eye for Talent replaces the bonus feat, while Heart of the Fey replaces
+  Skilled. Kitsune Skilled replaces Agile and Kitsune Magic, while Fast Shifter
+  replaces Kitsune Magic.
+- Elf Fleet-Footed replaces Keen Senses and Elven Weapon Familiarity, while
+  Dreamspeaker replaces Elven Immunities. Dwarf Magic Resistant replaces Hardy
+  and Relentless replaces Stability.
+- Gnome Eternal Hope replaces Defensive Training and Hatred, while Fell Magic
+  replaces Gnome Magic. Halfling Jinxed replaces Halfling Luck and Low Blow
+  replaces Keen Senses.
+- Half-Elf Ancestral Arms joins the native heritage selection and therefore
+  replaces Adaptability. Half-Orc Sacred Tattoo and Toothy replace Orc
+  Ferocity; Shaman's Apprentice replaces Intimidating.
+- Aasimar Heavenborn replaces the chosen ancestry's racial skill bonuses and
+  spell-like ability, Deathless Spirit replaces Celestial Resistance, and
+  Celestial Crusader replaces both Celestial Resistance and ancestry skill
+  bonuses. Tiefling Maw or Claw replaces the ancestry spell-like ability and
+  Fiendish Sprinter replaces its ancestry skill bonuses.
+- Both Oread options replace Acid Affinity. Wrath does not implement the
+  tabletop Dhampir light sensitivity or spell-like ability, so Dayborn replaces
+  Resist Level Drain and Vampiric Fangs replaces Undead Resistance.
+- Added individual Unity Mod Manager toggles for each race's alternate heritage
+  module. Every tooltip now names the racial abilities it replaces.
+
+INITIAL ALTERNATE-HERITAGE CONTENT (3.24.0; CORRECTED IN 3.24.1)
+----------------------------------------------------------------
+
+- Initially added twenty-eight race-restricted choices to the shared Trait
+  pool. Version 3.24.1 corrects them into alternate racial heritages.
+- Kitsune gained Keen Kitsune, Skilled Kitsune, and Fast Shifter. Keen Kitsune
+  changes the flexible mental bonus from Charisma to Intelligence; Skilled
+  Kitsune grants one additional skill point per character level; Fast Shifter
+  changes Kitsune Change Shape to a move action.
+- Humans gained Eye for Talent and Heart of the Fey. Eye for Talent chooses a
+  +2 racial ability bonus for an animal companion or bonded mount; Heart of the
+  Fey grants Perception and saves against fey magic.
+- Elves gained Fleet-Footed and Dreamspeaker. Fleet-Footed includes +5 racial
+  base movement speed, not an enhancement bonus; Dreamspeaker improves the DC
+  of enchantment spells.
+- Dwarves gained Magic Resistant and Relentless; Gnomes gained Pyromaniac,
+  Eternal Hope, and Fell Magic; Halflings gained Jinxed and Low Blow.
+- Half-Elves gained Ancestral Arms and Dual-Minded; Half-Orcs gained Sacred
+  Tattoo, Toothy, and Shaman's Apprentice.
+- Aasimar gained Heavenborn, Deathless Spirit, and Celestial Crusader;
+  Tieflings gained Maw or Claw and Fiendish Sprinter; Dhampirs gained Dayborn
+  and Vampiric Fangs; Oreads gained Stone in the Blood and Earth Insight.
+- Native Keen Kitsune, Pyromaniac, and Dual-Minded heritage effects cannot be
+  selected together with their new Trait versions. Toothy and Tusked are also
+  mutually exclusive.
+
+BACKGROUND BALANCE (3.23.1)
+----------------------------
+
+- Sarkorian Exile now grants +1 trait weapon damage against demons, without
+  also granting an attack-roll bonus.
+
+KITSUNE TRAITS (3.23.0)
+------------------------
+
+- Added four Kitsune-only choices to the shared Trait pool, increasing it to
+  74 choices, including 44 race-restricted traits.
+- Clever Predator uses Intelligence instead of Wisdom for Perception checks.
+- Two Faces, One Mind grants +2 trait saves against polymorph, charm, and
+  compulsion effects.
+- Hidden Tail grants +1 trait Stealth and Persuasion and an obligatory choice
+  to make either skill a class skill.
+- Vulpine Ambusher grants +2 trait initiative and +1 trait attack against
+  creatures that remain surprised during a surprise round.
+- Adopted and Racial Heritage (Kitsune) recognize all four traits through the
+  existing shared race-prerequisite system.
+- Corrected nested feature registration so the added backgrounds, their
+  proficiency subchoices, Racial Heritage race choices, and Unsanctioned
+  Knowledge spell choices no longer appear in unrelated race-heritage lists.
+
+TRAITS, WORLWOUND BACKGROUNDS, AND BUILD FEATS (3.22.0)
+--------------------------------------------------------
+
+- Added Fate's Favored, Pragmatic Activator, Bruising Intellect, Two-World
+  Magic, and Gifted Adept to the shared Trait pool, increasing it to 70 choices.
+- Added eight individually toggleable backgrounds: Sarkorian Exile, Wardstone
+  Veteran, Redeemed Cultist, Kenabres Watchman, Numerian Salvager, Temple
+  Weaponmaster, Crusade Quartermaster, and Worldwound Cartographer.
+- Kenabres Watchman chooses light-armor or light-shield proficiency; Temple
+  Weaponmaster reads the selected deity's native favored-weapon mapping.
+- Added the Eldritch Heritage, Improved Eldritch Heritage, and Greater Eldritch
+  Heritage feat chain for the native Sorcerer bloodlines.
+- Added Feral Combat Training as a natural-weapon selection. The chosen weapon
+  qualifies for unarmed-strike Monk and style mechanics and gains iterative
+  natural attacks.
+- Added Racial Heritage for Humans. The chosen race satisfies Buildcraft's
+  racial-Trait prerequisites while the character remains Human.
+- Added Artful Dodge, allowing Intelligence to satisfy Dexterity prerequisites
+  for combat feats.
+- Added Cut from the Air. It spends an available attack of opportunity to make
+  an opposed melee attack roll against an incoming manufactured ranged attack.
+- Added individual Unity Mod Manager toggles for all eight backgrounds and all
+  five requested feat modules.
+
+ADOPTED TRAIT (3.21.0)
+-----------------------
+
+- Added Adopted to the shared character-creation and Additional Traits pool,
+  increasing it from 64 to 65 options.
+- Selecting Adopted opens one obligatory nested choice containing the 40 racial
+  traits associated with races other than the character's actual race.
+- Adopted reuses the original racial-trait blueprints and mechanics while its
+  nested selection safely waives only their normal race prerequisite.
+
+CHARACTER TRAIT INITIALIZATION CORRECTION (3.20.2)
+--------------------------------------------------
+
+- Removed the remaining startup dependency on the custom Divine Conduit class
+  feature. All icons needed by Trait setup now come exclusively from native
+  blueprints that already exist when the Trait section is configured.
+- This fixes the 3.20.1 startup failure that prevented the Trait selection
+  blueprints from being created and consequently left no Trait phases in the
+  character-creation roadmap.
+
+CHARACTER-CREATION TRAIT FIX (3.20.1)
+--------------------------------------
+
+- Removed the premature dependency on the separately configured Dirty Fighting
+  feat that caused Character Trait blueprint creation to abort during startup.
+- Trait choices are now added after a race has been selected and use that race
+  as their feature source, allowing racial prerequisites to evaluate correctly.
+- Retained a guarded fallback for full respecs whose race is already known and
+  excluded pregenerated characters from receiving unresolved Trait selections.
+- Missing Trait selection blueprints now produce one mod-log error and are
+  skipped instead of throwing repeatedly and blanking the class-selection UI.
+
+RACIAL TRAITS (3.20.0)
+-----------------------
+
+- Expanded the shared character-creation and Additional Traits pool from 24
+  to 64 options. The 40 new racial traits use race prerequisites and therefore
+  appear only for characters of their associated race.
+- Human: Bred for War, Superstitious (Kellid), and Weapon Training (Ulfen).
+- Elf: Warrior of Old, Forlorn, and Insular.
+- Dwarf: Ruthless, Grounded, Deep Marker, Tunnel Fighter, and Warsmith.
+- Gnome: Adrenaline Rush, Illusion Obsession, Rapscallion, and Animal Friend.
+- Halfling: Well-Informed, Intrepid Volunteer, and Successful Shirker.
+- Half-Elf: Elven Reflexes, Failed Apprentice, and Experimental Rebel.
+- Half-Orc: Cruel Rager, Finish the Fight, Tusked, Scrapper, and Brute.
+- Aasimar: Celestial Contact, Martyr's Blood, Toxophilite, Adrift, and
+  Selective Health.
+- Tiefling: Dark Magic Affinity, Hard to Pin Down, Shadow Stabber, Ever Wary,
+  and Born Damned.
+- Oread: Stoic Dignity.
+- Dhampir: Acknowledged Scion, Undead Slayer, and Half-Forgotten Secrets.
+- Adapted tabletop skills and circumstances to Wrath's rules: Intimidate,
+  Diplomacy, and Bluff use Persuasion; Acrobatics and balance use Mobility;
+  Survival uses Lore (Nature); Knowledge (engineering/local) uses Knowledge
+  (World); Warsmith recognizes constructs, elementals, golems, gargoyles, and
+  similar stone or crystal creatures; Intrepid Volunteer offers Dexterity for
+  Athletics or combat maneuvers; Half-Forgotten Secrets offers all pairs drawn
+  from Wrath's four Knowledge and Lore skills.
+- Implemented conditional runtime behavior for underground fighting, nearby
+  animals, racial spell sources, rage restoration, previously injured targets,
+  low health, unseen attackers and targets, surprise-round defense, alignment,
+  spell descriptors, creature types, and the Stoic Dignity ally aura.
+
+EXPANDED CHARACTER TRAITS (3.19.0)
+-----------------------------------
+
+- Expanded the character-creation and Additional Traits pools from 4 to 24
+  options by adding Bullied, Courageous, Deft Dodger, Dirty Fighter, Fencer,
+  Killer, Birthmark, Devotee of the Green, Ease of Faith, History of Heresy,
+  Indomitable Faith, Sacred Conduit, Scholar of the Great Beyond, Dangerously
+  Curious, Focused Mind, Skeptic, Mathematical Prodigy, Bully, Child of the
+  Streets, and Fast-Talker.
+- Adapted tabletop skills to Wrath's skill system: Diplomacy and Intimidate use
+  Persuasion, Disable Device uses Trickery, and Knowledge or Lore skills use
+  their in-game counterparts.
+- Devotee of the Green, Scholar of the Great Beyond, and Mathematical Prodigy
+  grant both listed skill bonuses and open an obligatory choice for which one
+  becomes a class skill.
+- Conditional effects are implemented mechanically: Bullied and Fencer modify
+  only qualifying attacks of opportunity, Dirty Fighter modifies weapon damage
+  against flanked enemies, Killer adds post-critical damage, History of Heresy
+  stops working after entering a divine spellcasting class, and Sacred Conduit
+  increases the save DC of positive and negative Channel Energy variants.
+
+ADDITIONAL TRAITS FEAT (3.18.0)
+--------------------------------
+
+- Added Additional Traits as a one-time general feat. Selecting it grants two
+  obligatory choices from the same Trait pool used during character creation.
+- A character cannot select a Trait already possessed or choose the same Trait
+  for both additional selections.
+- Additional Traits has its own Unity Mod Manager toggle under Added Feats and
+  remains usable when automatic character-creation Traits are disabled.
+
+CHARACTER TRAITS (3.17.0)
+--------------------------
+
+- Every new or fully respecced character receives two obligatory Trait
+  selections while taking the first character level. The same trait cannot be
+  selected twice, and multiclassing does not grant additional selections.
+- The initial trait list contains:
+  - Anatomist: +1 on rolls to confirm critical hits.
+  - Armor Expert: reduces armor check penalty by 1.
+  - Reactionary: +2 trait bonus on initiative checks.
+  - Resilient: +1 trait bonus on Fortitude saving throws.
+- Character Traits have their own Unity Mod Manager toggle under Global
+  Changes. Existing characters must fully respec to receive the selections.
+
+SHILLELAGH: MAGICAL WEAPONS (3.16.0)
+-------------------------------------
+
+- Shillelagh now affects every wielded club and quarterstaff, including
+  weapons that already have a magical enhancement bonus. Its +1 enhancement,
+  two-category damage-size increase, and support for both quarterstaff ends
+  are otherwise unchanged.
+
+PALADIN PATH CHOICE (3.15.0)
+-----------------------------
+
+- Removed the universal Paladin Bonus Combat Feat grants at levels 7 and 14.
+- At level 3, Paladins who normally receive Mercy now choose one permanent
+  path:
+  - Mercy retains the full native Mercy progression at levels 3, 6, 9, 12,
+    15, and 18.
+  - Combat Training replaces every Mercy selection with Fighter-compatible
+    bonus combat feats at levels 3, 9, and 15. Normal feat prerequisites still
+    apply.
+- Archetypes that already replace Mercy retain their original replacement and
+  do not receive this new path choice. Tortured Crusader still retains only its
+  four native Self-Sufficient selections at levels 2, 8, 12, and 16.
+
+NEW SPELL: SHILLELAGH (3.14.0)
+--------------------------------
+
+- Added Shillelagh as a 1st-level Transmutation spell for Druid, Hunter,
+  Ranger, and Shaman.
+- It is a personal standard-action spell lasting 1 minute per caster level.
+  Nonmagical clubs and quarterstaffs wielded by the caster gain a +1
+  enhancement bonus on attack and damage rolls and deal damage as though two
+  size categories larger. Both ends of a quarterstaff benefit.
+- Magical and nonmagical clubs and quarterstaffs are both affected. The spell
+  has its own Unity Mod Manager setting.
+
+EXPANDED FEATS (3.13.0)
+------------------------
+
+- Added Two-Weapon Defense. It requires Dexterity 15 and Two-Weapon Fighting
+  and grants +1 dodge AC while wielding two weapons or a double weapon. The
+  bonus becomes +2 while Fighting Defensively. Natural weapons, unarmed
+  strikes, shields, and single-weapon configurations do not activate it.
+- Added Armor of the Pit for all native Tiefling heritages, granting +2
+  natural armor AC. Wrath has no selectable Scaled Skin alternate racial
+  trait, so no alternate resistance benefit is needed.
+- Added Greater Unarmed Strike. It requires character level 3 and Improved
+  Unarmed Strike, raises Medium unarmed damage to at least 1d8 and then 1d10
+  at character level 10, and treats a Monk as four levels higher for unarmed
+  damage progression. It never lowers stronger existing damage dice.
+- All three feats have individual Unity Mod Manager settings. Two-Weapon
+  Defense and Greater Unarmed Strike are combat feats and also appear in the
+  Fighter Bonus Feat list; Armor of the Pit is a general feat only.
+
+ALCHEMIST DISCOVERIES (3.12.0)
+-------------------------------
+
+- Added Bone-Spike Mutagen. While any normal, Greater, Grand, or True Mutagen
+  is active, it grants +2 natural armor and one additional masterwork natural
+  spike attack dealing 1d6 piercing damage. It requires Alchemist level 6 or
+  Mutation Warrior level 7 and access to Mutagen.
+- Added Collective Memory. While any normal, Greater, or Grand Cognatogen is
+  active, it adds half the character's Alchemist level to Knowledge (Arcana),
+  Knowledge (World), Lore (Nature), and Lore (Religion). It requires
+  Cognatogen.
+- Added Pheromones, granting a permanent +4 competence bonus on Persuasion
+  checks.
+- All three discoveries appear in the Alchemist, Extra Discovery,
+  Vivisectionist, and Extra Vivisectionist discovery selections. Bone-Spike
+  Mutagen and Collective Memory also appear for Mutation Warriors. The curated
+  Underground Chemist selection is unchanged.
+
+TWO-HANDED FIGHTER STRONG GRIP REVISION (3.11.0)
+-------------------------------------------------
+
+- Removed the separate Strong Arms feature and its grants at Fighter levels
+  10, 16, and 20.
+- Every rank of the Two-Handed Fighter's existing Strong Grip feature now also
+  grants +1 inherent Strength at levels 2/6/10/14/18, reaching +5 Strength.
+
+UNITY MOD MANAGER SETTINGS CORRECTION (3.10.1)
+------------------------------------------------
+
+- Removed the redundant "Remove Lead Blades from Paladin" setting and its
+  underlying spell-list mutation. Lead Blades is not part of the native
+  Paladin spell list, so Buildcraft no longer presents it as an optional
+  change.
+
+MODULAR UNITY MOD MANAGER SETTINGS (3.10.0)
+--------------------------------------------
+
+- Unity Mod Manager now provides collapsible settings groups for global
+  changes, races, classes and archetypes, added feats and exploits, and added
+  spells or spell-list changes.
+- Every modified class family can be enabled or disabled independently. The
+  standalone Crimson Marksman archetype has its own switch.
+- Every feat added by Buildcraft has an individual switch. Extra Hex is
+  separated into its Witch and Shaman versions, every Ascetic feat can be
+  controlled separately, and Quick Study has its own exploit switch.
+- Every new spell and every actual existing spell-list change can be controlled
+  separately, including Bard access to True Strike, Magic Weapon, and Greater
+  Magic Weapon and Paladin access to Aid and Freedom of Movement.
+- The Half-Orc racial changes, background Trait bonuses, and the global
+  Trapfinding improvement have independent switches. Barbarian, Rogue, and
+  Archaeologist Danger Sense changes follow their respective class switches.
+- All options default to enabled, preserving the behavior of previous releases.
+  Settings are saved to Unity Mod Manager's Settings.xml and take effect after
+  fully restarting Wrath. Characters should be respecced after changing class
+  progression or selectable-content settings.
+
+BLOODLINE FEAT SELECTION CORRECTION (3.6.3)
+-------------------------------------------
+
+- Sorcerers receive the gold Bloodline Feat Selection at levels 3/7/11/15/19.
+  Its nested selection continues to resolve to the feat list of the chosen
+  bloodline.
+- The dark generic Sorcerer Bonus Feat marker remains only at its native level
+  1 position. It is not used for the recurring selections.
+
+RACES - HALF-ORC
+----------------
+
+- Half-Orcs gain an additional +2 racial bonus to Strength and a -2 racial
+  penalty to Intelligence. Both fixed modifiers are displayed on the race
+  selection screen.
+- Their normal selectable +2 ability score bonus remains available. Selecting
+  Strength therefore grants both bonuses.
+
+BLUEPRINT TARGET CORRECTIONS (3.5.2)
+------------------------------------
+
+- Incense Synthesizer now removes the archetype's reductions to the recurring
+  Alchemist Bombs Feature ranks, rather than targeting the separate level-1
+  Alchemist Bombs feature. This restores the Bomb ranks at 3/7/11/15/19.
+- The 3.5.2 Sorcerer correction targeted the generic Sorcerer Bonus Feat
+  selection rather than the bloodline-specific selections. This regression is
+  corrected in 3.6.3.
+
+RUNTIME INITIALIZATION FIXES (3.5.1)
+------------------------------------
+
+- Incense Synthesizer now restores its full Bomb progression regardless of
+  how the current game version groups the native Bomb-removal entries.
+- Ranger Master Hunter now validates its fixed five-use Instant Enemy resource
+  using the game's fixed-resource representation, allowing the Ranger section
+  and its other changes to finish loading.
+- Sorcerer bloodline bonus feat progression validation now uses stable
+  blueprint identifiers after configuration. The selections at levels
+  3/7/11/15/19 and the remaining Sorcerer changes now finish loading normally.
+
+BACKGROUNDS
+-----------
+
+- The +1 skill bonus granted when a background class skill was already a class
+  skill is now a trait bonus instead of a competence bonus.
+- Attack bonuses granted when a background weapon proficiency overlaps with
+  an existing proficiency are now trait bonuses. Any other direct skill or
+  attack bonuses contained in the background selection tree are likewise
+  converted to trait bonuses.
+
+NEW ARCANE SPELL: LONG ARM
+--------------------------
+
+- Long Arm is a 1st-level Transmutation spell available to Alchemist, Bard and
+  Skald, Bloodrager, Magus, Witch, Wizard, Sorcerer, Arcanist, Eldritch
+  Scoundrel, Magic Deceiver, and Nature Mage spellcasting.
+- It is a personal standard-action spell lasting 1 minute per caster level.
+  For the duration, the caster's melee reach increases by 5 feet.
+- It is also included in the Transmutation specialist spell lists used by
+  specialist and Thassilonian Wizards.
+- Nature Mage uses a private copy of the Druid spell list containing Long Arm,
+  so ordinary Druids do not gain this arcane-spell addition.
+
+NEW TABLETOP SPELLS
+-------------------
+
+- Blistering Invective is a 2nd-level Evocation spell for Alchemist, Bard/Skald,
+  and Inquisitor. It attempts to demoralize every enemy within 30 feet. Each
+  successfully demoralized enemy takes 1d10 fire damage and must make a Reflex
+  save or catch fire for 1d6 fire damage immediately and each round. Spell
+  resistance protects only against the fire effects.
+- Arcane Concordance is a 3rd-level Bard/Skald Evocation spell. For 1 round per
+  caster level, arcane spells cast within its 10-foot emanation gain a +1
+  enhancement bonus to their saving throw DC and either free Extend or free
+  Reach metamagic, selected when Arcane Concordance is cast. Reach implements
+  the tabletop spell's Enlarge option; Wrath has no Silent or Still metamagic.
+- Burst of Radiance is a 2nd-level Evocation spell for Cleric, Druid, and
+  Wizard/Sorcerer/Arcanist spellcasting. A Reflex save changes 1d4 rounds of
+  blindness into 1d4 rounds of dazzled. Evil creatures also take 1d4 damage
+  per caster level, to a maximum of 5d4, regardless of the save.
+- Blade Tutor's Spirit is a 1st-level Magus spell and a 2nd-level Paladin and
+  Wizard/Sorcerer/Arcanist spell. For 1 minute per caster level it reduces
+  recognized voluntary melee attack penalties by 1 + 1 per 5 caster levels,
+  without reducing a penalty below 0. It supports Power Attack, Piranha Strike,
+  Combat Expertise, Fighting Defensively, Spell Combat, and charge penalties.
+- Deadly Juggernaut is a 3rd-level Necromancy [death] spell for Cleric,
+  Inquisitor, and Paladin. For 1 minute per caster level, each qualifying melee
+  kill grants a cumulative +1 luck bonus on melee attacks, melee weapon damage,
+  Strength checks, and Athletics, plus DR 2/-. It caps at five stacks (+5 and
+  DR 10/-); enemies more than four character levels below the caster do not
+  grant stacks.
+
+NEW FEATS
+---------
+
+- Two-Weapon Defense requires Dexterity 15 and Two-Weapon Fighting. While
+  wielding two weapons or a double weapon it grants +1 dodge AC, increased to
+  +2 while Fighting Defensively.
+- Armor of the Pit requires a Tiefling heritage and grants +2 natural armor
+  AC.
+- Greater Unarmed Strike requires Improved Unarmed Strike and character level
+  3. It raises unarmed damage to at least 1d8, then 1d10 at character level
+  10, and advances Monk unarmed damage as though the Monk were four levels
+  higher.
+- Mighty Hurling requires Strength 13 and base attack bonus +1. It uses
+  Strength instead of Dexterity for attack rolls with throwing axes, darts,
+  javelins, and shuriken whenever Strength is higher.
+- Crushing Throw requires Strength 15, base attack bonus +6, Mighty Hurling,
+  and Power Attack. While Power Attack is active, eligible thrown weapons use
+  its one-handed attack and damage scaling, with half damage on off-hand
+  attacks and normal support for Mythic Power Attack.
+- Balanced Grip requires Dexterity 13, base attack bonus +1, Weapon Finesse,
+  and Weapon Focus with the selected weapon. It can be taken repeatedly for
+  different one-handed slashing or piercing weapon types. The selected weapon
+  supports Weapon Finesse and Mythic Weapon Finesse and counts as light for
+  two-weapon fighting penalties without changing its proficiency, damage dice,
+  fighter weapon group, reach, or required hands.
+- Dervish Dance uses Dexterity for attack and damage rolls with a one-handed
+  scimitar while the off hand is free. Mobility 2 represents Perform (dance)
+  in Wrath's skill system.
+- Mad Magic allows a Bloodrager to cast spells from any class while
+  bloodraging. Greater Bloodrage also grants +1 spell DC while active.
+- Crusader's Flurry allows a deity's favored melee weapon with Weapon Focus to
+  function as a monk weapon for Flurry of Blows.
+- Rime Spell is a +1-level metamagic feat for cold spells. A creature that
+  takes cold damage from the spell is entangled for rounds equal to the
+  spell's original level.
+- Desna's Shooting Star uses Charisma for attack and damage rolls with
+  starknives for worshippers of Desna.
+- Bladed Brush lets worshippers of Shelyn with Weapon Focus (Glaive) apply
+  Weapon Finesse to glaive attacks and treat the glaive as one-handed for
+  abilities such as Spell Combat.
+- The parametrized Ascetic Style, Ascetic Form, and Ascetic Strike chain is
+  available for monk weapons. Ascetic Form enables Flurry of Blows with the
+  selected weapon; Ascetic Strike raises its damage to the unarmed-strike dice
+  of a monk four levels lower when that is better.
+- Fey Foundling is limited to character level 1. Magical healing restores 2
+  extra hit points per die, it grants +2 saves against death effects, and cold
+  iron weapons deal 1 extra damage to the character.
+- Vicious Stomp grants an unarmed attack of opportunity when an adjacent enemy
+  falls prone, consuming an available attack of opportunity normally.
+- Unsanctioned Knowledge requires Intelligence 13 and 1st-level Paladin spell
+  casting. It adds one selected Bard, Cleric, or Inquisitor spell of each spell
+  level from 1 through 4 to the Paladin spellbook.
+
+- Extra Hex is available in separate Witch and Shaman versions. Each version
+  reuses the class's native Hex selection, enforces every selected Hex's normal
+  prerequisites, and can be taken repeatedly.
+- Extra Revelation reuses the Oracle's native Revelation selection, enforces
+  every selected Revelation's normal prerequisites, and can be taken
+  repeatedly.
+- Cavaliers who retain Expert Trainer gain that class feature at level 4.
+  Horse Master requires Mobility 6 and an animal companion, and makes the
+  mount's progression use total character level. Expert Trainer is not a
+  prerequisite.
+- Hurtful is a toggleable combat feat requiring Strength 13 and Power Attack.
+  After a successful Demoralize against an enemy in melee reach, it spends the
+  character's available swift action to make one melee attack; a miss removes
+  the shaken effect applied by that Demoralize.
+- Dirty Fighting is a combat feat that grants access to the standard combat
+  maneuver actions and supplies Dexterity 13, Intelligence 13, Combat
+  Expertise, and Improved Unarmed Strike for maneuver-feat prerequisites. Its
+  CRPG maneuver modifiers reproduce the flanking benefit and the penalty for
+  attempting a maneuver without its improved feat.
+- Guided Hand requires Channel Energy and a deity, but deliberately does not
+  require Channel Smite. It uses Wisdom in place of Strength or Dexterity on
+  attack rolls with that deity's favored weapon when Wisdom is higher.
+- Erastil's Blessing requires Erastil and Weapon Focus (Longbow) and uses Wisdom
+  in place of Dexterity on attacks with longbows and shortbows, including their
+  composite versions, when Wisdom is higher.
+- Split Hex requires Witch level 10. While its default-on toggle is active, a
+  successful single-target Witch Hex that is neither a Major nor Grand Hex can
+  be used once more against a different creature as a free action in the same
+  round.
+- Shield Brace is a combat feat requiring Shield Focus, shield proficiency, and
+  either Fighter level 1 or base attack bonus +3. It allows a two-handed spear
+  or polearm to be used with a light, heavy, or tower shield and applies that
+  shield's armor check penalty to attacks made with the braced weapon.
+
+ALCHEMIST - VIVISECTIONIST
+--------------------------
+
+- Combat Trick can be selected repeatedly at separate Medical Discovery
+  opportunities. Each combat feat chosen through it must still obey its own
+  repeatability and prerequisites.
+
+ALCHEMIST - DISCOVERIES
+-----------------------
+
+- Bone-Spike Mutagen requires Alchemist level 6 or Mutation Warrior level 7
+  and Mutagen. While a normal, Greater, Grand, or True Mutagen is active, it
+  grants +2 natural armor and one additional masterwork natural spike attack
+  dealing 1d6 piercing damage.
+- Collective Memory requires Cognatogen. While a normal, Greater, or Grand
+  Cognatogen is active, it adds half the character's Alchemist level to all
+  four Knowledge and Lore skills.
+- Pheromones grants a permanent +4 competence bonus on Persuasion checks.
+- All three are available from the standard and Vivisectionist discovery
+  selections and their Extra Discovery variants. Mutation Warriors can select
+  Bone-Spike Mutagen and Collective Memory. Underground Chemists retain their
+  intentionally restricted discovery list.
+
+ALCHEMIST - GRENADIER
+---------------------
+
+- Loses the normal Alchemist Discovery selections at levels 2, 8, and 14.
+- Gains Grenadier Bonus Combat Feat selections at levels 8 and 14, using the
+  full Fighter Bonus Feat list and requiring the normal feat prerequisites.
+
+ALCHEMIST - INCENSE SYNTHESIZER
+-------------------------------
+
+- Incense Fog can now be used for 3 + Alchemist level + Intelligence modifier
+  rounds per day instead of 3 + half Alchemist level + Intelligence modifier.
+- Gains Swift Incense at level 10, allowing both versions of Incense Fog to be
+  activated as a swift action.
+- Retains the normal Alchemist Bomb progression; the Bomb ranks at levels
+  3/7/11/15/19 are no longer removed.
+
+FIGHTER - BASE CLASS
+--------------------
+
+- Gains free Weapon Focus selections at levels 1, 4, and 7, for three total.
+- Gains free Greater Weapon Focus selections at levels 8, 11, and 14, beginning
+  as soon as the feat's Fighter-level prerequisite is met. Normal Weapon Focus
+  and other feat prerequisites remain enforced.
+- Fighter archetypes inherit all six selections.
+- Aldori Defender's level-1 grant is fixed to Weapon Focus (Dueling Sword).
+  Its level-4/7 Weapon Focus and level-8/11/14 Greater Weapon Focus selections
+  remain unrestricted.
+- Each Armor Training rank now reduces armor check penalty by 2 and increases
+  maximum Dexterity allowance by 2, instead of 1 for each. Its movement-speed
+  benefits are unchanged.
+
+FIGHTER - TOWER SHIELD SPECIALIST
+---------------------------------
+
+- Gains I Am Your Shield at level 1. As a swift-action, nonconsecutive
+  round-based toggle while wielding a tower shield, it grants adjacent allies
+  the specialist's current tower shield AC bonus as a Shield bonus, including
+  the shield's enhancement bonus. It can be used for 2 rounds per day plus the
+  positive part of the Constitution modifier, with 2 additional rounds at
+  Fighter levels 5, 10, 15, and 20.
+- Tower Shield Defense now includes a magic tower shield's enhancement bonus,
+  in addition to its base shield bonus and Shield Focus, when adding shield AC
+  against touch attacks.
+
+FIGHTER - TWO-HANDED FIGHTER
+----------------------------
+
+- Each rank of the existing Strong Grip feature also grants +1 inherent
+  Strength at levels 2/6/10/14/18, reaching +5. The separate Strong Arms
+  feature has been removed.
+
+FIGHTER - DRAGONHEIR SCION
+--------------------------
+
+- Fearful Might now grants +2 on Intimidate checks at level 2 and increases by
+  another +2 at Fighter levels 6, 10, 14, and 18, reaching +10 instead of +5.
+- Retains the base Fighter's Armor Mastery at level 19 and Weapon Mastery at
+  level 20 in addition to its Dragonheir Scion abilities.
+
+CAVALIER - BASE CLASS
+---------------------
+
+- Cavalier Bonus Feats are gained at levels 2, 6, 10, 14, and 18 instead of
+  levels 6, 12, and 18.
+- Cavalier archetypes inherit the expanded schedule normally. Gendarme
+  continues to replace every normal Cavalier Bonus Feat with its archetype's
+  own feat selection.
+
+Order of the Cockatrice
+
+- Braggart's +2 attack bonus against targets under fear effects is now a
+  profane bonus instead of a morale bonus.
+
+Order of the Shroud
+
+- Its scaling attack bonus against an undead target of the Cavalier's challenge
+  is now a sacred bonus instead of a morale bonus.
+
+Order of the Star
+
+- Its scaling bonuses to Fortitude, Reflex, and Will saves while threatening
+  the target of the Cavalier's challenge are now sacred bonuses instead of
+  morale bonuses.
+
+Order of the Sword
+
+- Every By My Honor choice at level 2 now grants its +2 selected saving-throw
+  bonus as a luck bonus instead of a morale bonus. All fifteen alignment and
+  saving-throw choices remain available.
+
+Fearsome Leader
+
+- Fearmonger's Intimidate-check bonus begins at +2 at level 3 and increases by
+  another +2 every three Cavalier levels, instead of increasing by +1 at each
+  breakpoint.
+
+Gendarme
+
+- Gains Glorious Charge at level 9. After completing a charge, the Gendarme
+  gains a morale bonus on Fortitude, Reflex, and Will saves equal to his
+  Charisma modifier for 2 rounds. The charge attack does not need to hit, and
+  additional charges refresh rather than stack the effect.
+- Gendarme continues to replace the normal Cavalier Bonus Feat at all five
+  levels of the revised 2/6/10/14/18 schedule.
+
+Ghost Rider
+
+- Frightful Gaze is now a swift action instead of a standard action. This
+  applies both before and after its level-9 upgrade against fear-immune and
+  mind-affecting-immune creatures.
+
+Knight of the Wall
+
+- Deflective Shield now includes a magic shield's enhancement bonus when adding
+  the shield's total AC bonus to touch AC and CMD.
+- Soul Shield now includes a magic shield's enhancement bonus when adding the
+  shield's total AC bonus to Will saves.
+
+Standard Bearer
+
+- Banner of Solace is now a swift action instead of a full-round action.
+- Awesome Pennon's +1 attack bonus and +3 saving-throw bonus against
+  mind-affecting effects are now sacred bonuses instead of morale bonuses. Its
+  fear immunity remains unchanged.
+
+CLERIC - BASE CLASS
+-------------------
+
+- Gains Faithful Determination at level 10. It grants a morale bonus on Will saves
+  equal to the Cleric's current Charisma modifier (minimum +0).
+- All Cleric archetypes inherit Faithful Determination at level 10.
+- Gains Divine Conduit at level 20. Every die rolled by the single-target and
+  mass Cure and Inflict Light, Moderate, Serious, and Critical Wounds spells is
+  automatically maximized.
+- Divine Conduit also grants immunity to fear effects and a +4 untyped bonus to
+  Charisma. It is inherited by Cleric archetypes except Crusader.
+- Divine Conduit's maximization applies to spell casts only; potions, scrolls,
+  channel energy, Heal, Harm, and unrelated variable effects are unchanged.
+
+CLERIC - CRUSADER
+-----------------
+
+- Replaces Divine Conduit with Sacred War at level 20 and retains the existing
+  Crusader Bonus Feat.
+- Sacred War grants a bonus on martial attack and damage rolls equal to
+  one-third of the Crusader's Charisma modifier, rounded down (minimum +0).
+- The bonus is sacred for a good deity and profane for an evil deity. A
+  Crusader whose deity is neither good nor evil chooses between the sacred and
+  profane versions at level 20.
+
+CLERIC - DEMONBANE PRIEST
+-------------------------
+
+- Gains Teamwork Bonus Feat selections at levels 4, 8, 12, and 16 instead of
+  only levels 4 and 8, for four total bonus feats.
+
+DRUID - BASE CLASS
+------------------
+
+- Gains Mighty Transformation at level 11. While shapeshifted, the Druid's
+  Base Attack Bonus becomes equal to character level, potentially granting
+  additional iterative attacks. The adjustment ends with the final active
+  shapeshift effect.
+- Gains Beasts of Legends at level 20. The Druid's animal companion gains a
+  +4 sacred bonus to Strength, Dexterity, and Constitution.
+- The Druid gains the same +4 sacred bonuses while shapeshifted, and summoned
+  creatures gain +2 sacred Strength, Dexterity, and Constitution.
+- Druid archetypes inherit Beasts of Legends through the shared Druid
+  progression except Winter Child, which replaces it with its own level-20
+  archetype capstone and does not receive both.
+
+HUNTER - BASE CLASS
+-------------------
+
+- Gains Precise Companion again at level 5. Since the level-2 choice already
+  grants either Precise Shot or Outflank, the second selection grants the
+  remaining feat. Both feats continue to ignore their normal prerequisites.
+- Gains Nurtured Growth at level 13. The Hunter's animal companion gains +2
+  natural armor and +2 untyped Strength, Dexterity, and Constitution.
+- Master Hunter retains unlimited uses of Animal Focus. In addition, while
+  either the Hunter or animal companion has an Animal Focus effect, that
+  creature gains +2 dodge AC and +2 Base Attack Bonus.
+- The bonuses are tracked independently for the Hunter and companion, and end
+  for either creature when that creature no longer has any Animal Focus effect.
+
+HUNTER - COLLUDING SCOUNDREL
+----------------------------
+
+- Gains one Sneak Attack die at Hunter levels 5, 10, and 15, reaching +3d6.
+- These are ranks of the standard Sneak Attack feature and stack normally with
+  Sneak Attack dice gained from other classes or feats.
+
+HUNTER - DIVINE HOUND
+---------------------
+
+- Gains Eternal Judgment at level 20, replacing the Master Hunter capstone
+  that Divine Hound already trades away.
+- Eternal Judgment allows Judgment to be used any number of times per day.
+- While the Divine Hound or animal companion has any Judgment active, that
+  creature gains +2 dodge AC and +2 Base Attack Bonus. The bonuses are tracked
+  independently and remain active while that creature has at least one of its
+  available Judgments active.
+
+HUNTER - FORESTER
+-----------------
+
+- Gains Uncanny Dodge at level 2. The multiclass-safe Uncanny Dodge feature is
+  used, so a character who already has Uncanny Dodge gains Improved Uncanny
+  Dodge as normal.
+- Bonus Combat Feats are gained at Hunter levels 2, 6, 10, 14, and 18 instead
+  of the original 2, 7, 13, and 19 schedule.
+- Does not gain Nurtured Growth at level 13, consistent with Forester having no
+  animal companion.
+
+HUNTER - TANDEM EXECUTIONER
+---------------------------
+
+- Gains its first Tandem Executioner Technique at level 1. Together with the
+  existing selections at levels 4, 7, 10, 13, 16, and 19, this gives the
+  archetype seven Techniques in total.
+- Gains Tandem Execution at level 10. After the Hunter and animal companion
+  have both made a weapon attack against the same enemy, both add 1d6 Sneak
+  Attack precision damage to weapon attacks against that shared target. The
+  effect ends if either partner attacks a different enemy and resets when
+  combat ends. Each Hunter-companion pair tracks its own target.
+
+INQUISITOR - BASE CLASS
+-----------------------
+
+- Gains Experienced Judgement at level 10, granting 2 additional Judgement
+  uses per day and a +4 insight bonus to Wisdom.
+- Faith Hunter, Judge, and Tactical Leader retain Experienced Judgement because
+  they retain a form of the Judgement ability. Living Grimoire, Monster
+  Tactician, Sacred Huntsmaster, and Sanctified Slayer do not gain it because
+  those archetypes give up Judgement.
+- True Judgment at level 20 now permits four Judgement effects to be active at
+  the same time, one more than the three allowed after Third Judgement. Its
+  existing swift-action death-judgement effect is unchanged.
+
+MAGUS - BASE CLASS
+------------------
+
+- Gains Canny Defense at level 1. While wearing light or no armor and not using
+  a shield, the Magus adds the Intelligence modifier to Armor Class as a dodge
+  bonus, capped by Magus class level. The bonus is lost while flat-footed or
+  otherwise denied the Dexterity bonus and has no weapon requirement.
+- Sword Saint keeps its original Canny Defense instead, including the
+  requirement to wield the chosen weapon.
+- Magus Bonus Feats are gained at levels 2, 6, 10, 14, and 18 instead of levels
+  5, 11, and 17. Every Magus archetype inherits all five selections in addition
+  to its other archetype features.
+
+MONK - BASE CLASS AND ARCHETYPES
+--------------------------------
+
+- Uncanny Dodge is added to every Monk Bonus Feat selection available from
+  level 6 onward. This includes the standard Monk pools and the tailored pools
+  used by Scaled Fist, Zen Archer, and Student of Stone.
+- The selectable entry is a visible wrapper around Owlcat's hidden,
+  multiclass-safe Uncanny Dodge rank tracker, so it appears in the choice list
+  and correctly advances to Improved Uncanny Dodge when appropriate.
+- The level-1 Monk Bonus Feat pools are unchanged.
+- Ki Power: Perfect Self at level 20 retains DR 10/chaotic and additionally
+  deals 1d10 force damage with every unarmed hit. The Drunken Master version
+  gains the same effect.
+- Quarterstaff Master gains Weapon Training (Quarterstaff) at levels 7, 10,
+  13, and 16, increasing its weapon training attack and damage bonuses with
+  quarterstaves from +1 to +4.
+- Sensei retains the base Monk's Evasion at level 2 and Fast Movement at level
+  3. All other Sensei feature replacements remain unchanged.
+- Student of Stone's Strength of Stone gains an improvement at level 9 that
+  adds 1d6 bludgeoning damage to every unarmed hit. At level 15 it gains a
+  further improvement granting +4 inherent Strength and Constitution.
+- Traditional Monk gains Mastering the fundamentals at levels 7, 11, and 15.
+  These grants respectively increase unarmed damage dice by one size category,
+  provide +2 dodge AC, and add one attack at the highest attack bonus during
+  Flurry of Blows.
+- Zen Archer regains Evasion at level 2 and Improved Evasion at level 9.
+- Rapid Shot, Manyshot, and Deflect Arrows are removed from every Zen Archer
+  Monk Bonus Feat selection. They remain available through ordinary feat
+  selections, while Deflect Arrows is granted automatically at Zen Archer
+  level 7.
+- Improved Initiative is available in every Zen Archer Monk Bonus Feat
+  selection.
+- Zen Archer gains Greater Ki Arrows at level 15, increasing unarmed strike
+  damage dice by one size category and applying the same increase to every bow
+  supported by Ki Arrows.
+- At level 20, Zen Archer replaces Ki Power: Perfect Self with One with the
+  Arrow. It adds one attack at the highest attack bonus during bow Flurry of
+  Blows and increases the critical threat range of longbows and shortbows by 1.
+
+PALADIN - BASE CLASS
+--------------------
+
+- At level 1, every Paladin automatically gains Weapon Focus with the favored
+  weapon of the selected deity. This is the actual parametrized Weapon Focus
+  feat and therefore satisfies prerequisites that require it. All Paladin
+  archetypes inherit this feature.
+- At level 3, Paladins choose either the full Mercy progression at levels
+  3/6/9/12/15/18 or Combat Training bonus feats from the Fighter pool at
+  levels 3/9/15. Normal feat prerequisites still apply.
+- Every Paladin's Lay on Hands pool is equal to Paladin class level plus
+  Charisma modifier instead of half Paladin level plus Charisma modifier.
+  This includes both Tortured Crusader resource variants, which now use
+  Charisma for the pool. Archetype features that grant extra uses continue to
+  add on top of the new base pool.
+- Adds Aid to the Paladin spell list as a 2nd-level spell and Freedom of
+  Movement as a 4th-level spell. Lead Blades is no longer added to Paladins.
+
+PALADIN - ARCHETYPES
+--------------------
+
+- Martyr retains the base Paladin's Divine Grace feature at level 2. All other
+  Martyr additions and replacements remain unchanged.
+- Stonelord retains the base Paladin's Divine Grace feature at level 2. All
+  other Stonelord additions and replacements remain unchanged.
+- Tortured Crusader retains only its four Self-Sufficient bonus combat feats at
+  levels 2, 8, 12, and 16. Because it already replaces Mercy, it does not gain
+  the new Mercy-or-Combat path choice.
+
+PALADIN - WARRIOR OF THE HOLY LIGHT
+-----------------------------------
+
+- Every tier of Power of Faith is activated as a swift action instead of a
+  standard action.
+- Power of Faith's bonuses to AC, attack rolls, damage rolls, and saving throws
+  against fear are sacred bonuses instead of morale bonuses. This applies to
+  the Warrior of the Holy Light and every ally affected by the nimbus.
+- Shining Light is activated as a swift action instead of a standard action.
+
+RANGER - BASE CLASS AND ARCHETYPES
+----------------------------------
+
+- Rangers gain Combat Style feat selections at levels 2, 4, 6, 8, 10, 12,
+  14, 16, and 18 instead of only levels 2, 6, 10, 14, and 18.
+- The added selections use the normal option tiers: the level-2 selection at
+  level 4, the level-6 selection at level 8, and the level-10 selection at
+  levels 12 and 16.
+- All Ranger archetypes inherit the additional selections. Nomad and
+  Stormwalker retain their Archery-only restriction and receive matching
+  fixed Archery selections at the added levels.
+- Favored Terrain is selected six times, at Ranger levels 3, 6, 9, 13, 16,
+  and 19. Archetypes that replace Favored Terrain continue to lose the entire
+  expanded progression.
+- Master Hunter grants a supernatural version of Instant Enemy usable five
+  times per day. It also grants a +2 bonus to Armor Class and all saving throws
+  against favored enemies, including targets marked by Instant Enemy.
+
+RANGER - ESPIONAGE EXPERT
+-------------------------
+
+- Gains +1d6 Sneak Attack at levels 7 and 14, reaching +2d6.
+- Gains Calculated Assault at level 12, providing a morale bonus on attack
+  rolls equal to half the Espionage Expert's Charisma modifier, rounded down
+  to a minimum of +0.
+- At level 20, Calculated Assault — Mastery increases the effective morale
+  attack bonus to the full Charisma modifier. The half and full bonuses do not
+  stack with each other.
+
+RANGER - FLAMEWARDEN
+--------------------
+
+- Retains the base Ranger's Evasion feature at level 9 and Improved Evasion
+  feature at level 16. Every other Flamewarden addition and replacement is
+  unchanged.
+
+RANGER - NOMAD
+--------------
+
+- Gains Exceptional Breed at levels 7, 12, and 17. Its benefits apply to the
+  Nomad's horse and accumulate across the three milestones.
+- At level 7, the horse gains +2 natural armor and a +4 untyped bonus to
+  Constitution.
+- At level 12, the horse gains +10 feet of untyped movement speed and a +4
+  untyped bonus to Dexterity.
+- At level 17, the horse gains a +4 untyped bonus to Strength and makes one
+  additional natural attack at its highest attack bonus during a full attack.
+
+RANGER - STORMWALKER
+--------------------
+
+- Wind Treader is activated as a swift action instead of a standard action.
+- Gains Storm Resistance at level 7, providing electricity resistance 10.
+- Retains the base Ranger's Quarry at level 11, Improved Evasion at level 16,
+  and Improved Quarry at level 19. Every other Stormwalker addition and
+  replacement is unchanged.
+
+SORCERER - BASE CLASS AND ARCHETYPES
+------------------------------------
+
+- Bloodline bonus feats are selected five times, at Sorcerer levels 3, 7, 11,
+  15, and 19 instead of only levels 7, 13, and 19.
+- Each bloodline retains its own permitted bonus-feat list. Crossblooded uses
+  the primary bloodline's progression and does not receive a second set of
+  five selections from its secondary bloodline.
+
+Celestial Bloodline
+
+- Celestial Resistances is renamed Celestial Body. In addition to retaining
+  acid and cold resistance 5 at level 3 and resistance 10 at level 9, it grants
+  +2 Charisma at level 3, increasing to +4 at level 9.
+
+Infernal Bloodline
+
+- Infernal Resistances is renamed Infernal Body. In addition to retaining fire
+  resistance 5 and a +2 bonus on saves against poison at level 3, increasing
+  to 10 and +4 respectively at level 9, it grants +2 Charisma at level 3,
+  increasing to +4 at level 9.
+
+Fey and Serpentine Bloodlines
+
+- Fey gains Fey Agility and Serpentine gains Serpentine Agility. Each grants a
+  +2 inherent bonus to Dexterity at level 9, increasing to +4 at level 13 and
+  +6 at level 17. The features are also present on the corresponding Seeker,
+  alternate, and Crossblooded secondary bloodline progressions.
+
+Draconic Bloodlines
+
+- Every Sorcerer draconic bloodline can use its Breath Weapon three times per
+  day at level 9, six times per day at level 17, and nine times per day at
+  level 20. Damage, area, saving throw, DC, and damage scaling are unchanged.
+
+SHAMAN - BASE CLASS
+-------------------
+
+- Gains additional Hex selections at Shaman levels 6 and 14, alongside
+  Wandering Spirit and Wandering Hex. This expands the normal Hex schedule to
+  levels 2/4/6/8/10/12/14/16/18/20.
+- All Shaman archetypes except Unsworn Shaman inherit the two new selections.
+  Their existing feature additions and Hex replacements at other levels remain
+  unchanged.
+- Gains Charming Spirits at levels 7 and 15. Each rank grants +2 untyped
+  Charisma, reaching a cumulative +4 at level 15. All Shaman archetypes inherit
+  the feature.
+- Battle Ward and Bone Ward grant dodge bonuses to Armor Class instead of
+  deflection bonuses. Their values, scaling, durations, and reuse restrictions
+  are unchanged.
+- Flame, Stone, Waves, and Wind Spirit Manifestation now grant immunity to
+  their associated energy type instead of resistance 30. Frost Spirit retains
+  its existing cold immunity.
+- Flame, Frost, Stone, Waves, and Wind Spirit Manifestation add 1d6 damage of
+  their associated energy type to every weapon, natural, and unarmed attack.
+- Nature Spirit grants its complete animal-companion selection and scaling
+  bundle at level 8 instead of level 16. Its greater fast-healing feature moves
+  from level 8 to level 16.
+
+SHIFTER - BASE CLASS AND ARCHETYPES
+----------------------------------
+
+- Gains Bonus Combat Talent selections at Shifter levels 8 and 16.
+  Each selection offers the full native Fighter combat-feat pool and requires
+  the Shifter to meet the chosen feat's normal prerequisites.
+- Every Shifter archetype inherits both selections without changing any of
+  its existing additions or replacements.
+
+SLAYER - IMITATOR
+-----------------
+
+- Retains all six base Slayer Sneak Attack ranks at levels 3/6/9/12/15/18,
+  reaching +6d6 at level 18.
+- Retains all ten base Slayer Talent selections at every even Slayer level
+  from 2 through 20, including the normal level-6 and level-10 option tiers.
+- Every other Imitator addition and replacement remains unchanged.
+
+SLAYER - TALENTS
+----------------
+
+- Evasion and Uncanny Dodge are available in all three Slayer Talent tiers,
+  beginning with the level-2 selection. The Uncanny Dodge choice uses Owlcat's
+  multiclass-safe tracker and therefore grants Improved Uncanny Dodge when the
+  character already possesses Uncanny Dodge from another class.
+- Combat Trick can be selected at every Slayer Talent opportunity. Each combat
+  feat chosen through it still follows its own prerequisites and repeatability.
+
+SLAYER - MASTER SLAYER
+----------------------
+
+- Master Slayer retains its original death-attack ability and additionally
+  grants an insight bonus on attack rolls against targets studied by that
+  Slayer equal to half the Slayer's positive Intelligence modifier, rounded
+  down. Marks belonging to another Slayer do not qualify.
+
+TRAPFINDING - ALL CLASSES AND ARCHETYPES
+----------------------------------------
+
+- Every Trapfinding version applies its half-class-level bonus to Perception
+  checks made to locate traps and to all Trickery checks.
+- This covers Rogue, Slayer, the selectable Slayer Talent version, Espionage
+  Expert Ranger, Oracle Seeker, and Sorcerer Seeker. Each version continues to
+  scale from the class that grants it.
+
+SKALD - BASE CLASS AND ARCHETYPES
+---------------------------------
+
+- Weapon Focus is available through the Skald's level-1 Bonus Feat selection.
+- Skald Talent selections are gained at levels 2, 5, 8, 11, 14, and 17 instead
+  of levels 2, 7, 12, and 17. Archetypes that trade away Skald Talents, such as
+  Provocateur, continue to lose every selection in the revised progression.
+- Combat Trick can be selected repeatedly through Skald Talent. Each combat
+  feat chosen through it still follows its own prerequisites and repeatability.
+- Dance of a Hundred Cuts counts both Bard and Skald levels for its duration.
+  Its bonuses are active during Bardic Performance or any native Skald Raging
+  Song, including the alternate songs supplied by Skald archetypes.
+
+SKALD - HUNT CALLER
+-------------------
+
+- Retains the Rage Power selections at levels 6 and 18, giving Hunt Caller the
+  complete Skald Rage Power progression at levels 3/6/9/12/15/18.
+
+ROGUE - BASE CLASS
+------------------
+
+- Finesse Training weapon selections are gained at Rogue levels 3, 7, 11, 15,
+  and 19 instead of only 3, 11, and 19. Archetypes that trade away Finesse
+  Training continue to lose all five selections.
+- Gains Slippery at levels 7, 12, and 17. Each rank grants a cumulative +1
+  dodge bonus to Armor Class and +1 untyped bonus on Reflex saves, Stealth
+  checks, and Mobility checks, reaching +3 at level 17. Slippery uses the
+  Fast Stealth icon.
+- Gains Professional Craft at level 20 alongside Master Strike. It grants a +2
+  untyped bonus on every skill check and a +2 untyped attack bonus against
+  enemies who are flat-footed against the Rogue, representing enemies who are
+  unaware of her.
+- Combat Trick can be selected repeatedly, up to every Rogue Talent
+  opportunity. Because this changes the native Rogue Talent blueprint, other
+  classes that directly reuse it receive the same repeatability.
+- Rogue Danger Sense retains its original trap bonuses and also applies its
+  current rank as a dodge bonus to Armor Class and a Reflex-save bonus against
+  effects originating from enemies invisible to the Rogue.
+
+ROGUE - KNIFE MASTER
+--------------------
+
+- Blade Sense applies its rank-scaled dodge bonus to Armor Class against both
+  light blades and heavy blades instead of only light blades. Its levels and
+  maximum +6 bonus remain unchanged.
+
+ROGUE - UNDERGROUND CHEMIST
+---------------------------
+
+- Loses every Finesse Training selection at Rogue levels 3/7/11/15/19.
+- Replaces all ten normal Rogue Talent grants with Underground Chemist Rogue
+  Talent at levels 2/4/6/8/10/12/14/16/18/20. Each selection offers the full
+  normal Rogue Talent list plus Acid Bomb, Blinding Bomb, Choking Bomb,
+  Explosive Bombs, Fast Bombs, Force Bombs, and Tanglefoot Bombs.
+- Gains five ranks of the Alchemist Bomb feature at Rogue levels 1/5/9/13/17,
+  reaching 5d6 base bomb damage. Underground Chemist levels count for bomb
+  daily uses and ability scaling; normal Alchemist behavior remains unchanged.
+- Blinding Bomb, Fast Bombs, and Force Bombs retain their level-8 requirement,
+  which can now be met by either Alchemist level 8 or Underground Chemist Rogue
+  level 8. Every discovery retains its other prerequisites.
+
+ROGUE - SYLVAN TRICKSTER
+------------------------
+
+- Can select Uncanny Dodge through Sylvan Trickster Rogue Talent from level 4
+  onward. If Uncanny Dodge was already gained from another source, the native
+  talent behavior grants Improved Uncanny Dodge instead.
+
+BARD - BASE CLASS
+-----------------
+
+- Bard Talents are gained at levels 2, 5, 8, 11, 14, 17, and 20 instead of
+  levels 2, 6, 10, 14, and 18.
+- Combat Trick can be selected again at every Bard Talent opportunity.
+- Jack of All Trades is moved from level 10 to level 1. In addition to its
+  existing +1 bonus on all skill checks, it grants 1 additional skill point
+  for every level gained in the Bard class.
+- Archetypes which originally trade away Jack of All Trades continue to do so
+  and do not receive its additional Bard skill point. Beast Tamer continues to
+  replace the first and third Bard Talent grants under the new schedule.
+
+New Bard Spell: Dance of a Hundred Cuts
+
+- A 5th-level Transmutation spell with a personal range and a duration of 1
+  round per Bard level.
+- While the caster has a Bardic Performance actively running, the spell grants
+  +3 on melee attack rolls and a +3 dodge bonus to Armor Class.
+- The bonuses switch off while no performance is active and return if another
+  performance begins before the spell expires. Lingering Performance by itself
+  does not count as an actively running performance.
+- True Strike and Magic Weapon are added as 1st-level Bard spells.
+- Greater Magic Weapon is added as a 3rd-level Bard spell.
+
+Archaeologist
+
+- Archaeologist's Luck has twice its original rounds per day. It begins with
+  8 + twice the Archaeologist's Charisma modifier and gains 4 additional
+  rounds for every Bard level after 1st.
+- Gains True Luck at level 20. Once per round, the first failed attack roll,
+  saving throw, skill check, or spell resistance check is rerolled, taking the
+  better result. The check gains a luck bonus equal to half the Archaeologist's
+  Charisma modifier, rounded down.
+- Danger Sense retains its original trap bonuses and also applies its current
+  rank as a dodge bonus to Armor Class and a Reflex-save bonus against effects
+  originating from enemies invisible to the Archaeologist.
+
+Flame Dancer
+
+- Fire Dance retains its existing fire resistance and also adds fire damage to
+  all weapon, natural, and unarmed attacks made by allies under its effect.
+- The additional damage is 1d4 at level 3, 1d8 at level 6, and 1d10 at level
+  11. It is fire damage and is therefore affected by fire resistance and
+  immunity. Ordinary non-attack spell damage does not receive the bonus.
+
+
+BLOODRAGER - BASE CLASS
+-----------------------
+
+- Gains Consuming Rage at level 8. As a swift action, a Bloodrager can
+  sacrifice an available Bloodrager spell slot to restore an equal number of
+  Bloodrage rounds: 1/2/3/4 rounds for a level 1/2/3/4 slot respectively.
+- Bloodrage does not need to be active. Restoration cannot exceed the normal
+  resource maximum, and conversions are unavailable while Bloodrage is full or
+  while the selected spell-slot tier has no remaining uses.
+
+
+BLOODRAGER ARCHETYPES
+---------------------
+
+Steelblood
+
+- Retains the standard Bloodrager Damage Reduction ranks at levels 7, 10, 13,
+  16, and 19, reaching DR 5/-.
+- Its other archetype feature exchanges remain unchanged.
+
+Spell Eater
+
+- Retains the base Bloodrager's normal Uncanny Dodge at level 2.
+- Still loses Improved Uncanny Dodge at level 5.
+
+Hag-Riven
+
+- Retains the base Bloodrager's normal Uncanny Dodge at level 2.
+- Still loses Improved Uncanny Dodge at level 5.
+- At level 17, Claws of the Hag expands the critical threat range of the
+  Hag-Riven's own claws from 19-20 to 17-20. The change targets the archetype's
+  Medium and Small claw weapons without affecting unrelated natural attacks.
+- Every Claws of the Hag level-up wrapper uses the revised cumulative
+  description, so the level-17 progression tooltip explicitly shows 17-20.
+
+NEW FIGHTER ARCHETYPE: CRIMSON MARKSMAN
+---------------------------------------
+
+- Retains the standard Fighter bonus-feat progression except for the level-6
+  Fighter Bonus Feat, which is removed.
+- Is proficient with all simple and martial weapons and light armor, but not
+  medium armor, heavy armor, or shields by default.
+- Loses all Armor Training ranks at levels 3, 7, 11, and 15 and loses Armor
+  Mastery at level 19.
+- Replaces selectable Weapon Training with Ranged Weapon Training at levels 5,
+  9, 13, and 17. It applies to all ranged weapons and reaches +4 attack and
+  damage.
+- Ranged Weapon Training is confined to the Crimson Marksman progression and
+  does not appear in Fighter, Disciple of the Pike, or other weapon-training
+  selections.
+- Focused Aim (level 3): Once per day, increases the critical threat range of
+  ranged weapons by 2 for 3 rounds.
+- Focused Aim improvement (level 8): Duration increases to 6 rounds and gains
+  one additional daily use.
+- Focused Aim improvement (level 12): Also grants +2 attack with ranged weapons
+  for its duration.
+- Focused Aim improvement (level 18): Can be used five times per day.
+- Wailing Projectiles (level 6): Killing an enemy with a ranged weapon grants
+  1d8 additional sonic damage on ranged attacks for 3 rounds. The effect does
+  not stack.
+- Wailing Projectiles improvement (level 10): Sonic damage increases to 1d12.
+- Wailing Projectiles improvement (level 15): Sonic damage increases to 2d8.
+- Blood in the Eyes (level 9): Ranged hits inflict -2 Armor Class for 2 rounds.
+  Additional hits refresh the duration rather than stacking the penalty.
+- Feast on Their Screams (level 13): Each enemy killed grants +1 to all saving
+  throws for 5 rounds. Multiple bonuses stack and expire independently.
+
+
+BARBARIAN - BASE CLASS
+----------------------
+
+- Standard Damage Reduction begins at level 1 and gains another rank at levels
+  4, 7, 10, 13, 16, and 19, reaching DR 7/-.
+- Battleborn (level 8): Each enemy personally killed restores one round of Rage,
+  up to the normal maximum. Rage does not need to be active. Instinctual
+  Warrior's Focused Rage resource is also supported.
+- Danger Sense retains its original bonuses against traps. Its current rank also
+  applies as a dodge bonus to Armor Class against attacks from enemies that are
+  invisible to the Barbarian and as a bonus on Reflex saves against effects from
+  those enemies. Effects that negate the invisibility or concealment also negate
+  the additional bonus.
+
+
+BARBARIAN ARCHETYPES
+--------------------
+
+Armored Hulk
+
+- Retains normal Uncanny Dodge at level 2.
+- Still loses Improved Uncanny Dodge at level 5.
+
+Beastkin Berserker
+
+- Gains Feral Swiftness at level 1, using the Fast Movement icon.
+- While any tier of Feral Transformation is active, Feral Swiftness grants a
+  +10-foot untyped movement-speed bonus. It stacks with other movement-speed
+  bonuses and cannot multiply if transformation effects overlap.
+
+Flesheater
+
+- Retains Uncanny Dodge at level 2.
+- Retains Improved Uncanny Dodge at level 5.
+
+Invulnerable Rager
+
+- Its personal Damage Reduction begins at level 1 and gains another rank at
+  levels 3, 5, 7, 9, 11, 13, 15, 17, and 19, reaching DR 10/-.
+- Its personal Damage Reduction replaces the standard Barbarian DR progression
+  to prevent duplicate ranks.
+- Gains Just a Scratch at level 10. While strictly below 50% of maximum health,
+  it grants 2 additional stackable DR/-. The bonus ends at exactly 50% health or
+  higher.
+- Extreme Endurance grants electricity resistance in addition to fire and cold
+  resistance. All three resistances use the original scaling from 1 at level 3
+  to 6 at level 18.
+
+Mad Dog
+
+- The Mad Dog and animal companion gain their shared Damage Reduction ranks at
+  levels 1, 4, 7, 10, 13, 16, and 19, reaching DR 7/-.
+- The shared feature replaces the standard Barbarian DR grants on the Mad Dog to
+  prevent duplicate ranks while retaining the companion benefit.
+
+Pack Rager
+
+- Inherits the standard Barbarian Damage Reduction progression at levels 1, 4,
+  7, 10, 13, 16, and 19, reaching DR 7/- without missing or delayed ranks.
+
+
+VERSION HISTORY
+===============
+
+3.23.0
+
+- Added Clever Predator, Two Faces One Mind, Hidden Tail, and Vulpine
+  Ambusher as Kitsune racial traits.
+
+3.22.0
+
+- Added five traits, eight Worldwound backgrounds, the Eldritch Heritage chain,
+  Feral Combat Training, Racial Heritage, Artful Dodge, and Cut from the Air.
+
+3.21.0
+
+- Added Adopted with a nested choice of racial traits belonging to other races.
+
+3.20.2
+
+- Fixed the remaining custom-feature initialization dependency so Trait
+  blueprints and their character-creation phases are actually created.
+
+3.20.1
+
+- Fixed the character-creation blank screen and deferred Trait selections until
+  the selected race is available.
+
+3.20.0
+
+- Added 40 race-restricted traits for all eleven playable base races and
+  expanded the shared Trait pool from twenty-four to sixty-four options.
+
+3.19.0
+
+- Expanded the shared character-creation and Additional Traits pool from four
+  to twenty-four fully implemented traits.
+
+3.18.0
+
+- Added the one-time Additional Traits general feat, granting two further
+  non-duplicating choices from the Classes Reborn Trait pool.
+
+3.17.0
+
+- Added two character-creation Trait selections with Anatomist, Armor Expert,
+  Reactionary, and Resilient as the initial options.
+
+3.16.0
+
+- Shillelagh now applies to magical as well as nonmagical clubs and
+  quarterstaffs.
+
+3.15.0
+
+- Replaced the universal Paladin bonus combat feats with a level-3 choice
+  between the full Mercy progression and Combat Training feats at levels
+  3/9/15. Mercy-replacing archetypes preserve their native tradeoffs.
+
+3.14.0
+
+- Added Shillelagh to the level-1 Druid, Hunter, Ranger, and Shaman spell
+  lists, including its conditional +1 weapon enhancement and two-category
+  damage-size increase.
+
+3.13.0
+
+- Added Two-Weapon Defense as a dodge-AC combat feat, Armor of the Pit for
+  Tieflings, and Greater Unarmed Strike with its character-level and Monk
+  unarmed-damage progression.
+
+3.12.0
+
+- Added Bone-Spike Mutagen, Collective Memory, and the +4 Pheromones discovery
+  to the appropriate Alchemist, Vivisectionist, and Mutation Warrior discovery
+  selections.
+
+3.11.0
+
+- Removed Strong Arms from the Two-Handed Fighter and added +1 inherent
+  Strength to every rank of its existing Strong Grip feature instead.
+
+3.9.1
+
+- Added Deadly Juggernaut as a 3rd-level Cleric, Inquisitor, and Paladin spell,
+  including its five-tier melee-kill progression and qualifying-enemy check.
+
+3.9.0
+
+- Added Blistering Invective, Arcane Concordance, Burst of Radiance, and Blade
+  Tutor's Spirit with their class spell-list assignments and tabletop-inspired
+  mechanics adapted to Wrath.
+- Removed Lead Blades from the Paladin spell list while retaining Aid at spell
+  level 2 and Freedom of Movement at spell level 4.
+
+3.8.1
+
+- Fixed a startup failure caused by installing Rime Spell's UI text hooks
+  before Wrath had initialized the UI text data they require. These two hooks
+  now install after the blueprint cache is ready.
+- Added full Harmony exception details to the mod log if a future startup
+  patch fails, instead of reporting only a generic invocation exception.
+- Fixed Unsanctioned Knowledge trying to copy its icon from the custom Paladin
+  deity Weapon Focus feature before the Paladin section had created it. The
+  complete feat-additions section now initializes during startup.
+
+3.8.0
+
+- Added Mighty Hurling, using Strength for attack rolls with thrown weapons.
+- Added Crushing Throw, extending Power Attack and Mythic Power Attack to
+  eligible thrown weapons with one-handed scaling.
+- Added repeatable Balanced Grip for weapon-specific finesse and light
+  two-weapon penalty treatment of one-handed slashing or piercing weapons.
+
+3.7.0
+
+- Added Dervish Dance, Mad Magic, Crusader's Flurry, Rime Spell, Desna's
+  Shooting Star, Bladed Brush, the Ascetic Style/Form/Strike chain, Fey
+  Foundling, Vicious Stomp, and Unsanctioned Knowledge as standalone feats.
+- Added Quick Study to the Arcanist Exploit selection, including Exploiter
+  Wizards. It spends 1 arcane reservoir point to exchange a prepared spell as
+  a full-round action that provokes attacks of opportunity.
+
+3.6.5
+
+- Removed Expert Trainer from Horse Master's prerequisites and in-game
+  description. Horse Master now requires only Mobility 6 and an animal
+  companion.
+
+3.6.4
+
+- Removed the explanatory "Channel Smite is not required" sentence from
+  Guided Hand's in-game description. Its prerequisites are unchanged.
+
+3.6.3
+
+- Corrected the Sorcerer progression to expand the gold SorcererFeatSelection
+  blueprint instead of the dark generic SorcererBonusFeat marker.
+- Bloodline Feat Selection now appears at levels 3/7/11/15/19, while the
+  generic marker remains only at level 1.
+
+3.6.2
+
+- Added a -2 racial Intelligence penalty to Half-Orcs.
+- Added the fixed +2 Strength and -2 Intelligence modifiers to the Half-Orc
+  race-selection stat display while retaining the existing functional racial
+  feature and selectable +2 ability bonus.
+
+3.6.1
+
+- Attempted to correct Sorcerer bonus-feat progression, but targeted the
+  generic Sorcerer Bonus Feat marker rather than the recurring gold Bloodline
+  Feat Selection. Version 3.6.3 corrects this target.
+
+3.6.0
+
+- Added an additional +2 racial Strength bonus to Half-Orcs while retaining
+  their selectable +2 ability score bonus.
+- Included the corrected Incense Synthesizer Bomb-rank and Sorcerer Bonus Feat
+  blueprint targets prepared in version 3.5.2.
+
+3.4.1
+
+- Added Long Arm to the Alchemist spell list as a 1st-level extract.
+
+3.4.0
+
+- Added Long Arm as a 1st-level spell to every standard arcane spell-list
+  family. It increases the caster's melee reach by 5 feet for 1 minute per
+  caster level.
+
+3.3.0
+
+- Improved every version of Trapfinding so its half-level bonus applies to
+  both Perception checks made to locate traps and all Trickery checks. This
+  covers Rogue, Slayer, Espionage Expert Ranger, Oracle Seeker, and Sorcerer
+  Seeker, including the selectable Slayer Talent version.
+
+3.2.0
+
+- Changed skill and attack bonuses granted by backgrounds to trait bonuses.
+
+3.1.0
+
+- Added Mighty Transformation to all Druids at level 11, granting full
+  character-level Base Attack Bonus while shapeshifted.
+
+3.0.0
+
+- Grenadier now loses Discovery at levels 2/8/14 and gains bonus combat feats
+  at levels 8/14.
+
+2.99.0
+
+- Fixed Sorcerer bloodline discovery against the live selection option arrays
+  so bonus bloodline feats configure at levels 3/7/11/15/19.
+- Fixed the Ranger Master Hunter validation that prevented later Ranger
+  progression and archetype changes from configuring.
+
+2.98.0
+
+- Moved the second shared Shifter Bonus Combat Talent from level 12 to level 16.
+
+2.97.0
+
+- Fixed Alchemist initialization against the live Vivisectionist Medical
+  Discovery option arrays so the version 2.96.0 Alchemist changes configure.
+
+2.96.0
+
+- Made Vivisectionist Combat Trick repeatable.
+- Improved Incense Synthesizer rounds, activation action, and Bomb progression.
+
+2.95.0
+
+- Reduced Charming Spirits to two ranks at Shaman levels 7/15, reaching +4
+  Charisma instead of +6.
+
+2.94.0
+
+- Reduced shared Paladin Bonus Combat Feats to levels 7/14 and excluded
+  Tortured Crusader, which now retains only its four Self-Sufficient feats.
+- Reduced Shifter Bonus Combat Talents to levels 8/12.
+
+2.93.0
+
+- Added Fey Agility and Serpentine Agility to their respective Sorcerer
+  bloodlines, granting +2/+4/+6 inherent Dexterity at levels 9/13/17.
+
+2.92.0
+
+- Renamed the Infernal Bloodline's Infernal Resistances to Infernal Body and
+  added +2 Charisma at level 3, increasing to +4 at level 9, while retaining
+  its fire resistance and poison-save bonuses.
+
+2.91.0
+
+- Tripled the daily uses of Breath Weapon for every Sorcerer draconic
+  bloodline, changing the level 9/17/20 progression from 1/2/3 to 3/6/9 uses.
+
+2.90.0
+
+- Renamed the Celestial Bloodline's Celestial Resistances to Celestial Body and
+  added +2 Charisma at level 3, increasing to +4 at level 9, while retaining
+  its acid and cold resistances.
+
+2.89.0
+
+- Expanded Sorcerer bloodline bonus feats to five selections at levels
+  3/7/11/15/19 while retaining each bloodline's specific feat list.
+
+2.88.0
+
+- Expanded the Ranger Favored Terrain progression to six selections at levels
+  3/6/9/13/16/19 while preserving archetype replacements.
+
+2.87.0
+
+- Enhanced the Ranger's Master Hunter capstone with five supernatural Instant
+  Enemy uses per day and +2 AC and saving throws against favored enemies.
+
+2.86.0
+
+- Changed Slippery's icon to the vanilla Fast Stealth icon.
+
+2.85.0
+
+- Restored Divine Grace to Martyr and Stonelord before running independent
+  Paladin changes, so a later Paladin configuration error cannot suppress it.
+- Made deity-favored Weapon Focus support every weapon category with stable
+  generated blueprint IDs, fixing the startup failure on Kukri and preventing
+  further missing-category failures.
+
+2.84.0
+
+- Replaced the seven-rank Fighter Weapon Focus schedule with three Weapon Focus
+  selections at levels 1/4/7 and three Greater Weapon Focus selections at
+  levels 8/11/14.
+
+2.83.0
+
+- Fixed a malformed Alchemist Bomb resource ID in the Underground Chemist
+  configuration. Its startup failure had prevented the remaining base Rogue
+  changes from loading.
+- Added Paladin Bonus Combat Feats at levels 6/9/12 for the base class and all
+  archetypes. Tortured Crusader now receives seven total with its four native
+  Self-Sufficient selections.
+- Added the missing Light Mace mapping to the deity-favored Weapon Focus grant,
+  allowing the complete Paladin section to initialize.
+
+2.82.0
+
+- Removed the technical word "untyped" from every Classes Reborn ability
+  tooltip while preserving the bonuses' existing mechanics and stacking.
+- Unsworn Shaman no longer inherits the added Hex selections at levels 6 and
+  14; every other Shaman archetype continues to receive them.
+- Fixed the Weapon Focus blueprint type used by the level-1 Skald Bonus Feat.
+  Its startup failure had prevented the remaining Skald changes from loading.
+- Standardized Dance of a Hundred Cuts' displayed duration to "1 round/level."
+
+2.81.0
+
+- Enhanced Master Slayer with an insight attack bonus against the Slayer's own
+  studied targets equal to half the Slayer's positive Intelligence modifier.
+
+2.80.0
+
+- Added Evasion and multiclass-safe Uncanny Dodge to every Slayer Talent tier.
+- Made Combat Trick repeatable through Slayer Talents at every opportunity.
+
+2.79.0
+
+- Restored every base Slayer Sneak Attack rank and Slayer Talent selection to
+  the Imitator archetype while preserving its other feature exchanges.
+
+2.78.0
+
+- Added Weapon Focus to the level-1 Skald Bonus Feat selection.
+- Expanded Skald Talents to levels 2/5/8/11/14/17 and made Combat Trick
+  repeatable through that selection while preserving archetype tradeoffs.
+- Made Dance of a Hundred Cuts count Skald levels and recognize all native
+  Skald Raging Songs as valid active performances.
+- Restored Hunt Caller's Rage Power selections at levels 6 and 18.
+
+2.77.0
+
+- Added Bonus Combat Talent selections to all Shifters at levels 4/8/12/16,
+  using the full native Fighter combat-feat pool with normal prerequisites.
+  Every Shifter archetype inherits the four selections.
+
+2.76.0
+
+- Added the missing Sylvan Trickster level-4 eligibility prerequisite to the
+  native Uncanny Dodge Rogue Talent, making it visible and selectable through
+  Sylvan Trickster Rogue Talent.
+
+2.75.0
+
+- Changed Shaman Battle Ward and Bone Ward from deflection AC bonuses to dodge
+  AC bonuses.
+- Enhanced the Flame, Frost, Stone, Waves, and Wind Spirit Manifestations with
+  +1d6 elemental damage on weapon, natural, and unarmed attacks. Flame, Stone,
+  Waves, and Wind now grant elemental immunity in place of resistance 30;
+  Frost keeps its native cold immunity.
+- Swapped the Nature Spirit's level-8 and level-16 feature packages so its
+  fully scaled animal companion is gained at level 8 and its greater
+  fast-healing feature at level 16.
+
+2.74.0
+
+- Added Charming Spirits to all Shamans at levels 7/11/15, granting +2 untyped
+  Charisma per rank and reaching +6.
+
+2.73.0
+
+- Added two additional Shaman Hex selections at levels 6 and 14 for the base
+  class and every Shaman archetype.
+
+2.72.0
+
+- Reworked Underground Chemist to replace Finesse Training and all ten Rogue
+  Talents with an expanded archetype talent selection, and added five ranks of
+  Alchemist Bomb at levels 1/5/9/13/17 with Underground Chemist scaling.
+
+2.71.0
+
+- Expanded Knife Master's Blade Sense Dodge AC bonus from light blades to both
+  light and heavy blade weapon groups.
+
+2.70.0
+
+- Expanded Rogue Finesse Training to levels 3/7/11/15/19, extended
+  Trapfinding's half-level bonus to Trickery, added the three-rank Slippery
+  feature at levels 7/12/17, and added Professional Craft at level 20.
+
+2.69.0
+
+- Fixed Paladin blueprint initialization when a native Warpriest deity mapping
+  contains duplicate or multiple favored-weapon components. Deity's Weapon
+  Focus and all later Paladin configuration now initialize normally.
+
+2.68.0
+
+- Made the native Rogue Combat Trick talent repeatable and extended the
+  invisible-enemy AC and Reflex-save benefits of Danger Sense to the Rogue and
+  Archaeologist versions.
+
+2.67.0
+
+- Added Lead Blades and Aid as 2nd-level Paladin spells and Freedom of Movement
+  as a 4th-level Paladin spell.
+
+2.66.0
+
+- Changed Stormwalker's Wind Treader to a swift action and added Storm
+  Resistance at level 7 for electricity resistance 10.
+
+2.65.0
+
+- Restored the base Ranger Quarry, Improved Evasion, and Improved Quarry
+  features to Stormwalker at levels 11, 16, and 19.
+
+2.64.0
+
+- Added the cumulative Exceptional Breed feature to Nomad at levels 7, 12,
+  and 17, improving the Nomad's horse's natural armor, Constitution, movement
+  speed, Dexterity, Strength, and full-attack routine.
+
+2.63.0
+
+- Restored the base Ranger Evasion and Improved Evasion features to
+  Flamewarden at levels 9 and 16.
+
+2.62.0
+
+- Added +1d6 Sneak Attack to Espionage Expert at levels 7 and 14. Added
+  Calculated Assault at level 12 for half Charisma modifier as a morale attack
+  bonus, improving to the full Charisma modifier at level 20.
+
+2.61.0
+
+- Added Ranger Combat Style feat selections at levels 4, 8, 12, and 16.
+  Nomad and Stormwalker receive the corresponding fixed Archery-style
+  selections rather than unrestricted choices.
+
+2.60.0
+
+- Increased Lay on Hands uses for every Paladin to Paladin class level plus
+  Charisma modifier. Updated both Tortured Crusader resource variants to use
+  the same formula and ability score.
+
+2.59.0
+
+- Changed every Power of Faith tier and Shining Light to swift actions for the
+  Warrior of the Holy Light. Changed all Power of Faith morale bonuses to
+  sacred bonuses.
+
+2.58.0
+
+- Added an automatic level-1 Weapon Focus feat to every Paladin, fixed to the
+  favored weapon of the Paladin's selected deity.
+
+2.57.0
+
+- Restored Divine Grace at level 2 to the Stonelord Paladin archetype.
+
+2.56.0
+
+- Restored Divine Grace at level 2 to the Martyr Paladin archetype.
+
+2.55.0
+
+- Removed Deflect Arrows from Zen Archer bonus-feat choices and granted it
+  automatically at level 7. Added Improved Initiative to every Zen Archer
+  bonus-feat pool.
+
+2.54.0
+
+- Restored Evasion and Improved Evasion to Zen Archer, removed Rapid Shot and
+  Manyshot from its bonus-feat pools, added Greater Ki Arrows at level 15, and
+  replaced Perfect Self with One with the Arrow at level 20.
+
+2.53.0
+
+- Added Mastering the fundamentals to Traditional Monk at levels 7, 11, and
+  15, improving unarmed damage dice, dodge AC, and Flurry of Blows.
+
+2.52.0
+
+- Added Student of Stone Strength of Stone improvements at Monk levels 9 and
+  15: +1d6 bludgeoning damage on unarmed hits, followed by +4 inherent
+  Strength and Constitution.
+
+2.51.0
+
+- Corrected the level-6-and-later Monk Bonus Feat addition to use a visible
+  Uncanny Dodge choice. Version 2.47.0 added Owlcat's hidden tracker directly,
+  which the level-up UI filtered out.
+
+2.50.0
+
+- Restored Evasion at level 2 and Fast Movement at level 3 to Sensei.
+
+2.49.0
+
+- Added four ranks of quarterstaff-only Weapon Training to Quarterstaff Master
+  at Monk levels 7/10/13/16.
+
+2.48.0
+
+- Added 1d10 force damage to every unarmed hit made by a Monk with Ki Power:
+  Perfect Self, including the Drunken Master version.
+
+2.47.0
+
+- Added Uncanny Dodge to all standard and archetype-specific Monk Bonus Feat
+  pools available from level 6 onward.
+
+2.46.0
+
+- Added Canny Defense to every Magus at level 1, without a weapon requirement
+  for non-Sword Saints, while preserving Sword Saint's chosen-weapon version.
+- Expanded Magus Bonus Feats to levels 2/6/10/14/18 for the base class and all
+  archetypes.
+
+2.32.0
+
+- Changed Tower Shield Defense to include magic shield enhancement bonuses in
+  its touch-AC calculation.
+
+2.31.0
+
+- Changed Aldori Defender's level-1 Weapon Focus grant to always select
+  Dueling Sword, without restricting its later Weapon Focus selections.
+
+2.30.0
+
+- Doubled Armor Training's per-rank armor check penalty reduction and maximum
+  Dexterity allowance increase from 1 to 2.
+
+2.29.0
+
+- Added free Weapon Focus selections to all Fighters at levels
+  1/4/7/10/13/16/19.
+
+2.28.0
+
+- Corrected the archetype's displayed name from Crimson Marksmen to the
+  singular Crimson Marksman.
+
+2.27.0
+
+- Renamed the Crimson Deadeye Fighter archetype to Crimson Marksmen.
+- Replaced its Fighter Proficiencies with simple weapons, martial weapons, and
+  light armor only, removing its default medium armor, heavy armor, and shield
+  proficiencies.
+- Removed Armor Training at levels 3/7/11/15, Armor Mastery at level 19, and
+  the Fighter Bonus Feat at level 6 from Crimson Marksman.
+
+2.26.0
+
+- Shortened Divine Conduit's tooltip by removing the individual Cure and
+  Inflict spell names and the displayed "untyped" label from its Charisma bonus.
+- Renamed Holy Determination to Faithful Determination.
+- Changed Crusader to replace Divine Conduit with Sacred War at level 20 rather
+  than gaining both Cleric capstones.
+
+2.25.0
+
+- Updated all six Hag-Riven Claws of the Hag level-up wrapper tooltips to use
+  the revised description, including the 17-20 critical range at level 17.
+
+2.24.0
+
+- Corrected Hag-Riven's live startup validation to recognize Owlcat's indirect
+  claw-upgrade delivery chain. The previous check stopped initialization after
+  Bard and prevented later class sections from loading.
+- Isolated each class configuration section so a future validation failure is
+  logged without preventing unrelated later classes from being configured.
+
+2.23.0
+
+- Changed Winter Child to replace Beasts of Legends with its own level-20
+  archetype capstone instead of receiving both capstones.
+
+2.22.0
+
+- Added Divine Conduit to all Clerics at level 20, maximizing every Cure and
+  Inflict spell die, granting fear immunity, and adding +4 untyped Charisma.
+
+2.21.0
+
+- Added Beasts of Legends to all Druids at level 20, empowering their animal
+  companion and shapeshifted form with +4 sacred physical ability-score
+  bonuses and their summoned creatures with +2 sacred bonuses.
+
+2.20.0
+
+- Added Holy Determination to all Clerics at level 10, granting a Charisma-based
+  morale bonus on Will saves.
+
+2.19.0
+
+- Added two more Demonbane Priest Teamwork Bonus Feats at levels 12 and 16,
+  expanding its progression to four total grants at levels 4/8/12/16.
+
+2.18.0
+
+- Added the Sacred War capstone selection to Crusader Clerics at level 20, with
+  a Charisma-scaled sacred or profane martial attack and damage bonus determined
+  by the deity's alignment.
+
+2.17.0
+
+- Changed Standard Bearer's Banner of Solace to a swift action.
+- Changed Awesome Pennon's attack and mind-affecting saving-throw bonuses from
+  morale bonuses to sacred bonuses.
+
+2.16.0
+
+- Changed Knight of the Wall's Deflective Shield and Soul Shield to include
+  magic shield enhancement bonuses in their shield-bonus calculations.
+
+2.15.0
+
+- Changed both versions of Ghost Rider's Frightful Gaze from a standard action
+  to a swift action.
+
+2.14.0
+
+- Added Glorious Charge to Gendarme at level 9.
+- Corrected Gendarme's normal Cavalier Bonus Feat removal-list construction for
+  the revised 2/6/10/14/18 schedule.
+
+2.13.0
+
+- Doubled Fearmonger's Intimidate-check scaling from +1 to +2 at each
+  three-level breakpoint starting at Fearsome Leader level 3.
+
+2.12.0
+
+- Removed Crimson Marksman's Ranged Weapon Training from the global Weapon
+  Training feature group so it can no longer appear in Disciple of the Pike or
+  other unrelated selections.
+
+2.11.0
+
+- Changed Order of the Shroud's challenge attack bonus from morale to sacred.
+- Changed Order of the Star's challenge saving-throw bonuses from morale to
+  sacred.
+- Changed all Order of the Sword By My Honor saving-throw bonuses from morale
+  to luck.
+
+2.10.0
+
+- Changed Order of the Cockatrice's Braggart attack bonus against targets under
+  fear effects from a morale bonus to a profane bonus.
+
+2.9.0
+
+- Expanded the Cavalier Bonus Feat progression from levels 6/12/18 to
+  2/6/10/14/18 while preserving Gendarme's replacement feature schedule.
+
+2.8.0
+
+- Restored the standard Bloodrager Damage Reduction progression to Steelblood
+  at levels 7/10/13/16/19.
+
+2.7.0
+
+- Restored normal Uncanny Dodge at level 2 for the Spell Eater Bloodrager while
+  preserving its loss of Improved Uncanny Dodge.
+
+2.6.0
+
+- Expanded Hag-Riven's Claws of the Hag critical threat range to 17-20 at
+  level 17.
+
+2.5.0
+
+- Restored normal Uncanny Dodge at level 2 for the Hag-Riven Bloodrager while
+  preserving its loss of Improved Uncanny Dodge.
+
+2.4.0
+
+- Added Consuming Rage to Bloodrager at level 8, converting level 1-4 spell
+  slots into an equal number of restored Bloodrage rounds.
+
+2.3.0
+
+- Added scaling fire damage to Flame Dancer's Fire Dance performance: 1d4 at
+  level 3, 1d8 at level 6, and 1d10 at level 11.
+
+2.2.0
+
+- Doubled all components of Archaeologist's Luck rounds-per-day scaling.
+- Added the True Luck capstone to Archaeologist at level 20.
+
+2.1.0
+
+- Added True Strike and Magic Weapon as 1st-level Bard spells.
+- Added Greater Magic Weapon as a 3rd-level Bard spell.
+
+2.0.0
+
+- Changed Bard Talent progression to levels 2/5/8/11/14/17/20.
+- Added a Bard-only repeatable version of Combat Trick to the Bard Talent list.
+- Moved Jack of All Trades to level 1 and added one skill point per Bard level.
+- Added Dance of a Hundred Cuts as a 5th-level Bard Transmutation spell.
+
+1.9.0
+
+- Corrected Armored Hulk and Flesheater Uncanny Dodge restoration to target the
+  actual hidden Uncanny Dodge Checker granted by the Barbarian progression at
+  level 2.
+- Added validation against the real level-2 and level-5 progression entries so
+  the wrong blueprint cannot silently pass the configuration checks again.
+
+1.8.0
+
+- Changed Mad Dog's companion-sharing Damage Reduction to the standard
+  Barbarian pacing at levels 1/4/7/10/13/16/19.
+- Ensured Pack Rager inherits the same standard Damage Reduction pacing.
+
+1.7.0
+
+- Changed Invulnerable Rager Damage Reduction to levels
+  1/3/5/7/9/11/13/15/17/19.
+- Added Just a Scratch at level 10.
+- Added electricity resistance to Extreme Endurance.
+
+1.6.0
+
+- Added the intended restoration of Uncanny Dodge and Improved Uncanny Dodge to
+  Flesheater. The level-2 target was corrected in version 1.9.0.
+
+1.5.0
+
+- Added Feral Swiftness to Beastkin Berserker at level 1.
+
+1.4.0
+
+- Added the intended restoration of normal Uncanny Dodge to Armored Hulk while
+  retaining the loss of Improved Uncanny Dodge. The level-2 target was corrected
+  in version 1.9.0.
+
+1.3.0
+
+- Expanded Danger Sense to work against attacks and Reflex-save effects from
+  enemies invisible to the Barbarian.
+
+1.2.0
+
+- Added Battleborn to all Barbarians at level 8.
+
+1.1.0
+
+- Renamed the mod to Classes Reborn.
+- Changed the standard Barbarian Damage Reduction progression to levels
+  1/4/7/10/13/16/19.
+
+1.0.0
+
+- Added the Fighter archetype originally named Crimson Deadeye, now named
+  Crimson Marksman, and all of its original features.

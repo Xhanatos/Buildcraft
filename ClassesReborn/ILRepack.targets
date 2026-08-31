@@ -1,0 +1,19 @@
+<Project>
+  <Target Name="MergeBlueprintCore" AfterTargets="Build">
+    <ItemGroup>
+      <InputAssemblies Include="$(TargetPath)" />
+      <InputAssemblies Include="$(TargetDir)BlueprintCore.dll" />
+      <RepackLibraryPath Include="$(TargetDir)" />
+      <RepackLibraryPath Include="$(WrathInstallDir)\Wrath_Data\Managed" />
+      <RepackLibraryPath Include="$(WrathInstallDir)\Wrath_Data\Managed\UnityModManager" />
+    </ItemGroup>
+    <Message Text="Merging BlueprintCore into $(TargetPath)" Importance="High" />
+    <ILRepack
+      InputAssemblies="@(InputAssemblies)"
+      LibraryPath="@(RepackLibraryPath)"
+      OutputFile="$(TargetPath)"
+      TargetKind="SameAsPrimaryAssembly"
+      Internalize="true"
+      DebugInfo="true" />
+  </Target>
+</Project>
