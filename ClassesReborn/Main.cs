@@ -133,10 +133,6 @@ public static class Main {
                     Settings.RagePowerFerociousMount,
                     RagePowerRebalance.Configure);
                 ConfigureSection(
-                    "Crimson Marksman archetype",
-                    Settings.CrimsonMarksman,
-                    CrimsonDeadeyeArchetype.Configure);
-                ConfigureSection(
                     "Dread Archer archetype",
                     Settings.DreadArcher,
                     DreadArcherArchetype.Configure);

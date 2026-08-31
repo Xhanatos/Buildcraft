@@ -6,7 +6,7 @@
 		<AssemblyName>ClassesReborn</AssemblyName>
 		<PackageName>Buildcraft</PackageName>
 		<Description>Buildcraft</Description>
-    <Version>3.44.4</Version>
+    <Version>3.44.5</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RootNamespace>ClassesReborn</RootNamespace>

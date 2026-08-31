@@ -1,11 +1,20 @@
 BUILDCRAFT - CHANGELOG
 ======================
 
-Last updated for Buildcraft 3.44.4.
+Last updated for Buildcraft 3.44.5.
 
 
 CURRENT CUMULATIVE CHANGES
 ==========================
+
+CRIMSON MARKSMAN REMOVAL (3.44.5)
+----------------------------------
+
+- Removed the Crimson Marksman Fighter archetype, its configuration option,
+  feature blueprints, custom mechanics, and localization.
+- Dread Archer remains available as Buildcraft's ranged Fighter archetype.
+- Characters currently using Crimson Marksman should be respecced into another
+  archetype before installing this version.
 
 MONGREL RACE IDENTITY AND ANIMATION REPAIR (3.44.4)
 -----------------------------------------------------

@@ -96,72 +96,6 @@ public sealed class ShillelaghWeaponBonuses : UnitFactComponentDelegate,
 }
 
 [AllowedOn(typeof(BlueprintUnitFact))]
-[TypeId("676ee021-2b34-469f-b703-d87ba612d8fe")]
-public sealed class WailingProjectilesTrigger : UnitFactComponentDelegate, IUnitFinallyDeadHandler {
-    public BlueprintBuffReference m_D8Buff;
-    public BlueprintBuffReference m_D12Buff;
-    public BlueprintBuffReference m_2D8Buff;
-    public BlueprintFeatureReference m_Level10Feature;
-    public BlueprintFeatureReference m_Level15Feature;
-
-    public void HandleUnitBecameFinallyDead(UnitEntityData unit) {
-        if (!CombatChecks.WasKilledBy(unit, Owner)) {
-            return;
-        }
-
-        var damage = unit.LastHandledDamage;
-        var weapon = damage?.DamageBundle?.Weapon ?? damage?.AttackRoll?.Weapon;
-        if (!CombatChecks.IsRangedWeapon(weapon)) {
-            return;
-        }
-
-        var selectedBuff = m_D8Buff?.Get();
-        var level15Feature = m_Level15Feature?.Get();
-        var level10Feature = m_Level10Feature?.Get();
-        if (level15Feature != null && Owner.Descriptor.HasFact(level15Feature)) {
-            selectedBuff = m_2D8Buff?.Get();
-        } else if (level10Feature != null && Owner.Descriptor.HasFact(level10Feature)) {
-            selectedBuff = m_D12Buff?.Get();
-        }
-
-        RemoveBuff(m_D8Buff);
-        RemoveBuff(m_D12Buff);
-        RemoveBuff(m_2D8Buff);
-
-        if (selectedBuff != null) {
-            Owner.Buffs.AddBuff(selectedBuff, Owner, CombatChecks.Rounds(3));
-        }
-    }
-
-    private void RemoveBuff(BlueprintBuffReference buffReference) {
-        var blueprint = buffReference?.Get();
-        if (blueprint == null) {
-            return;
-        }
-
-        Owner.Buffs.GetBuff(blueprint)?.Remove();
-    }
-}
-
-[AllowedOn(typeof(BlueprintBuff))]
-[TypeId("fd77aa0e-7834-4f5f-b0e4-c6577966a3c6")]
-public sealed class RangedSonicDamage : UnitFactComponentDelegate,
-    IInitiatorRulebookHandler<RulePrepareDamage> {
-    public DiceFormula Dice;
-
-    public void OnEventAboutToTrigger(RulePrepareDamage evt) {
-        var weapon = evt.DamageBundle?.Weapon;
-        if (!CombatChecks.IsRangedWeapon(weapon)) {
-            return;
-        }
-
-        evt.Add(new EnergyDamage(Dice, DamageEnergyType.Sonic));
-    }
-
-    public void OnEventDidTrigger(RulePrepareDamage evt) { }
-}
-
-[AllowedOn(typeof(BlueprintUnitFact))]
 [TypeId("51e2e7a8-79e7-4fc7-8f6c-3b8a079d5d36")]
 public sealed class PerfectSelfForceDamage : UnitFactComponentDelegate,
     IInitiatorRulebookHandler<RulePrepareDamage> {
@@ -342,44 +276,6 @@ public sealed class HagboundClawMasteryCriticalRange : UnitFactComponentDelegate
     public void OnEventDidTrigger(RuleCalculateWeaponStats evt) {
         if (evt.Weapon?.Blueprint?.Category == WeaponCategory.Claw) {
             evt.CriticalEdgeBonus += Fact.GetRank();
-        }
-    }
-}
-
-[AllowedOn(typeof(BlueprintUnitFact))]
-[TypeId("b6d9313d-fad8-4486-ba4e-fb7cb58446a4")]
-public sealed class BloodInTheEyesTrigger : UnitFactComponentDelegate,
-    IInitiatorRulebookHandler<RuleAttackRoll> {
-    public BlueprintBuffReference m_Debuff;
-
-    public void OnEventAboutToTrigger(RuleAttackRoll evt) { }
-
-    public void OnEventDidTrigger(RuleAttackRoll evt) {
-        if (evt.IsFake || !evt.IsHit || evt.Target == null || !evt.Target.IsEnemy(Owner) ||
-            !CombatChecks.IsRangedWeapon(evt.Weapon)) {
-            return;
-        }
-
-        var debuff = m_Debuff?.Get();
-        if (debuff != null) {
-            evt.Target.Buffs.AddBuff(debuff, Owner, CombatChecks.Rounds(2));
-        }
-    }
-}
-
-[AllowedOn(typeof(BlueprintUnitFact))]
-[TypeId("1e1532e6-d09b-4ba9-b7a8-40e0806a296c")]
-public sealed class FeastOnTheirScreamsTrigger : UnitFactComponentDelegate, IUnitFinallyDeadHandler {
-    public BlueprintBuffReference m_Buff;
-
-    public void HandleUnitBecameFinallyDead(UnitEntityData unit) {
-        if (!CombatChecks.WasKilledBy(unit, Owner)) {
-            return;
-        }
-
-        var buff = m_Buff?.Get();
-        if (buff != null) {
-            Owner.Buffs.AddBuff(buff, Owner, CombatChecks.Rounds(5));
         }
     }
 }

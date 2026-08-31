@@ -31,12 +31,12 @@ character has been respecced without it.
 
 ## Content overview
 
-Buildcraft 3.44.4 contains:
+Buildcraft 3.44.5 contains:
 
 | Content category | Count |
 | --- | ---: |
 | Playable races | 2 |
-| New Fighter archetypes | 2 |
+| New Fighter archetypes | 1 |
 | New alternate racial heritages | 47 |
 | Worldwound backgrounds | 8 |
 | Character traits | 87 |
@@ -79,11 +79,8 @@ mismatched-ear variants, five horn variants, and unusual glossy eyes.
 - Eight alternate heritages
 - Five Mongrel racial traits
 
-## New Fighter archetypes — 2
+## New Fighter archetype — 1
 
-- **Crimson Marksman** — a light-armored ranged Fighter with Ranged Weapon
-  Training, Focused Aim, Blood in the Eyes, Wailing Projectiles, and Feast on
-  Their Screams.
 - **Dread Archer** — a ranged fear specialist with Merciless Reputation,
   Deadly Aim, Painful Shots, Ranged Weapon Training, Merciless, Dreadful
   Carnage, and an increased carnage radius at level 18.
@@ -344,7 +341,7 @@ include:
 - **Druid:** Beasts of Legends; Defender of the True World also applies its
   specialization to evil outsiders
 - **Fighter:** expanded Weapon Focus and Armor Training progressions, I Am
-  Your Shield, Crimson Marksman, and Dread Archer
+  Your Shield, and Dread Archer
 - **Hunter:** Nurtured Growth and Tandem Execution
 - **Inquisitor:** Experienced Judgement
 - **Magus:** Canny Defense and expanded bonus feats

@@ -61,7 +61,6 @@ public sealed class ClassesRebornSettings : UnityModManager.ModSettings {
     public bool Cleric = true;
     public bool Druid = true;
     public bool Fighter = true;
-    public bool CrimsonMarksman = true;
     public bool DreadArcher = true;
     public bool Hunter = true;
     public bool Inquisitor = true;
@@ -310,7 +309,6 @@ public sealed class ClassesRebornSettings : UnityModManager.ModSettings {
             ("Druid", () => Druid, value => Druid = value),
             ("Fighter", () => Fighter, value => Fighter = value));
         DrawToggleRow(
-            ("Crimson Marksman archetype", () => CrimsonMarksman, value => CrimsonMarksman = value),
             ("Dread Archer archetype", () => DreadArcher, value => DreadArcher = value));
         DrawToggleRow(
             ("Hunter", () => Hunter, value => Hunter = value),
@@ -588,7 +586,6 @@ public sealed class ClassesRebornSettings : UnityModManager.ModSettings {
         Cleric = value;
         Druid = value;
         Fighter = value;
-        CrimsonMarksman = value;
         DreadArcher = value;
         Hunter = value;
         Inquisitor = value;

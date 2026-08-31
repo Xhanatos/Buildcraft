@@ -1167,33 +1167,6 @@ internal static class BlueprintIds {
         "ea6a099d0e963e145a7268e4343d5924",
     };
 
-    // Crimson Marksman (original archetype ID retained for save compatibility)
-    internal const string Archetype = "a62f0af0ac414db4809669684b7c4541";
-    internal const string CrimsonMarksmanProficiencies = "6c4fc3850ce74bfa839e4aac8eb75eb3";
-    internal const string RangedWeaponTraining = "2281489354f24e639da134b2b8844180";
-
-    internal const string FocusedAimResource = "a0c91ba318794d338b2bf7933442a17d";
-    internal const string FocusedAimAbility = "294162116a284fbaab89f9e82ccf3fb0";
-    internal const string FocusedAimBuff = "792a3ee9843c4d5f93cd0a45233379cd";
-    internal const string FocusedAimAttackBuff = "e06a88842b564ad291486c2215480f0b";
-    internal const string FocusedAimFeature = "a2f15b55dcf4485aaab7e58efcfbaed8";
-    internal const string FocusedAimLevel8 = "2194ab5ca1ce45b1a0a830bb5749be34";
-    internal const string FocusedAimLevel12 = "e97f4f08eb6349b5a0d5a309c17c958c";
-    internal const string FocusedAimLevel18 = "a1aa6f1c180d45619dd533d3808b8cbc";
-
-    internal const string WailingProjectilesFeature = "f61b0673374b4db28f7963868c025e6c";
-    internal const string WailingProjectilesLevel10 = "e161044c07024144be951fc4d276bd0d";
-    internal const string WailingProjectilesLevel15 = "f6c652e0ef544e939c265bd2fa0b7da9";
-    internal const string WailingProjectilesD8Buff = "cff5b2eaef104340a45c87d6509da770";
-    internal const string WailingProjectilesD12Buff = "b3e7925dadca4df9aa671095c36464a9";
-    internal const string WailingProjectiles2D8Buff = "9782f6ac108b4fd49ce5ed74381b64cd";
-
-    internal const string BloodInTheEyesFeature = "c6e4b77860a9460ab74198bacdaa899a";
-    internal const string BloodInTheEyesDebuff = "ddd91a203de0409c944bf9a8a8da96b1";
-
-    internal const string FeastOnTheirScreamsFeature = "4462cf7b613e49feb79b706d8a5b3b47";
-    internal const string FeastOnTheirScreamsBuff = "00bb35eae6ad4aa798d1dcf06f5b8334";
-
     // Dread Archer
     internal const string DreadArcherArchetype = "4877eff941664579aaab9968e0ca70c2";
     internal const string DreadArcherProficiencies = "0bfaa472e0664f2ca5676209f772b4d3";
