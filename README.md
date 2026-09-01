@@ -8,6 +8,19 @@ class options, capstones, and progression reworks.
 The mod does not add a new base class. Instead, it broadens the choices and
 improves the progression of the game's existing classes and archetypes.
 
+## Compatibility notice
+
+> **Buildcraft has currently only been tested together with Toy Box.** It is
+> intended to be used as a standalone content mod. Using Buildcraft alongside
+> other mods that add or alter classes, archetypes, races, feats, spells,
+> character-creation options, or other gameplay content will most likely cause
+> conflicts or unexpected problems.
+
+Please report any bugs you encounter through
+[GitHub Issues](https://github.com/Xhanatos/Buildcraft/issues) so they can be
+investigated and fixed. Include the Buildcraft version, your other installed
+mods, and any relevant screenshots or log files when possible.
+
 ## Requirements
 
 - Pathfinder: Wrath of the Righteous 2.7.0x
