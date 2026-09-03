@@ -8,6 +8,38 @@ class options, capstones, and progression reworks.
 The mod does not add a new base class. Instead, it broadens the choices and
 improves the progression of the game's existing classes and archetypes.
 
+<details>
+<summary><strong>What's new in Buildcraft 3.45.5</strong></summary>
+
+This update collects all changes made since the previous public release,
+v3.44.5.
+
+- Added the **Wild-Raised** Wanderer background: Lore (Nature) becomes a class
+  skill, with +1 Lore (Nature) and +1 attack with natural weapons.
+- Added the **Knight** Noble background: longsword proficiency and +1 AC while
+  wearing heavy armor.
+- Added the Combat traits **Shadow Assault** (+1 Stealth, Stealth as a class
+  skill, and full-speed movement while sneaking) and **Born in Plates** (+1
+  maximum Dexterity bonus from worn armor).
+- Reworked **Bounty Hunter**, **Healer**, **Mugger**, and **Pickpocket** with new
+  armor, healing, stealth-attack, and Fighting Defensively benefits.
+- Expanded **Armor Expert**, **Birthmark**, **Devotee of the Green**, **History
+  of Heresy**, **Scholar of the Great Beyond**, **Skeptic**, **Dangerously
+  Curious**, **Bully**, **Child of the Streets**, and **Fast-Talker** with new
+  mechanical benefits.
+- **Mathematical Prodigy** now grants +1 on dispel checks.
+- **Eldritch Scion Canny Defense** now scales from Charisma instead of
+  Intelligence.
+- Fixed the missing Draconic Heritage and Elemental Heritage names and
+  descriptions.
+- Repaired **Fate's Favored** so its extra Luck bonus applies correctly to
+  attacks and weapon damage, survives save loading, and appears at its full
+  effective value in combat breakdowns.
+
+See the [complete versioned changelog](CHANGELOG.txt) for further details.
+
+</details>
+
 ## Compatibility notice
 
 > **Buildcraft has currently only been tested together with Toy Box.** It is
