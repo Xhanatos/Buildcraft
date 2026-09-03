@@ -1,11 +1,77 @@
 BUILDCRAFT - CHANGELOG
 ======================
 
-Last updated for Buildcraft 3.44.5.
+Last updated for Buildcraft 3.45.5.
 
 
 CURRENT CUMULATIVE CHANGES
 ==========================
+
+FATE'S FAVORED COMBAT-LOG AND DAMAGE REPAIR (3.45.5)
+-----------------------------------------------------
+
+- Fate's Favored now increases Luck-based weapon damage in the rule path used
+  by actual attacks instead of relying only on the aggregate character stat.
+- Attack and weapon-damage breakdowns now display the increased Luck modifier
+  at its effective value, such as Luck +2 from Divine Favor, rather than hiding
+  Fate's Favored's additional point.
+
+FATE'S FAVORED LUCK-BONUS REPAIR (3.45.4)
+------------------------------------------
+
+- Fate's Favored now tracks its active state without scanning an incompletely
+  restored feature collection during every stat calculation.
+- Existing Luck-modified stats are recalculated when the trait activates or
+  deactivates, so Divine Favor and other active Luck bonuses gain or lose the
+  additional +1 correctly after both fresh application and save loading.
+
+MATHEMATICAL PRODIGY DISPEL BONUS (3.45.3)
+--------------------------------------------
+
+- Mathematical Prodigy now grants a +1 trait bonus on dispel checks in
+  addition to its existing Knowledge (Arcana), Use Magic Device, and chosen
+  class-skill benefits.
+
+DRACONIC AND ELEMENTAL HERITAGE LOCALIZATION (3.45.2)
+------------------------------------------------------
+
+- Fixed the missing names and descriptions on the internal Draconic Heritage
+  and Elemental Heritage entries shown in bloodline progressions. They now
+  explain that each family permits only one bloodline selection instead of
+  displaying unknown localization keys.
+
+ELDRITCH SCION CANNY DEFENSE (3.45.1)
+--------------------------------------
+
+- Eldritch Scion Canny Defense now scales from Charisma instead of
+  Intelligence. Its armor, shield, flat-footed, and Magus-level cap rules are
+  unchanged.
+- Other Magus archetypes retain Intelligence scaling, while Sword Saint keeps
+  its original chosen-weapon version.
+
+TRAIT AND BACKGROUND EXPANSION (3.45.0)
+----------------------------------------
+
+- Added the Combat traits Shadow Assault and Born in Plates. Shadow Assault
+  grants +1 Stealth, makes Stealth a class skill, and allows full-speed Stealth
+  movement. Born in Plates increases an armor's maximum Dexterity bonus by 1.
+- Added Wild-Raised to the Wanderer background category, granting Lore (Nature)
+  as a class skill, +1 Lore (Nature), and +1 attacks with natural weapons.
+- Added Knight to the Noble background category, granting longsword proficiency
+  and +1 AC while wearing heavy armor.
+- Bounty Hunter no longer grants light armor proficiency and instead grants +1
+  AC while wearing medium armor.
+- Healer now adds 1 point to healing from cure spells and healing Channel Energy
+  abilities. Mugger grants +1 attacks from Stealth, and Pickpocket reduces the
+  Fighting Defensively attack penalty by 1.
+- Armor Expert now reduces armor check penalties by 2. Birthmark grants 2 hit
+  points. Devotee of the Green grants +1 saves against disease and poison.
+- History of Heresy grants +1 weapon damage against divine spellcasters, Scholar
+  of the Great Beyond grants +1 weapon damage against outsiders, and Skeptic
+  grants +1 attacks against incorporeal creatures.
+- Dangerously Curious grants +2 initiative and -2 AC while surprised. Bully
+  grants +1 weapon damage against fear-affected enemies. Child of the Streets
+  grants Favored Terrain (Urban), and Fast-Talker makes Demoralize a move action.
 
 CRIMSON MARKSMAN REMOVAL (3.44.5)
 ----------------------------------

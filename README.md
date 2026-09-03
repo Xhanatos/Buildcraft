@@ -44,15 +44,15 @@ character has been respecced without it.
 
 ## Content overview
 
-Buildcraft 3.44.5 contains:
+Buildcraft 3.45.5 contains:
 
 | Content category | Count |
 | --- | ---: |
 | Playable races | 2 |
 | New Fighter archetypes | 1 |
 | New alternate racial heritages | 47 |
-| Worldwound backgrounds | 8 |
-| Character traits | 87 |
+| Added backgrounds | 10 |
+| Character traits | 89 |
 | Added feat entries | 48 |
 | Mythic abilities | 4 |
 | Selectable rage powers | 16 |
@@ -126,7 +126,7 @@ The system also integrates the native **Keen Kitsune**, **Pyromaniac**, and
 **Dual-Minded** options into its compatibility rules. These three native
 heritages are not included in the count of 47 new options.
 
-## Worldwound backgrounds — 8
+## Added backgrounds — 10
 
 - Sarkorian Exile
 - Wardstone Veteran
@@ -136,18 +136,21 @@ heritages are not included in the count of 47 new options.
 - Temple Weaponmaster
 - Crusade Quartermaster
 - Worldwound Cartographer
+- Wild-Raised (Wanderer category)
+- Knight (Noble category)
 
-## Character traits — 87
+## Character traits — 89
 
 Every new or fully respecced character can select up to two different traits
 at level 1. The one-time **Additional Traits** feat grants two more choices.
 Traits are divided into Combat, Faith, Magic, Social, and Racial categories;
 each slot can also be skipped with **None**.
 
-### Combat traits — 12
+### Combat traits — 14
 
 Anatomist, Armor Expert, Reactionary, Resilient, Bullied, Courageous, Deft
-Dodger, Dirty Fighter, Fencer, Killer, Sharp Nails, Shield Fighter
+Dodger, Dirty Fighter, Fencer, Killer, Sharp Nails, Shield Fighter, Shadow
+Assault, Born in Plates
 
 ### Faith traits — 8
 
@@ -503,7 +506,8 @@ improve action economy, and add level-20 capstones.
 
 - Every non-Sword-Saint Magus gains **Canny Defense** at level 1, adding the
   Intelligence modifier to dodge AC while in light or no armor and without a
-  shield, capped by Magus level. Sword Saint keeps its chosen-weapon version.
+  shield, capped by Magus level. Eldritch Scion uses Charisma instead of
+  Intelligence. Sword Saint keeps its chosen-weapon version.
 - Magus Bonus Feats are gained at levels 2, 6, 10, 14, and 18, and every Magus
   archetype inherits the expanded schedule.
 

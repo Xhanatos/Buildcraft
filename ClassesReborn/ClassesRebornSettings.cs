@@ -22,6 +22,8 @@ public sealed class ClassesRebornSettings : UnityModManager.ModSettings {
     public bool TempleWeaponmaster = true;
     public bool CrusadeQuartermaster = true;
     public bool WorldwoundCartographer = true;
+    public bool WildRaised = true;
+    public bool Knight = true;
 
     // Race changes
     public bool HalfOrc = true;
@@ -289,6 +291,9 @@ public sealed class ClassesRebornSettings : UnityModManager.ModSettings {
         DrawToggleRow(
             ("Crusade Quartermaster", () => CrusadeQuartermaster, value => CrusadeQuartermaster = value),
             ("Worldwound Cartographer", () => WorldwoundCartographer, value => WorldwoundCartographer = value));
+        DrawToggleRow(
+            ("Wild-Raised", () => WildRaised, value => WildRaised = value),
+            ("Knight", () => Knight, value => Knight = value));
         GUILayout.EndVertical();
     }
 
@@ -575,6 +580,8 @@ public sealed class ClassesRebornSettings : UnityModManager.ModSettings {
         TempleWeaponmaster = value;
         CrusadeQuartermaster = value;
         WorldwoundCartographer = value;
+        WildRaised = value;
+        Knight = value;
     }
 
     private void SetClasses(bool value) {

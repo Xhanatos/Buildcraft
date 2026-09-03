@@ -536,6 +536,10 @@
     "enGB": "When wearing light or no armor and not using a shield, a magus adds 1 point of {g|Encyclopedia:Intelligence}Intelligence{/g} bonus (if any) per magus class level as a dodge {g|Encyclopedia:Bonus}bonus{/g} to {g|Encyclopedia:Armor_Class}Armor Class{/g}. If the magus is caught {g|Encyclopedia:Flat_Footed}flat-footed{/g} or otherwise denied the Dexterity bonus, the magus also loses this bonus."
   },
   {
+    "Key": "ClassesReborn.EldritchScionCannyDefense.Description",
+    "enGB": "When wearing light or no armor and not using a shield, an Eldritch Scion adds 1 point of {g|Encyclopedia:Charisma}Charisma{/g} bonus (if any) per magus class level as a dodge {g|Encyclopedia:Bonus}bonus{/g} to {g|Encyclopedia:Armor_Class}Armor Class{/g}. If the Eldritch Scion is caught {g|Encyclopedia:Flat_Footed}flat-footed{/g} or otherwise denied the Dexterity bonus, the Eldritch Scion also loses this bonus."
+  },
+  {
     "Key": "ClassesReborn.KiPerfectSelf.Description",
     "enGB": "At 20th level, a monk becomes a magical creature. The monk gains {g|Encyclopedia:Damage_Reduction}damage reduction{/g} 10/chaotic, which allows the monk to ignore the first 10 points of damage from any attack made by a nonchaotic weapon or by any natural attack made by a creature that does not have similar damage reduction. In addition, each hit with an {g|Encyclopedia:Unarmed_Attack}unarmed attack{/g} deals an additional 1d10 force damage."
   },
@@ -1447,7 +1451,7 @@
   },
   {
     "Key": "ClassesReborn.ArmorExpertTrait.Description",
-    "enGB": "You have worn armor for as long as you can remember and know how to move naturally in it. Reduce your armor check penalty by 1."
+    "enGB": "You have worn armor for as long as you can remember and know how to move naturally in it. Reduce your armor check penalty by 2."
   },
   {
     "Key": "ClassesReborn.ReactionaryTrait.Name",
@@ -1540,13 +1544,31 @@
     "enGB": "When two-weapon fighting with a shield in your off hand, the shield counts as a light weapon for determining two-weapon fighting penalties. You gain a +1 trait bonus on damage rolls made with shield bashes."
   },
   {
+    "Key": "ClassesReborn.ShadowAssaultTrait.Name",
+    "ProcessTemplates": false,
+    "enGB": "Shadow Assault"
+  },
+  {
+    "Key": "ClassesReborn.ShadowAssaultTrait.Description",
+    "enGB": "You gain a +1 trait bonus on Stealth checks, Stealth becomes a class skill for you, and you can move at full speed while using Stealth."
+  },
+  {
+    "Key": "ClassesReborn.BornInPlatesTrait.Name",
+    "ProcessTemplates": false,
+    "enGB": "Born in Plates"
+  },
+  {
+    "Key": "ClassesReborn.BornInPlatesTrait.Description",
+    "enGB": "Increase the maximum Dexterity bonus allowed by your worn armor by 1."
+  },
+  {
     "Key": "ClassesReborn.BirthmarkTrait.Name",
     "ProcessTemplates": false,
     "enGB": "Birthmark"
   },
   {
     "Key": "ClassesReborn.BirthmarkTrait.Description",
-    "enGB": "You gain a +2 trait bonus on saving throws against charm and compulsion effects."
+    "enGB": "You gain a +2 trait bonus on saving throws against charm and compulsion effects and 2 additional hit points."
   },
   {
     "Key": "ClassesReborn.DevoteeOfTheGreenTrait.Name",
@@ -1555,7 +1577,7 @@
   },
   {
     "Key": "ClassesReborn.DevoteeOfTheGreenTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Knowledge (World) and Lore (Nature) checks. Choose one of these skills to become a class skill."
+    "enGB": "You gain a +1 trait bonus on Knowledge (World), Lore (Nature), and saving throws against disease and poison effects. Choose Knowledge (World) or Lore (Nature) to become a class skill."
   },
   {
     "Key": "ClassesReborn.DevoteeOfTheGreenTrait.Choice.Name",
@@ -1588,7 +1610,7 @@
   },
   {
     "Key": "ClassesReborn.HistoryOfHeresyTrait.Description",
-    "enGB": "You gain a +1 trait bonus on saving throws against divine spells while you have no levels in a divine spellcasting class."
+    "enGB": "You gain a +1 trait bonus on saving throws against divine spells while you have no levels in a divine spellcasting class. You also gain a +1 trait bonus on weapon damage rolls against divine spellcasters."
   },
   {
     "Key": "ClassesReborn.IndomitableFaithTrait.Name",
@@ -1615,7 +1637,7 @@
   },
   {
     "Key": "ClassesReborn.ScholarOfTheGreatBeyondTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Knowledge (World) and Knowledge (Arcana) checks. Choose one of these skills to become a class skill."
+    "enGB": "You gain a +1 trait bonus on Knowledge (World) and Knowledge (Arcana) checks and on weapon damage rolls against outsiders. Choose Knowledge (World) or Knowledge (Arcana) to become a class skill."
   },
   {
     "Key": "ClassesReborn.ScholarOfTheGreatBeyondTrait.Choice.Name",
@@ -1639,7 +1661,7 @@
   },
   {
     "Key": "ClassesReborn.DangerouslyCuriousTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Use Magic Device checks, and Use Magic Device becomes a class skill for you."
+    "enGB": "You gain a +1 trait bonus on Use Magic Device checks, and Use Magic Device becomes a class skill for you. During a surprise round in which you are surprised, you gain a +2 trait bonus on initiative checks but take a -2 trait penalty to Armor Class."
   },
   {
     "Key": "ClassesReborn.FocusedMindTrait.Name",
@@ -1657,7 +1679,7 @@
   },
   {
     "Key": "ClassesReborn.SkepticTrait.Description",
-    "enGB": "You gain a +2 trait bonus on saving throws against illusion spells."
+    "enGB": "You gain a +2 trait bonus on saving throws against illusion spells and a +1 trait bonus on attack rolls against incorporeal creatures."
   },
   {
     "Key": "ClassesReborn.MathematicalProdigyTrait.Name",
@@ -1666,7 +1688,7 @@
   },
   {
     "Key": "ClassesReborn.MathematicalProdigyTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Knowledge (Arcana) and Use Magic Device checks. Choose one of these skills to become a class skill."
+    "enGB": "You gain a +1 trait bonus on Knowledge (Arcana), Use Magic Device, and dispel checks. Choose Knowledge (Arcana) or Use Magic Device to become a class skill."
   },
   {
     "Key": "ClassesReborn.MathematicalProdigyTrait.Choice.Name",
@@ -1690,7 +1712,7 @@
   },
   {
     "Key": "ClassesReborn.BullyTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Persuasion checks, and Persuasion becomes a class skill for you."
+    "enGB": "You gain a +1 trait bonus on Persuasion checks, and Persuasion becomes a class skill for you. You also gain a +1 trait bonus on weapon damage rolls against enemies suffering from a fear effect."
   },
   {
     "Key": "ClassesReborn.ChildOfTheStreetsTrait.Name",
@@ -1699,7 +1721,7 @@
   },
   {
     "Key": "ClassesReborn.ChildOfTheStreetsTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Trickery checks, and Trickery becomes a class skill for you."
+    "enGB": "You gain a +1 trait bonus on Trickery checks, Trickery becomes a class skill for you, and you gain Favored Terrain (Urban) at rank 1."
   },
   {
     "Key": "ClassesReborn.FastTalkerTrait.Name",
@@ -1708,7 +1730,7 @@
   },
   {
     "Key": "ClassesReborn.FastTalkerTrait.Description",
-    "enGB": "You gain a +1 trait bonus on Persuasion checks, and Persuasion becomes a class skill for you."
+    "enGB": "You gain a +1 trait bonus on Persuasion checks, Persuasion becomes a class skill for you, and you can use Demoralize as a move action."
   },
   {
     "Key": "ClassesReborn.AdoptedTrait.Name",
@@ -2323,6 +2345,40 @@
     "enGB": "Additional backgrounds tied to the Worldwound and the Fifth Crusade."
   },
   {
+    "Key": "ClassesReborn.WildRaisedBackground.Name",
+    "ProcessTemplates": false,
+    "enGB": "Wild-Raised"
+  },
+  {
+    "Key": "ClassesReborn.WildRaisedBackground.Description",
+    "enGB": "You were reared beyond settled lands by wild beasts or druidic guardians. Lore (Nature) becomes a class skill and gains a +1 trait bonus. You gain a +1 trait bonus on attack rolls with natural weapons."
+  },
+  {
+    "Key": "ClassesReborn.KnightBackground.Name",
+    "ProcessTemplates": false,
+    "enGB": "Knight"
+  },
+  {
+    "Key": "ClassesReborn.KnightBackground.Description",
+    "enGB": "You were trained for noble service and armored war. You gain proficiency with longswords and a +1 trait bonus to Armor Class while wearing heavy armor."
+  },
+  {
+    "Key": "ClassesReborn.BountyHunterBackground.Description",
+    "enGB": "Bounty Hunter adds Stealth to the list of class skills and grants proficiency with clubs, light maces, and heavy maces. You gain a +1 trait bonus to Armor Class while wearing medium armor. If the character already has a class skill or weapon proficiency granted by this background from their class during character creation, the corresponding background benefit changes to a +1 trait bonus on that skill or attack rolls with that weapon."
+  },
+  {
+    "Key": "ClassesReborn.HealerBackground.Description",
+    "enGB": "Healer adds Lore (Nature) and Lore (Religion) to the list of class skills and allows Intelligence to be used instead of Wisdom for those checks. Cure spells and Channel Energy abilities used to restore hit points heal 1 additional hit point. If the character already has either class skill from their class during character creation, the corresponding background benefit changes to a +1 trait bonus on that skill."
+  },
+  {
+    "Key": "ClassesReborn.MuggerBackground.Description",
+    "enGB": "Mugger adds Trickery and Persuasion to the list of class skills and grants proficiency with daggers, punching daggers, and darts. You gain a +1 trait bonus on attack rolls made from Stealth. If the character already has a class skill or weapon proficiency granted by this background from their class during character creation, the corresponding background benefit changes to a +1 trait bonus on that skill or attack rolls with that weapon."
+  },
+  {
+    "Key": "ClassesReborn.PickpocketBackground.Description",
+    "enGB": "Pickpocket adds Trickery and Stealth to the list of class skills and grants a +2 bonus on initiative checks. While Fighting Defensively, its attack-roll penalty is reduced by 1. If the character already has either class skill from their class during character creation, the corresponding background benefit changes to a +1 trait bonus on that skill."
+  },
+  {
     "Key": "ClassesReborn.SarkorianExileBackground.Name",
     "ProcessTemplates": false,
     "enGB": "Sarkorian Exile"
@@ -2412,6 +2468,24 @@
   {
     "Key": "EldritchHeritage.Description",
     "enGB": "Select a sorcerer bloodline. You gain its 1st-level bloodline power, using your character level minus 2 as your effective sorcerer level."
+  },
+  {
+    "Key": "DraconicHeritage.Name",
+    "ProcessTemplates": false,
+    "enGB": "Draconic Heritage"
+  },
+  {
+    "Key": "DraconicHeritage.Description",
+    "enGB": "This bloodline belongs to the draconic bloodline family for the purposes of Eldritch Heritage. You can select only one draconic bloodline."
+  },
+  {
+    "Key": "ElementalHeritage.Name",
+    "ProcessTemplates": false,
+    "enGB": "Elemental Heritage"
+  },
+  {
+    "Key": "ElementalHeritage.Description",
+    "enGB": "This bloodline belongs to the elemental bloodline family for the purposes of Eldritch Heritage. You can select only one elemental bloodline."
   },
   {
     "Key": "EldritchHeritageImproved.Name",

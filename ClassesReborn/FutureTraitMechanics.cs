@@ -15,12 +15,103 @@ using Kingmaker.RuleSystem.Rules.Abilities;
 using Kingmaker.UnitLogic;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.Mechanics.Actions;
+using Kingmaker.Utility;
 
 namespace ClassesReborn;
 
 [AllowedOn(typeof(BlueprintUnitFact))]
 [TypeId("119ed06a-6717-482d-af19-56c1c4963551")]
-public sealed class FatesFavoredMarker : UnitFactComponentDelegate { }
+public sealed class FatesFavoredMarker : UnitFactComponentDelegate,
+    IInitiatorRulebookHandler<RuleCalculateAttackBonusWithoutTarget>,
+    IInitiatorRulebookHandler<RuleCalculateWeaponStats> {
+    public override void OnTurnOn() {
+        Owner.Ensure<UnitPartFatesFavored>().Enabled.Retain();
+        RefreshLuckBonuses();
+    }
+
+    public override void OnTurnOff() {
+        Owner.Get<UnitPartFatesFavored>()?.Enabled.Release();
+        RefreshLuckBonuses();
+    }
+
+    private void RefreshLuckBonuses() {
+        var stats = Owner?.Stats?.AllStats;
+        if (stats == null) {
+            return;
+        }
+
+        foreach (var stat in stats) {
+            if (stat?.Modifiers?.Any(modifier =>
+                    modifier.ModDescriptor == ModifierDescriptor.Luck) == true) {
+                stat.UpdateValue();
+            }
+        }
+    }
+
+    public void OnEventAboutToTrigger(
+        RuleCalculateAttackBonusWithoutTarget evt) { }
+
+    public void OnEventDidTrigger(
+        RuleCalculateAttackBonusWithoutTarget evt) {
+        var modifiers = evt?.StatModifiersAtTheMoment?.ToList();
+        if (modifiers == null) {
+            return;
+        }
+
+        var bestLuckIndex = -1;
+        for (var index = 0; index < modifiers.Count; index++) {
+            var modifier = modifiers[index];
+            if (modifier?.ModDescriptor == ModifierDescriptor.Luck &&
+                modifier.ModValue > 0 &&
+                (bestLuckIndex < 0 ||
+                 modifier.ModValue > modifiers[bestLuckIndex].ModValue)) {
+                bestLuckIndex = index;
+            }
+        }
+
+        if (bestLuckIndex < 0) {
+            return;
+        }
+
+        var luck = modifiers[bestLuckIndex];
+        modifiers[bestLuckIndex] = new ModifiableValue.Modifier {
+            AppliedTo = luck.AppliedTo,
+            ModDescriptor = luck.ModDescriptor,
+            StackMode = luck.StackMode,
+            ModValue = luck.ModValue + 1,
+            Source = luck.Source,
+            SourceComponent = luck.SourceComponent,
+            ItemSource = luck.ItemSource,
+        };
+        evt.StatModifiersAtTheMoment = modifiers;
+    }
+
+    public void OnEventAboutToTrigger(RuleCalculateWeaponStats evt) { }
+
+    public void OnEventDidTrigger(RuleCalculateWeaponStats evt) {
+        var damage = evt?.DamageDescription?.FirstOrDefault();
+        if (damage == null) {
+            return;
+        }
+
+        var luck = damage.Modifiers
+            .Where(modifier =>
+                modifier.Descriptor == ModifierDescriptor.Luck &&
+                modifier.Value > 0)
+            .OrderByDescending(modifier => modifier.Value)
+            .FirstOrDefault();
+        if (luck.Value > 0) {
+            damage.AddModifier(new Modifier(
+                luck.Value + 1,
+                luck.Fact,
+                luck.Descriptor));
+        }
+    }
+}
+
+internal sealed class UnitPartFatesFavored : OldStyleUnitPart {
+    public CountableFlag Enabled = new();
+}
 
 [HarmonyPatch(
     typeof(ModifiableValue),
@@ -31,14 +122,14 @@ internal static class FatesFavoredLuckBonusPatch {
         ModifiableValue __instance,
         Func<ModifiableValue.Modifier, bool> filter,
         ref int __result) {
-        // CharacterStats.PostLoad recalculates values before every unit's
-        // feature and modifier collections have necessarily been restored.
-        // A global stat-calculation postfix must remain inert during that
-        // incomplete state or it aborts the unit's entire stat initialization.
-        var features = __instance?.Owner?.Progression?.Features;
+        // CharacterStats.PostLoad can recalculate values before unit facts have
+        // been activated. The runtime part is absent in that state, so this
+        // global postfix remains inert; activating the marker refreshes any
+        // already-loaded Luck modifiers afterward.
+        var unit = __instance?.Owner?.Unit;
         var modifiers = __instance?.Modifiers;
-        if (features == null || modifiers == null ||
-            !features.SelectFactComponents<FatesFavoredMarker>().Any()) {
+        var part = unit?.Get<UnitPartFatesFavored>();
+        if (part == null || !part.Enabled || modifiers == null) {
             return;
         }
 

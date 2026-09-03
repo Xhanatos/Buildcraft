@@ -58,7 +58,7 @@ internal static class TraitRebalance {
             .SetGroups(FeatureGroup.Trait)
             .SetRanks(1)
             .SetIsClassFeature(false)
-            .AddComponent(new ArmorCheckPenaltyIncrease { BonesPerRank = 1 })
+            .AddComponent(new ArmorCheckPenaltyIncrease { BonesPerRank = 2 })
             .Configure();
 
         var reactionary = CreateStatTrait("ClassesRebornReactionaryTrait", BlueprintIds.ReactionaryTrait,
@@ -103,6 +103,28 @@ internal static class TraitRebalance {
             "ClassesReborn.ShieldFighterTrait",
             shieldIcon,
             new ShieldFighterTraitComponent());
+        var shadowAssault = FeatureConfigurator.New(
+                "ClassesRebornShadowAssaultTrait",
+                FutureContentIds.Get("Trait.ShadowAssault"))
+            .SetDisplayName("ClassesReborn.ShadowAssaultTrait.Name")
+            .SetDescription("ClassesReborn.ShadowAssaultTrait.Description")
+            .SetIcon(FeatureRefs.SkillFocusStealth.Reference.Get().Icon)
+            .SetGroups(FeatureGroup.Trait)
+            .SetRanks(1)
+            .SetIsClassFeature(false)
+            .AddStatBonus(
+                descriptor: ModifierDescriptor.Trait,
+                stat: StatType.SkillStealth,
+                value: 1)
+            .AddClassSkill(StatType.SkillStealth)
+            .AddComponent(new FullSpeedInStealth())
+            .Configure();
+        var bornInPlates = CreateComponentTrait(
+            "ClassesRebornBornInPlatesTrait",
+            FutureContentIds.Get("Trait.BornInPlates"),
+            "ClassesReborn.BornInPlatesTrait",
+            armorIcon,
+            new ArmorMaximumDexterityTraitBonus { Bonus = 1 });
         var birthmark = FeatureConfigurator.New("ClassesRebornBirthmarkTrait", BlueprintIds.BirthmarkTrait)
             .SetDisplayName("ClassesReborn.BirthmarkTrait.Name")
             .SetDescription("ClassesReborn.BirthmarkTrait.Description")
@@ -114,17 +136,30 @@ internal static class TraitRebalance {
                 spellDescriptor: SpellDescriptor.Charm | SpellDescriptor.Compulsion,
                 value: 2,
                 modifierDescriptor: ModifierDescriptor.Trait)
+            .AddStatBonus(
+                descriptor: ModifierDescriptor.Trait,
+                stat: StatType.HitPoints,
+                value: 2)
             .Configure();
         var devotee = CreateSkillChoiceTrait(
             "DevoteeOfTheGreen", BlueprintIds.DevoteeOfTheGreenTrait, BlueprintIds.DevoteeOfTheGreenBonuses,
             BlueprintIds.DevoteeOfTheGreenSelection, BlueprintIds.DevoteeOfTheGreenWorld,
             BlueprintIds.DevoteeOfTheGreenNature, "ClassesReborn.DevoteeOfTheGreenTrait", faithIcon,
             StatType.SkillKnowledgeWorld, StatType.SkillLoreNature);
+        FeatureConfigurator.For(BlueprintIds.DevoteeOfTheGreenBonuses)
+            .AddSavingThrowBonusAgainstDescriptor(
+                spellDescriptor: SpellDescriptor.Disease | SpellDescriptor.Poison,
+                value: 1,
+                modifierDescriptor: ModifierDescriptor.Trait)
+            .Configure();
         var easeOfFaith = CreateSkillTrait("ClassesRebornEaseOfFaithTrait", BlueprintIds.EaseOfFaithTrait,
             "ClassesReborn.EaseOfFaithTrait", faithIcon, StatType.SkillPersuasion);
         var historyOfHeresy = CreateComponentTrait("ClassesRebornHistoryOfHeresyTrait",
             BlueprintIds.HistoryOfHeresyTrait, "ClassesReborn.HistoryOfHeresyTrait", faithIcon,
             new HistoryOfHeresySaveBonus());
+        FeatureConfigurator.For(BlueprintIds.HistoryOfHeresyTrait)
+            .AddComponent(new DivineCasterDamageTraitBonus { Bonus = 1 })
+            .Configure();
         var indomitableFaith = CreateStatTrait("ClassesRebornIndomitableFaithTrait",
             BlueprintIds.IndomitableFaithTrait, "ClassesReborn.IndomitableFaithTrait", faithIcon,
             (StatType.SaveWill, 1));
@@ -137,9 +172,22 @@ internal static class TraitRebalance {
             BlueprintIds.ScholarOfTheGreatBeyondWorld, BlueprintIds.ScholarOfTheGreatBeyondArcana,
             "ClassesReborn.ScholarOfTheGreatBeyondTrait", magicIcon,
             StatType.SkillKnowledgeWorld, StatType.SkillKnowledgeArcana);
+        FeatureConfigurator.For(BlueprintIds.ScholarOfTheGreatBeyondBonuses)
+            .AddComponent(new TargetFactDamageTraitBonus {
+                m_TargetFact = BlueprintTool.GetRef<BlueprintFeatureReference>(
+                    FeatureRefs.OutsiderType.ToString()),
+                Bonus = 1,
+            })
+            .Configure();
         var dangerouslyCurious = CreateSkillTrait("ClassesRebornDangerouslyCuriousTrait",
             BlueprintIds.DangerouslyCuriousTrait, "ClassesReborn.DangerouslyCuriousTrait", initiativeIcon,
             StatType.SkillUseMagicDevice);
+        FeatureConfigurator.For(BlueprintIds.DangerouslyCuriousTrait)
+            .AddComponent(new SurpriseRoundTraitModifiers {
+                InitiativeBonus = 2,
+                ArmorClassPenalty = -2,
+            })
+            .Configure();
         var focusedMind = FeatureConfigurator.New("ClassesRebornFocusedMindTrait", BlueprintIds.FocusedMindTrait)
             .SetDisplayName("ClassesReborn.FocusedMindTrait.Name")
             .SetDescription("ClassesReborn.FocusedMindTrait.Description")
@@ -160,6 +208,11 @@ internal static class TraitRebalance {
                 modifierDescriptor: ModifierDescriptor.Trait,
                 school: SpellSchool.Illusion,
                 value: 2)
+            .AddComponent(new TargetFactAttackTraitBonus {
+                m_TargetFact = BlueprintTool.GetRef<BlueprintFeatureReference>(
+                    FeatureRefs.Incorporeal.ToString()),
+                Bonus = 1,
+            })
             .Configure();
         var mathematicalProdigy = CreateSkillChoiceTrait(
             "MathematicalProdigy", BlueprintIds.MathematicalProdigyTrait,
@@ -167,13 +220,25 @@ internal static class TraitRebalance {
             BlueprintIds.MathematicalProdigyArcana, BlueprintIds.MathematicalProdigyUseMagicDevice,
             "ClassesReborn.MathematicalProdigyTrait", initiativeIcon,
             StatType.SkillKnowledgeArcana, StatType.SkillUseMagicDevice);
+        FeatureConfigurator.For(BlueprintIds.MathematicalProdigyBonuses)
+            .AddComponent(new MathematicalProdigyDispelCheckBonus { Bonus = 1 })
+            .Configure();
         var bully = CreateSkillTrait("ClassesRebornBullyTrait", BlueprintIds.BullyTrait,
             "ClassesReborn.BullyTrait", dirtyFightingIcon, StatType.SkillPersuasion);
+        FeatureConfigurator.For(BlueprintIds.BullyTrait)
+            .AddComponent(new DemoralizedTargetDamageTraitBonus { Bonus = 1 })
+            .Configure();
         var childOfTheStreets = CreateSkillTrait("ClassesRebornChildOfTheStreetsTrait",
             BlueprintIds.ChildOfTheStreetsTrait, "ClassesReborn.ChildOfTheStreetsTrait", initiativeIcon,
             StatType.SkillThievery);
+        FeatureConfigurator.For(BlueprintIds.ChildOfTheStreetsTrait)
+            .AddFacts(new() { FeatureRefs.FavoriteTerrainUrban.ToString() })
+            .Configure();
         var fastTalker = CreateSkillTrait("ClassesRebornFastTalkerTrait", BlueprintIds.FastTalkerTrait,
             "ClassesReborn.FastTalkerTrait", initiativeIcon, StatType.SkillPersuasion);
+        FeatureConfigurator.For(BlueprintIds.FastTalkerTrait)
+            .AddComponent(new FastTalkerMarker())
+            .Configure();
 
         var fatesFavored = CreateComponentTrait(
             "ClassesRebornFatesFavoredTrait",
@@ -274,7 +339,8 @@ internal static class TraitRebalance {
                 "ClassesReborn.TraitCategory.Combat",
                 weaponFocusIcon,
                 anatomist, armorExpert, reactionary, resilient, bullied, courageous,
-                deftDodger, dirtyFighter, fencer, killer, sharpNails, shieldFighter),
+                deftDodger, dirtyFighter, fencer, killer, sharpNails, shieldFighter,
+                shadowAssault, bornInPlates),
             new TraitCategoryDefinition(
                 "Faith",
                 "ClassesReborn.TraitCategory.Faith",
@@ -353,6 +419,7 @@ internal static class TraitRebalance {
 
         Validate(selectionOne, selectionTwo, selectionThree, selectionFour, additionalTraits, choices,
             anatomist, armorExpert, reactionary, resilient, sharpNails, shieldFighter,
+            shadowAssault, bornInPlates,
             adopted, adoptedSelection, racialChoices,
             noneChoices, categorySelections, categories, giftedAdept,
             devotee, scholar, mathematicalProdigy);
@@ -702,6 +769,7 @@ internal static class TraitRebalance {
         BlueprintFeature anatomist, BlueprintFeature armorExpert,
         BlueprintFeature reactionary, BlueprintFeature resilient,
         BlueprintFeature sharpNails, BlueprintFeature shieldFighter,
+        BlueprintFeature shadowAssault, BlueprintFeature bornInPlates,
         BlueprintProgression adopted, BlueprintFeatureSelection adoptedSelection,
         BlueprintFeature[] racialChoices,
         BlueprintFeature[] noneChoices,
@@ -724,6 +792,11 @@ internal static class TraitRebalance {
         var resilientBonus = resilient.GetComponents<AddStatBonus>()
             .SingleOrDefault(component => component.Stat == StatType.SaveFortitude);
         var armorPenalty = armorExpert.GetComponents<ArmorCheckPenaltyIncrease>().SingleOrDefault();
+        var mathematicalProdigyBonuses = BlueprintTool.Get<BlueprintFeature>(
+            BlueprintIds.MathematicalProdigyBonuses);
+        var mathematicalProdigyDispelBonus = mathematicalProdigyBonuses
+            .GetComponents<MathematicalProdigyDispelCheckBonus>()
+            .SingleOrDefault();
         var adoptedValid = adopted.LevelEntries.Length == 1 &&
             adopted.LevelEntries[0].Level == 1 &&
             adopted.LevelEntries[0].Features.Count == 1 &&
@@ -779,7 +852,10 @@ internal static class TraitRebalance {
             anatomist.GetComponents<CriticalConfirmationBonus>().Count() != 1 ||
             sharpNails.GetComponents<SharpNailsCriticalMultiplier>().Count() != 1 ||
             shieldFighter.GetComponents<ShieldFighterTraitComponent>().Count() != 1 ||
-            armorPenalty?.BonesPerRank != 1 ||
+            shadowAssault.GetComponents<FullSpeedInStealth>().Count() != 1 ||
+            bornInPlates.GetComponents<ArmorMaximumDexterityTraitBonus>().Count() != 1 ||
+            mathematicalProdigyDispelBonus?.Bonus != 1 ||
+            armorPenalty?.BonesPerRank != 2 ||
             reactionaryBonus?.Value != 2 || reactionaryBonus.Descriptor != ModifierDescriptor.Trait ||
             resilientBonus?.Value != 1 || resilientBonus.Descriptor != ModifierDescriptor.Trait ||
             !adoptedValid || !skillChoicesValid || !categoriesValid || !additionalTraitsValid) {

@@ -4,6 +4,12 @@ internal static class BlueprintIds {
     internal const string MonkClass = "e8f21e5b58e0569468e420ebea456124";
     // Base game
     internal const string BackgroundsBaseSelection = "f926dabeee7f8a54db8f2010b323383c";
+    internal const string BackgroundsNobleSelection = "7b11f589e81617a46b3e5eda3632508d";
+    internal const string BackgroundsWandererSelection = "0cdd576724fce2240b372455889fac87";
+    internal const string BountyHunterBackground = "15a072cca47e2444ebfd178b71f4e797";
+    internal const string HealerBackground = "f0d2840b6564c6f408c1e068d0707ca0";
+    internal const string MuggerBackground = "88453bd5448456748ab531cddad38721";
+    internal const string PickpocketBackground = "9da9faf5f0ef4904db4a59a22dafbb06";
     internal const string TraitSelectionOne = "38c840134e04445f911811a21ef6ac31";
     internal const string TraitSelectionTwo = "8d385d058bd84e12b4ad3b1a5dc918e6";
     internal const string TraitSelectionThree = "d19dfff0cb854fd1ab09f2595bf35bd0";
@@ -562,10 +568,11 @@ internal static class BlueprintIds {
     internal const string MagusClass = "45a4607686d96a1498891b3286121780";
     internal const string MagusProgression = "1b912721a7e075d4f9cfe8dafa39414c";
     internal const string MagusBonusFeatSelection = "66befe7b24c42dd458952e3c47c93563";
+    internal const string EldritchScionArchetype = "d078b2ef073f2814c9e338a789d97b73";
     internal const string SwordSaintArchetype = "7d6678f2160018049814838af2ab4236";
     internal const string SwordSaintCannyDefense = "f58e19256746efa419e640175d4e21ad";
     internal static readonly string[] MagusArchetypes = {
-        "d078b2ef073f2814c9e338a789d97b73", // Eldritch Scion
+        EldritchScionArchetype,
         SwordSaintArchetype,
         "44388c01eb4a29d4d90a25cc0574320d", // Eldritch Archer
         "79ccf7a306a5d5547bebd97299f6fc89", // Hexcrafter

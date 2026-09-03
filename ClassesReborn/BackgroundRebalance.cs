@@ -47,6 +47,7 @@ internal static class BackgroundRebalance {
             visited,
             ref convertedBackgroundWeapons,
             ref convertedDirectBonuses);
+        ConfigureNativeBackgroundUpgrades();
 
         if (convertedBackgroundWeapons == 0) {
             throw new InvalidOperationException(
@@ -90,51 +91,197 @@ internal static class BackgroundRebalance {
         if (Main.Settings.WorldwoundCartographer) {
             choices.Add(CreateWorldwoundCartographer(skillIcon));
         }
-        if (choices.Count == 0) {
-            return;
+        if (Main.Settings.WildRaised) {
+            AddToBackgroundCategory(
+                BlueprintIds.BackgroundsWandererSelection,
+                CreateWildRaised(skillIcon));
+        }
+        if (Main.Settings.Knight) {
+            AddToBackgroundCategory(
+                BlueprintIds.BackgroundsNobleSelection,
+                CreateKnight(combatIcon));
         }
 
-        var selection = FeatureSelectionConfigurator.New(
-                "ClassesRebornAddedBackgroundSelection",
-                FutureContentIds.Get("Background.Selection"))
-            .SetDisplayName("ClassesReborn.AddedBackgrounds.Name")
-            .SetDescription("ClassesReborn.AddedBackgrounds.Description")
-            .SetIcon(skillIcon)
-            .SetRanks(1)
-            .SetIgnorePrerequisites(false)
-            .SetObligatory(true)
+        if (choices.Count > 0) {
+            var selection = FeatureSelectionConfigurator.New(
+                    "ClassesRebornAddedBackgroundSelection",
+                    FutureContentIds.Get("Background.Selection"))
+                .SetDisplayName("ClassesReborn.AddedBackgrounds.Name")
+                .SetDescription("ClassesReborn.AddedBackgrounds.Description")
+                .SetIcon(skillIcon)
+                .SetRanks(1)
+                .SetIgnorePrerequisites(false)
+                .SetObligatory(true)
+                .Configure();
+            selection.m_AllFeatures = choices
+                .Select(feature => feature.ToReference<BlueprintFeatureReference>())
+                .ToArray();
+            selection.m_Features = selection.m_AllFeatures.ToArray();
+
+            // These are nested options added explicitly to the background tree.
+            // Assigning FeatureGroup.None is not inert: BlueprintCore propagates
+            // grouped features into matching global selections, and the zero-valued
+            // group can leak them into unrelated heritage selections.
+            var nestedFeatures = choices
+                .Concat(choices.OfType<BlueprintFeatureSelection>()
+                    .SelectMany(choice => choice.m_AllFeatures
+                        .Select(reference => reference?.Get())
+                        .OfType<BlueprintFeature>()))
+                .Append(selection)
+                .ToArray();
+            if (nestedFeatures.Any(feature => feature.Groups?.Any() == true)) {
+                throw new InvalidOperationException(
+                    "Added backgrounds and their nested choices must not register with global feature groups.");
+            }
+
+            var root = BlueprintTool.Get<BlueprintFeatureSelection>(
+                BlueprintIds.BackgroundsBaseSelection);
+            root.m_AllFeatures = (root.m_AllFeatures ?? Array.Empty<BlueprintFeatureReference>())
+                .Where(reference => reference?.deserializedGuid != selection.AssetGuid)
+                .Append(selection.ToReference<BlueprintFeatureReference>())
+                .ToArray();
+            root.m_Features = (root.m_Features ?? Array.Empty<BlueprintFeatureReference>())
+                .Where(reference => reference?.deserializedGuid != selection.AssetGuid)
+                .Append(selection.ToReference<BlueprintFeatureReference>())
+                .ToArray();
+        }
+    }
+
+    private static void ConfigureNativeBackgroundUpgrades() {
+        var bountyHunter = BlueprintTool.Get<BlueprintFeature>(
+            BlueprintIds.BountyHunterBackground);
+        bountyHunter.ComponentsArray = (bountyHunter.ComponentsArray ??
+                Array.Empty<BlueprintComponent>())
+            .Where(component => component is not AddBackgroundArmorProficiency)
+            .ToArray();
+        foreach (var facts in bountyHunter.GetComponents<AddFacts>()) {
+            facts.m_Facts = (facts.m_Facts ?? Array.Empty<BlueprintUnitFactReference>())
+                .Where(reference => reference?.Get()?.AssetGuid.ToString() !=
+                    BlueprintIds.LightArmorProficiency)
+                .ToArray();
+        }
+        foreach (var proficiencies in bountyHunter.GetComponents<AddProficiencies>()) {
+            proficiencies.ArmorProficiencies =
+                (proficiencies.ArmorProficiencies ?? Array.Empty<ArmorProficiencyGroup>())
+                .Where(category => category != ArmorProficiencyGroup.Light)
+                .ToArray();
+        }
+        FeatureConfigurator.For(BlueprintIds.BountyHunterBackground)
+            .SetDescription("ClassesReborn.BountyHunterBackground.Description")
+            .AddComponent(new ArmorCategoryBackgroundAcBonus {
+                Category = ArmorProficiencyGroup.Medium,
+                Bonus = 1,
+            })
             .Configure();
-        selection.m_AllFeatures = choices
-            .Select(feature => feature.ToReference<BlueprintFeatureReference>())
-            .ToArray();
-        selection.m_Features = selection.m_AllFeatures.ToArray();
 
-        // These are nested options added explicitly to the background tree.
-        // Assigning FeatureGroup.None is not inert: BlueprintCore propagates
-        // grouped features into matching global selections, and the zero-valued
-        // group can leak them into unrelated heritage selections.
-        var nestedFeatures = choices
-            .Concat(choices.OfType<BlueprintFeatureSelection>()
-                .SelectMany(choice => choice.m_AllFeatures
-                    .Select(reference => reference?.Get())
-                    .OfType<BlueprintFeature>()))
-            .Append(selection)
-            .ToArray();
-        if (nestedFeatures.Any(feature => feature.Groups?.Any() == true)) {
+        FeatureConfigurator.For(BlueprintIds.HealerBackground)
+            .SetDescription("ClassesReborn.HealerBackground.Description")
+            .AddComponent(new HealerBackgroundHealingBonus { Bonus = 1 })
+            .Configure();
+        FeatureConfigurator.For(BlueprintIds.MuggerBackground)
+            .SetDescription("ClassesReborn.MuggerBackground.Description")
+            .AddComponent(new MuggerStealthAttackBonus { Bonus = 1 })
+            .Configure();
+        FeatureConfigurator.For(BlueprintIds.PickpocketBackground)
+            .SetDescription("ClassesReborn.PickpocketBackground.Description")
+            .AddComponent(new FightingDefensivelyPenaltyReduction { Reduction = 1 })
+            .Configure();
+
+        var bountyHunterStillGrantsLightArmor =
+            bountyHunter.GetComponents<AddFacts>().Any(facts =>
+                (facts.m_Facts ?? Array.Empty<BlueprintUnitFactReference>()).Any(
+                    reference => reference?.Get()?.AssetGuid.ToString() ==
+                        BlueprintIds.LightArmorProficiency)) ||
+            bountyHunter.GetComponents<AddProficiencies>().Any(proficiencies =>
+                (proficiencies.ArmorProficiencies ??
+                    Array.Empty<ArmorProficiencyGroup>()).Contains(
+                        ArmorProficiencyGroup.Light));
+        if (bountyHunter.GetComponents<AddBackgroundArmorProficiency>().Any() ||
+            bountyHunterStillGrantsLightArmor ||
+            bountyHunter.GetComponents<ArmorCategoryBackgroundAcBonus>().Count() != 1 ||
+            BlueprintTool.Get<BlueprintFeature>(BlueprintIds.HealerBackground)
+                .GetComponents<HealerBackgroundHealingBonus>().Count() != 1 ||
+            BlueprintTool.Get<BlueprintFeature>(BlueprintIds.MuggerBackground)
+                .GetComponents<MuggerStealthAttackBonus>().Count() != 1 ||
+            BlueprintTool.Get<BlueprintFeature>(BlueprintIds.PickpocketBackground)
+                .GetComponents<FightingDefensivelyPenaltyReduction>().Count() != 1) {
             throw new InvalidOperationException(
-                "Added backgrounds and their nested choices must not register with global feature groups.");
+                "Native background upgrades were not configured exactly once.");
         }
+    }
 
-        var root = BlueprintTool.Get<BlueprintFeatureSelection>(
-            BlueprintIds.BackgroundsBaseSelection);
-        root.m_AllFeatures = (root.m_AllFeatures ?? Array.Empty<BlueprintFeatureReference>())
-            .Where(reference => reference?.deserializedGuid != selection.AssetGuid)
-            .Append(selection.ToReference<BlueprintFeatureReference>())
-            .ToArray();
-        root.m_Features = (root.m_Features ?? Array.Empty<BlueprintFeatureReference>())
-            .Where(reference => reference?.deserializedGuid != selection.AssetGuid)
-            .Append(selection.ToReference<BlueprintFeatureReference>())
-            .ToArray();
+    private static BlueprintFeature CreateWildRaised(Sprite icon) {
+        var feature = FeatureConfigurator.New(
+                "ClassesRebornWildRaisedBackground",
+                FutureContentIds.Get("Background.WildRaised"))
+            .SetDisplayName("ClassesReborn.WildRaisedBackground.Name")
+            .SetDescription("ClassesReborn.WildRaisedBackground.Description")
+            .SetIcon(icon)
+            .SetRanks(1)
+            .AddStatBonus(
+                descriptor: ModifierDescriptor.Trait,
+                stat: StatType.SkillLoreNature,
+                value: 1)
+            .AddClassSkill(StatType.SkillLoreNature)
+            .AddComponent(new NaturalWeaponBackgroundAttackBonus { Bonus = 1 })
+            .Configure();
+        ValidateCategorizedBackground(
+            feature,
+            feature.GetComponents<NaturalWeaponBackgroundAttackBonus>().Count() == 1);
+        return feature;
+    }
+
+    private static BlueprintFeature CreateKnight(Sprite icon) {
+        var feature = FeatureConfigurator.New(
+                "ClassesRebornKnightBackground",
+                FutureContentIds.Get("Background.Knight"))
+            .SetDisplayName("ClassesReborn.KnightBackground.Name")
+            .SetDescription("ClassesReborn.KnightBackground.Description")
+            .SetIcon(icon)
+            .SetRanks(1)
+            .AddComponent(new AddProficiencies {
+                ArmorProficiencies = Array.Empty<ArmorProficiencyGroup>(),
+                WeaponProficiencies = new[] { WeaponCategory.Longsword },
+            })
+            .AddComponent(new ArmorCategoryBackgroundAcBonus {
+                Category = ArmorProficiencyGroup.Heavy,
+                Bonus = 1,
+            })
+            .Configure();
+        ValidateCategorizedBackground(
+            feature,
+            feature.GetComponents<AddProficiencies>()
+                .SingleOrDefault()?.WeaponProficiencies.Contains(WeaponCategory.Longsword) == true &&
+            feature.GetComponents<ArmorCategoryBackgroundAcBonus>().Count() == 1);
+        return feature;
+    }
+
+    private static void ValidateCategorizedBackground(
+        BlueprintFeature feature,
+        bool mechanicsValid) {
+        if (feature.Groups?.Any() == true || !mechanicsValid) {
+            throw new InvalidOperationException(
+                $"Background {feature.name} must remain nested in its native category and contain its requested mechanics.");
+        }
+    }
+
+    private static void AddToBackgroundCategory(
+        string selectionId,
+        BlueprintFeature feature) {
+        var selection = BlueprintTool.Get<BlueprintFeatureSelection>(selectionId);
+        selection.m_AllFeatures = AppendDistinct(selection.m_AllFeatures, feature);
+        if (selection.m_Features?.Length > 0) {
+            selection.m_Features = AppendDistinct(selection.m_Features, feature);
+        }
+    }
+
+    private static BlueprintFeatureReference[] AppendDistinct(
+        BlueprintFeatureReference[] references,
+        BlueprintFeature feature) {
+        references ??= Array.Empty<BlueprintFeatureReference>();
+        return references.Any(reference => reference?.Get() == feature)
+            ? references
+            : references.Append(feature.ToReference<BlueprintFeatureReference>()).ToArray();
     }
 
     private static BlueprintFeature CreateSarkorianExile(Sprite icon) =>

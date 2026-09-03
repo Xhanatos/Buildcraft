@@ -74,7 +74,8 @@ public static class Main {
                     Settings.SarkorianExile || Settings.WardstoneVeteran ||
                     Settings.RedeemedCultist || Settings.KenabresWatchman ||
                     Settings.NumerianSalvager || Settings.TempleWeaponmaster ||
-                    Settings.CrusadeQuartermaster || Settings.WorldwoundCartographer,
+                    Settings.CrusadeQuartermaster || Settings.WorldwoundCartographer ||
+                    Settings.WildRaised || Settings.Knight,
                     BackgroundRebalance.ConfigureAddedBackgrounds);
                 ConfigureSection(
                     "Character traits",

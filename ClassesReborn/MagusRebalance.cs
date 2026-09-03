@@ -4,9 +4,16 @@ using HarmonyLib;
 using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Selection;
+using Kingmaker.Blueprints.Facts;
+using Kingmaker.Blueprints.JsonSystem;
+using Kingmaker.Blueprints.Items.Armors;
 using Kingmaker.Designers.Mechanics.Buffs;
 using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.EntitySystem.Stats;
+using Kingmaker.Enums;
+using Kingmaker.PubSubSystem;
+using Kingmaker.RuleSystem.Rules;
+using Kingmaker.UnitLogic;
 
 namespace ClassesReborn;
 
@@ -40,6 +47,18 @@ internal static class MagusRebalance {
                 Stat = StatType.Intelligence,
             })
             .Configure();
+        var eldritchScionCannyDefense = FeatureConfigurator.New(
+                "ClassesRebornEldritchScionCannyDefenseFeature",
+                FutureContentIds.Get("Magus.EldritchScionCannyDefense"))
+            .SetDisplayName("ClassesReborn.MagusCannyDefense.Name")
+            .SetDescription("ClassesReborn.EldritchScionCannyDefense.Description")
+            .SetIcon(swordSaintCannyDefense.Icon)
+            .SetIsClassFeature(true)
+            .AddComponent(new CharismaCannyDefense {
+                m_CharacterClass = BlueprintTool.GetRef<BlueprintCharacterClassReference>(
+                    BlueprintIds.MagusClass),
+            })
+            .Configure();
 
         var levelEntries = progression.LevelEntries?.ToList() ?? new List<LevelEntry>();
         RemoveFeature(levelEntries, cannyDefense);
@@ -55,18 +74,25 @@ internal static class MagusRebalance {
             .ToArray();
         foreach (var archetype in archetypes) {
             var removals = archetype.RemoveFeatures?.ToList() ?? new List<LevelEntry>();
+            var additions = archetype.AddFeatures?.ToList() ?? new List<LevelEntry>();
             RemoveFeature(removals, bonusFeat);
             RemoveFeature(removals, cannyDefense);
+            RemoveFeature(additions, eldritchScionCannyDefense);
             if (archetype.AssetGuid.ToString() == BlueprintIds.SwordSaintArchetype) {
                 AddFeature(removals, 1, cannyDefense);
+            } else if (archetype.AssetGuid.ToString() == BlueprintIds.EldritchScionArchetype) {
+                AddFeature(removals, 1, cannyDefense);
+                AddFeature(additions, 1, eldritchScionCannyDefense);
             }
             archetype.RemoveFeatures = removals.OrderBy(entry => entry.Level).ToArray();
+            archetype.AddFeatures = additions.OrderBy(entry => entry.Level).ToArray();
         }
 
         Validate(
             magusClass,
             progression,
             cannyDefense,
+            eldritchScionCannyDefense,
             bonusFeat,
             swordSaintCannyDefense,
             archetypes);
@@ -76,6 +102,7 @@ internal static class MagusRebalance {
         BlueprintCharacterClass magusClass,
         BlueprintProgression progression,
         BlueprintFeature cannyDefense,
+        BlueprintFeature eldritchScionCannyDefense,
         BlueprintFeatureSelection bonusFeat,
         BlueprintFeature swordSaintCannyDefense,
         IReadOnlyCollection<BlueprintArchetype> archetypes) {
@@ -87,7 +114,13 @@ internal static class MagusRebalance {
             .ToArray();
         var swordSaint = archetypes.Single(archetype =>
             archetype.AssetGuid.ToString() == BlueprintIds.SwordSaintArchetype);
-        var otherArchetypes = archetypes.Where(archetype => archetype != swordSaint);
+        var eldritchScion = archetypes.Single(archetype =>
+            archetype.AssetGuid.ToString() == BlueprintIds.EldritchScionArchetype);
+        var otherArchetypes = archetypes.Where(archetype =>
+            archetype != swordSaint && archetype != eldritchScion);
+        var charismaCannyComponents = eldritchScionCannyDefense
+            .GetComponents<CharismaCannyDefense>()
+            .ToArray();
 
         if (CountFeatureAtLevel(progression.LevelEntries, cannyDefense, 1) != 1 ||
             CountFeature(progression.LevelEntries, cannyDefense) != 1 ||
@@ -97,6 +130,9 @@ internal static class MagusRebalance {
             cannyComponents[0].ChosenWeaponBlueprint != null ||
             recalculations.Length != 1 ||
             recalculations[0].Stat != StatType.Intelligence ||
+            charismaCannyComponents.Length != 1 ||
+            charismaCannyComponents[0].CharacterClass != magusClass ||
+            CountFeature(progression.LevelEntries, eldritchScionCannyDefense) != 0 ||
             CountFeature(progression.LevelEntries, bonusFeat) != BonusFeatLevels.Length ||
             BonusFeatLevels.Any(level =>
                 CountFeatureAtLevel(progression.LevelEntries, bonusFeat, level) != 1) ||
@@ -107,10 +143,18 @@ internal static class MagusRebalance {
             CountFeatureAtLevel(swordSaint.RemoveFeatures, cannyDefense, 1) != 1 ||
             CountFeature(swordSaint.RemoveFeatures, cannyDefense) != 1 ||
             CountFeatureAtLevel(swordSaint.AddFeatures, swordSaintCannyDefense, 1) != 1 ||
+            CountFeatureAtLevel(eldritchScion.RemoveFeatures, cannyDefense, 1) != 1 ||
+            CountFeature(eldritchScion.RemoveFeatures, cannyDefense) != 1 ||
+            CountFeatureAtLevel(
+                eldritchScion.AddFeatures,
+                eldritchScionCannyDefense,
+                1) != 1 ||
+            CountFeature(eldritchScion.AddFeatures, eldritchScionCannyDefense) != 1 ||
             otherArchetypes.Any(archetype =>
-                CountFeature(archetype.RemoveFeatures, cannyDefense) != 0)) {
+                CountFeature(archetype.RemoveFeatures, cannyDefense) != 0 ||
+                CountFeature(archetype.AddFeatures, eldritchScionCannyDefense) != 0)) {
             throw new InvalidOperationException(
-                "Every Magus must gain unrestricted Canny Defense at level 1 and Magus Bonus Feats at levels 2, 6, 10, 14, and 18, while Sword Saint keeps only its original chosen-weapon version.");
+                "Every Magus must gain unrestricted Canny Defense at level 1 and Magus Bonus Feats at levels 2, 6, 10, 14, and 18; Eldritch Scion must use Charisma, while Sword Saint keeps only its original chosen-weapon version.");
         }
     }
 
@@ -154,6 +198,39 @@ internal static class MagusRebalance {
         }
         entries.RemoveAll(entry => entry.m_Features == null || entry.m_Features.Count == 0);
     }
+}
+
+[AllowedOn(typeof(BlueprintUnitFact))]
+[TypeId("4f4702be-7c07-4c71-8d7d-8f9ab43f1fbe")]
+public sealed class CharismaCannyDefense : UnitFactComponentDelegate,
+    ITargetRulebookHandler<RuleCalculateAC> {
+    public BlueprintCharacterClassReference m_CharacterClass;
+
+    public BlueprintCharacterClass CharacterClass => m_CharacterClass?.Get();
+
+    public void OnEventAboutToTrigger(RuleCalculateAC evt) {
+        if (evt.IsTargetFlatFooted ||
+            Owner.Body.SecondaryHand.HasShield ||
+            CharacterClass == null) {
+            return;
+        }
+
+        var armor = Owner.Body.Armor;
+        if (armor.HasArmor &&
+            armor.Armor?.Blueprint?.IsArmor == true &&
+            armor.Armor.ArmorType() != ArmorProficiencyGroup.Light) {
+            return;
+        }
+
+        var bonus = Math.Min(
+            Math.Max(0, Owner.Stats.Charisma.Bonus),
+            Owner.Progression.GetClassLevel(CharacterClass));
+        if (bonus > 0) {
+            evt.AddModifier(bonus, Fact, ModifierDescriptor.Dodge);
+        }
+    }
+
+    public void OnEventDidTrigger(RuleCalculateAC evt) { }
 }
 
 [HarmonyPatch(typeof(CannyDefensePermanent), "CheckWeapon")]
